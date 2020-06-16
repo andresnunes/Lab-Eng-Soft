@@ -1,11 +1,20 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import java.time.LocalTime;
 
 public class Torneio {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private Long id;
 	private LocalTime data_inicio;
 	private LocalTime data_final;
+	@ManyToOne
 	private Clube clube;
+	@ManyToOne
 	private Atleta vencedor;
 	
 	
@@ -35,5 +44,11 @@ public class Torneio {
 	}
 	public void setVencedor(Atleta vencedor) {
 		this.vencedor = vencedor;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

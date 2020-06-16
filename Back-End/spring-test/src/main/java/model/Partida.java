@@ -2,8 +2,25 @@ package model;
 
 import java.time.LocalTime;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 public class Partida {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private Long id;
+	@ManyToMany
+	@JoinTable(name = "Atleta1_Partida",
+    joinColumns = { @JoinColumn(name = "idAtleta") },
+    inverseJoinColumns = { @JoinColumn(name = "idPartida") })
 	private Atleta atleta1;
+	@ManyToMany
+	@JoinTable(name = "Atleta2_Partida",
+    joinColumns = { @JoinColumn(name = "idAtleta") },
+    inverseJoinColumns = { @JoinColumn(name = "idPartida") })
 	private Atleta atleta2;
 	private LocalTime hora;
 	private LocalTime data;
@@ -32,5 +49,11 @@ public class Partida {
 	}
 	public void setData(LocalTime data) {
 		this.data = data;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

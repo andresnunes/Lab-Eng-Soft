@@ -1,6 +1,12 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Clube {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private Long id;
 	private String nome;
 	private String cnpj;
 	private String email;
@@ -33,6 +39,12 @@ public class Clube {
 	}
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 
