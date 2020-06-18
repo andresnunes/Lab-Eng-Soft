@@ -1,4 +1,4 @@
-package model;
+package br.com.torneio.gerenciador.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

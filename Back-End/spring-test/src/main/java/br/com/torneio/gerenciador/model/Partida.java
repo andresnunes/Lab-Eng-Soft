@@ -1,4 +1,4 @@
-package model;
+package br.com.torneio.gerenciador.model;
 
 import java.time.LocalTime;
 

@@ -1,4 +1,4 @@
-package model;
+package br.com.torneio.gerenciador.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,11 +12,22 @@ public class Atleta {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private int idade;
 	@ManyToMany
 	@JoinTable(name = "Atleta_Clube",
     joinColumns = { @JoinColumn(name = "idAtleta") },
     inverseJoinColumns = { @JoinColumn(name = "idClube") })
 	private Clube clube;
+	
+	public Atleta() {
+		
+	}
+	
+	public Atleta(String nome,int idade, Clube clube) {
+		this.nome = nome;
+		this.idade = idade;
+		this.clube = clube;
+	}
 	
 	
 	public String getNome() {
@@ -37,5 +48,13 @@ public class Atleta {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
 	}
 }
