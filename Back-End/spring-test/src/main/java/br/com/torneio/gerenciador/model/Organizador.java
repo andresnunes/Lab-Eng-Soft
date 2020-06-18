@@ -10,6 +10,7 @@ public class Organizador {
 	private String nome;
 	private String cpf;
 	private String email;
+	private String senha;
 	
 	
 	public String getNome() {
@@ -37,5 +38,11 @@ public class Organizador {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

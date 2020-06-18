@@ -1,6 +1,7 @@
 package br.com.torneio.gerenciador.model;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,18 +14,14 @@ public class Partida {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	@ManyToMany
-	@JoinTable(name = "Atleta1_Partida",
-    joinColumns = { @JoinColumn(name = "idAtleta") },
-    inverseJoinColumns = { @JoinColumn(name = "idPartida") })
-	private Atleta atleta1;
-	@ManyToMany
-	@JoinTable(name = "Atleta2_Partida",
-    joinColumns = { @JoinColumn(name = "idAtleta") },
-    inverseJoinColumns = { @JoinColumn(name = "idPartida") })
-	private Atleta atleta2;
+	
 	private LocalTime hora;
 	private LocalTime data;
 	
+	//Criar valore da partida
+	private String tipoPartida;
+	
+	private List<Atleta> atleta;
 	
 	public Atleta getAtleta1() {
 		return atleta1;
