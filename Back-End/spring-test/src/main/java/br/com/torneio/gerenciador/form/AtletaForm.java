@@ -44,7 +44,7 @@ public class AtletaForm {
 	}
 	
 	public Atleta converter(ClubeRepository clubeRepository) {
-		Clube clube = clubeRepository.findByNome(nomeClube);
+		Clube clube = clubeRepository.findByNome(nomeClube).get(0);
 		return new Atleta(nome, idade, clube);
 	}
 

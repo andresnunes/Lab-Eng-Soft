@@ -9,11 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 public class Partida {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
-	@ManyToMany
 	
 	private LocalTime hora;
 	private LocalTime data;
@@ -21,20 +21,10 @@ public class Partida {
 	//Criar valore da partida
 	private String tipoPartida;
 	
+	@ManyToOne
 	private List<Atleta> atleta;
 	
-	public Atleta getAtleta1() {
-		return atleta1;
-	}
-	public void setAtleta1(Atleta atleta1) {
-		this.atleta1 = atleta1;
-	}
-	public Atleta getAtleta2() {
-		return atleta2;
-	}
-	public void setAtleta2(Atleta atleta2) {
-		this.atleta2 = atleta2;
-	}
+	
 	public LocalTime getHora() {
 		return hora;
 	}
@@ -52,5 +42,17 @@ public class Partida {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getTipoPartida() {
+		return tipoPartida;
+	}
+	public void setTipoPartida(String tipoPartida) {
+		this.tipoPartida = tipoPartida;
+	}
+	public List<Atleta> getAtleta() {
+		return atleta;
+	}
+	public void setAtleta(List<Atleta> atleta) {
+		this.atleta = atleta;
 	}
 }
