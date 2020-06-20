@@ -9,4 +9,8 @@ public enum TipoPartida {
 	TipoPartida(String tipo){
 		this.tipo = tipo;
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
 }

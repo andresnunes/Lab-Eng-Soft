@@ -19,7 +19,8 @@ public class Partida {
 	private LocalTime data;
 	
 	//Criar valore da partida
-	private String tipoPartida;
+	private TipoPartida tipoPartida;
+	
 	
 	@ManyToOne
 	private List<Atleta> atleta;
@@ -43,12 +44,15 @@ public class Partida {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getTipoPartida() {
+
+	
+	public TipoPartida getTipoPartida() {
 		return tipoPartida;
 	}
-	public void setTipoPartida(String tipoPartida) {
+	public void setTipoPartida(TipoPartida tipoPartida) {
 		this.tipoPartida = tipoPartida;
 	}
+	
 	public List<Atleta> getAtleta() {
 		return atleta;
 	}
