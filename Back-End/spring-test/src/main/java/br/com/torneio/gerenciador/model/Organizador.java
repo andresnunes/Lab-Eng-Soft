@@ -3,6 +3,7 @@ package br.com.torneio.gerenciador.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 public class Organizador {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -11,6 +12,7 @@ public class Organizador {
 	private String cpf;
 	private String email;
 	private String senha;
+	
 	
 	
 	public String getNome() {

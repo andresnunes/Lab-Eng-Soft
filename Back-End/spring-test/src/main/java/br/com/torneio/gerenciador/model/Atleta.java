@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 public class Atleta {
@@ -13,10 +14,7 @@ public class Atleta {
 	private Long id;
 	private String nome;
 	private int idade;
-	@ManyToMany
-	@JoinTable(name = "Atleta_Clube",
-    joinColumns = { @JoinColumn(name = "idAtleta") },
-    inverseJoinColumns = { @JoinColumn(name = "idClube") })
+	@ManyToOne
 	private Clube clube;
 	
 	public Atleta() {

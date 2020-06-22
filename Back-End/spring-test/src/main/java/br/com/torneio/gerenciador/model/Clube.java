@@ -3,6 +3,7 @@ package br.com.torneio.gerenciador.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 public class Clube {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -11,7 +12,8 @@ public class Clube {
 	private String cnpj;
 	private String email;
 	private String endereco;
-	
+	@OneToMany
+	private Atleta atleta;
 	
 	public String getNome() {
 		return nome;
