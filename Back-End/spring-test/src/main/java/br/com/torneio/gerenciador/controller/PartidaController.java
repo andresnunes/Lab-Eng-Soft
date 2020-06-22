@@ -18,46 +18,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.torneio.gerenciador.dto.AtletaDto;
-import br.com.torneio.gerenciador.form.AtletaForm;
-import br.com.torneio.gerenciador.form.AtualizaAtletaForm;
-import br.com.torneio.gerenciador.model.Atleta;
-import br.com.torneio.gerenciador.repository.AtletaRepository;
-import br.com.torneio.gerenciador.repository.ClubeRepository;
+import br.com.torneio.gerenciador.dto.PartidaDto;
+import br.com.torneio.gerenciador.form.PartidaForm;
+import br.com.torneio.gerenciador.model.Partida;
+import br.com.torneio.gerenciador.repository.PartidaRepository;
+
 
 @RequestMapping("/partida")
 public class PartidaController {
 	
+	@Autowired
+	private PartidaRepository partidaRepository;
+	
 	
 	@GetMapping
-	public List<AtletaDto> listaAtleta(String nomeAtleta){
-		if (nomeAtleta == null) {
-			List<Atleta> atleta = atletaRepository.findAll();
-			return AtletaDto.converter(atleta);
-		} else {
-			List<Atleta> atleta = atletaRepository.findByNome(nomeAtleta);
-			return AtletaDto.converter(atleta);
-		}
+	public List<PartidaDto> listapartida(){
+		
+		List<Partida> partida = partidaRepository.findAll();
+		return PartidaDto.converter(partida);
+		
 	}
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<AtletaDto> cadastraAtleta(@RequestBody @Validated AtletaForm form, UriComponentsBuilder uriBuilder) {
-		Atleta atleta = form.converter(clubeRepository);
-		atletaRepository.save(atleta);
+	public ResponseEntity<PartidaDto> cadastrapartida(@RequestBody @Validated PartidaForm form, UriComponentsBuilder uriBuilder) {
+		Partida partida = form.converter();
+		partidaRepository.save(partida);
 		
-		URI uri = uriBuilder.path("/atleta/{id}").buildAndExpand(atleta.getId()).toUri();
-		return ResponseEntity.created(uri).body(new AtletaDto(atleta));
+		URI uri = uriBuilder.path("/partida/{id}").buildAndExpand(partida.getId()).toUri();
+		return ResponseEntity.created(uri).body(new PartidaDto(partida));
 		
 	}
 	
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<AtletaDto> atualizaAtleta(@PathVariable Long id, @RequestBody  AtualizaAtletaForm form) {
-		Optional<Atleta> optional = atletaRepository.findById(id);
+	public ResponseEntity<PartidaDto> atualizapartida(@PathVariable Long id, @RequestBody  AtualizaPartidaForm form) {
+		Optional<Partida> optional = partidaRepository.findById(id);
 		if (optional.isPresent()) {
-			Atleta atleta = form.atualizar(id, atletaRepository);
-			return ResponseEntity.ok(new AtletaDto(atleta));
+			Partida partida = form.atualizar(id, partidaRepository);
+			return ResponseEntity.ok(new PartidaDto(partida));
 		}
 		else {
 			return ResponseEntity.notFound().build();
@@ -66,10 +65,10 @@ public class PartidaController {
 	
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> deletaAtleta(@PathVariable Long id) {
-		Optional<Atleta> optional = atletaRepository.findById(id);
+	public ResponseEntity<?> deletapartida(@PathVariable Long id) {
+		Optional<Partida> optional = partidaRepository.findById(id);
 		if (optional.isPresent()) {
-			atletaRepository.deleteById(id);
+			partidaRepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		}
 		else {
