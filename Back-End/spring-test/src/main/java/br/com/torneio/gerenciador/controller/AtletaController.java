@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.torneio.gerenciador.model.Atleta;
@@ -25,6 +26,7 @@ import br.com.torneio.gerenciador.dto.AtletaDto;
 import br.com.torneio.gerenciador.form.AtletaForm;
 import br.com.torneio.gerenciador.form.AtualizaAtletaForm;
 
+@RestController
 @RequestMapping("/atleta")
 public class AtletaController {
 
@@ -37,13 +39,12 @@ public class AtletaController {
 	
 	@GetMapping
 	public List<AtletaDto> listaAtleta(String nomeAtleta){
-		if (nomeAtleta == null) {
-			List<Atleta> atleta = atletaRepository.findAll();
-			return AtletaDto.converter(atleta);
-		} else {
+		if (nomeAtleta != null) {
 			List<Atleta> atleta = atletaRepository.findByNome(nomeAtleta);
 			return AtletaDto.converter(atleta);
 		}
+		List<Atleta> atleta = atletaRepository.findAll();
+		return AtletaDto.converter(atleta);
 	}
 	
 	@PostMapping

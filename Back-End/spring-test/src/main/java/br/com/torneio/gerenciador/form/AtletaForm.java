@@ -1,5 +1,7 @@
 package br.com.torneio.gerenciador.form;
 
+import java.util.Optional;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +19,7 @@ public class AtletaForm {
 	private int idade;
 	
 	@NotNull @NotEmpty
-	private String nomeClube;
+	private Long clube_id;
 	
 	public String getNome() {
 		return nome;
@@ -35,17 +37,17 @@ public class AtletaForm {
 		this.idade = idade;
 	}
 
-	public String getNomeClube() {
-		return nomeClube;
+	public Long getNomeClube() {
+		return clube_id;
 	}
 
-	public void setNomeClube(String nomeClube) {
-		this.nomeClube = nomeClube;
+	public void setNomeClube(Long clube_id) {
+		this.clube_id = clube_id;
 	}
 	
 	public Atleta converter(ClubeRepository clubeRepository) {
-		Clube clube = clubeRepository.findByNome(nomeClube).get(0);
-		return new Atleta(nome, idade, clube);
+		Optional<Clube> clube = clubeRepository.findById(clube_id);
+		return new Atleta(nome, idade, clube.get());
 	}
 
 }

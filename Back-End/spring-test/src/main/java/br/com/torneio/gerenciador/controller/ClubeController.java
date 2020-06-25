@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.torneio.gerenciador.dto.ClubeDto;
@@ -25,7 +26,7 @@ import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
 
 
-
+@RestController
 @RequestMapping("/clube")
 public class ClubeController {
 	@Autowired
