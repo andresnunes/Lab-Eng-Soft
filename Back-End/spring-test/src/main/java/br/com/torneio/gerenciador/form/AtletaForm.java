@@ -4,21 +4,18 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-
 import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
 
 public class AtletaForm {
-	@NotNull @NotEmpty @Length(min = 3)
+	//@NotNull @NotEmpty @Length(min = 3)
 	private String nome;
 	
-	@NotNull @NotEmpty 
+	//@NotNull @NotEmpty 
 	private int idade;
 	
-	@NotNull @NotEmpty
+	//@NotNull @NotEmpty
 	private Long clube_id;
 	
 	public String getNome() {

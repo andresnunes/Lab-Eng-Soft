@@ -1,19 +1,34 @@
 package br.com.torneio.gerenciador.model;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Atleta {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
+	
+	//@NotEmpty = @Valid do javax
+	@Column(length = 30, nullable = false)
 	private String nome;
+	
+	//@Column   
 	private int idade;
-	@ManyToOne
+
+	@ManyToOne @JoinColumn
 	private Clube clube;
+	
+	@OneToMany ( mappedBy = "atleta_vencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
+	private List<Torneio> torneios_vencidos;
+	
 	
 	public Atleta() {
 		
@@ -23,8 +38,7 @@ public class Atleta {
 		this.nome = nome;
 		this.idade = idade;
 		this.clube = clube;
-	}
-	
+	}	
 	
 	public String getNome() {
 		return nome;
@@ -48,9 +62,18 @@ public class Atleta {
 
 	public int getIdade() {
 		return idade;
-	}
+	}	
 
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
+
+	public List<Torneio> getTorneios_vencidos() {
+		return torneios_vencidos;
+	}
+
+	public void setTorneios_vencidos(List<Torneio> torneios_vencidos) {
+		this.torneios_vencidos = torneios_vencidos;
+	}
+	
 }

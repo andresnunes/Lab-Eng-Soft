@@ -7,3 +7,9 @@ INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Marquinhos',23, 1);
 INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Uguinho', 25, 1);
 INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Zézinho', 34, 2);
 INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Luizinho', 29, 3);
+
+
+select * from ATLETA ;
+select * from CLUBE ;
+select * from ORGANIZADOR ;
+select * from TORNEIO;
