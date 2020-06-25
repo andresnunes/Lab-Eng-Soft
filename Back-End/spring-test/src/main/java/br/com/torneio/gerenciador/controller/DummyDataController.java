@@ -1,6 +1,7 @@
 package br.com.torneio.gerenciador.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,6 +101,10 @@ public class DummyDataController {
 			Torneio torneio1 = new Torneio();
 			torneio1.setClube(clube1);
 			torneio1.setData_inicio(LocalDate.parse("2020-09-15"));
+			List<Atleta> atletas_torneio1 = torneio1.getAtletas_participantes();
+
+
+			torneio1.setAtletas_participantes(atletas_torneio1);
 			tr.save(torneio1);
 			Torneio torneio2 = new Torneio();
 			torneio2.setClube(clube1);
@@ -115,6 +120,9 @@ public class DummyDataController {
 			tr.save(torneio2);
 			tr.save(torneio3);
 			//return "redirect:/atletas";
+			
+			
+			
 		}
 	}
 

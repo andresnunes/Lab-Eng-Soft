@@ -13,3 +13,4 @@ select * from ATLETA ;
 select * from CLUBE ;
 select * from ORGANIZADOR ;
 select * from TORNEIO;
+select * from TORNEIO_ATLETA ;

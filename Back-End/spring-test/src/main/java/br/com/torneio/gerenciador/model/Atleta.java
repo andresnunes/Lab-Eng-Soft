@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,6 +32,9 @@ public class Atleta {
 	@OneToMany ( mappedBy = "atleta_vencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
 	private List<Torneio> torneios_vencidos;
 	
+	@ManyToMany
+	@JoinTable(name="torneio_atleta", joinColumns = {@JoinColumn(name="torneio_id")},inverseJoinColumns = {@JoinColumn(name="atleta_id")})
+	private List<Torneio> torneios_concorridos;
 	
 	public Atleta() {
 		
@@ -74,6 +80,14 @@ public class Atleta {
 
 	public void setTorneios_vencidos(List<Torneio> torneios_vencidos) {
 		this.torneios_vencidos = torneios_vencidos;
+	}
+
+	public List<Torneio> getTorneios_concorridos() {
+		return torneios_concorridos;
+	}
+
+	public void setTorneios_concorridos(List<Torneio> torneios_concorridos) {
+		this.torneios_concorridos = torneios_concorridos;
 	}
 	
 }
