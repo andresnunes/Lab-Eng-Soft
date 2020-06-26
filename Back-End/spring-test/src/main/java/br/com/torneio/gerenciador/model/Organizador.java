@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity 
 public class Organizador {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
@@ -21,7 +21,7 @@ public class Organizador {
 	@Column(length = 30, nullable = false)
 	private String email;
 	
-	@Column(length = 15, nullable = false)
+	@Column(length = 15, nullable = false) //@Size(min=2, max=100, message="Tem de ter pelo menos 2 letras") 
 	private String senha;
 	
 	//@Column furutamente pra manyToMany colocar comando a baixo no clube, e tornar organizador lista, depois trazer o @joinColum de la pra cá

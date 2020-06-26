@@ -10,5 +10,10 @@ import br.com.torneio.gerenciador.model.Torneio;
 
 @Repository
 public interface TorneioRepository extends CrudRepository<Torneio, String>{
-	void adicionarAtletaAoTorneio(Torneio torneio, Atleta atleta);
+	//List<Atleta> adicionarAtletaAoTorneio(Torneio torneio, Atleta atleta);
+	
+	//procurar todos os torneios do atleta
+	//Iterable<Torneio> findByAtleta(Atleta atleta);
+
+    Torneio findById(long id);
 }

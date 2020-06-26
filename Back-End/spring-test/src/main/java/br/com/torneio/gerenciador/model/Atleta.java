@@ -2,14 +2,13 @@ package br.com.torneio.gerenciador.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -19,7 +18,7 @@ public class Atleta {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	//@NotEmpty = @Valid do javax
+	//@NotEmpty = @Valid do javax 
 	@Column(length = 30, nullable = false)
 	private String nome;
 	
@@ -32,9 +31,10 @@ public class Atleta {
 	@OneToMany ( mappedBy = "atleta_vencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
 	private List<Torneio> torneios_vencidos;
 	
-	@ManyToMany
-	@JoinTable(name="torneio_atleta", joinColumns = {@JoinColumn(name="torneio_id")},inverseJoinColumns = {@JoinColumn(name="atleta_id")})
+
+	@ManyToMany(mappedBy = "atletas_participantes", cascade = CascadeType.ALL)
 	private List<Torneio> torneios_concorridos;
+
 	
 	public Atleta() {
 		

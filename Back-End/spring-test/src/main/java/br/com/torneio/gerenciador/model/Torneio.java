@@ -2,13 +2,12 @@ package br.com.torneio.gerenciador.model;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -27,8 +26,10 @@ public class Torneio {
 	private LocalDate data_inicio;
 	
 	//MANYTOMANY LISTA DE ATLETAS
-	@ManyToMany(mappedBy="torneios_concorridos", cascade = CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name="torneio_atleta", joinColumns = {@JoinColumn(name="torneio_id")},inverseJoinColumns = {@JoinColumn(name="atleta_id")})
 	private List<Atleta> atletas_participantes;
+
 	
 	public Long getId() {
 		return id;
