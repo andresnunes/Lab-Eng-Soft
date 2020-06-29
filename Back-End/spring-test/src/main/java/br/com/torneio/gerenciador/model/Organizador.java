@@ -6,21 +6,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+
+
 
 @Entity 
 public class Organizador {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 	
+	@NotEmpty
 	@Column(length = 30, nullable = false)
 	private String nome;
 	
+	@NotEmpty
 	@Column(length = 14, nullable = false)
 	private String cpf;
 	
+	@NotEmpty
 	@Column(length = 30, nullable = false)
 	private String email;
 	
+	@NotEmpty
 	@Column(length = 15, nullable = false) //@Size(min=2, max=100, message="Tem de ter pelo menos 2 letras") 
 	private String senha;
 	

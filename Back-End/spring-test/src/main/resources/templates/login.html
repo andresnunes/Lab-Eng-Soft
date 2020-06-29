@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style/style.css" />
+<title>Tenis - Torneio release</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Tenis na mesa</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li id="btn_login"><a href="/organizador/signup"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Cadastro do
+							organizador</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<th:block th:include="mensagemValidacao"></th:block>
+	<div id="login" class="container formOrganizador">
+		<form method="post">
+			<div class="row">
+				<h4>Login de organizador</h4>
+				<div class="input-field col s6">
+					<label for="email">Email:</label> <input type="text" id="emaile"
+						value="" name="email" />
+				</div>
+				<div class="input-field col s3">
+					<label for="senha">Senha:</label> <input type="text" id="senhae"
+						value="" name="senha" />
+				</div>
+				<div class="input-field col s3">
+					<button class="waves-effect waves-light btn" type="submit">
+						<i class="material-icons left">arrow_upward</i>Login
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

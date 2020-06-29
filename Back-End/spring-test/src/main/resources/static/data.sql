@@ -8,7 +8,7 @@ INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Uguinho', 25, 1);
 INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Zézinho', 34, 2);
 INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Luizinho', 29, 3);
 
-
+INSERT INTO ORGANIZADOR(nome, cpf, email, senha) VALUES('organizador1', '123', 'organizador1@email','senha');
 select * from ATLETA ;
 select * from CLUBE ;
 select * from ORGANIZADOR ;
