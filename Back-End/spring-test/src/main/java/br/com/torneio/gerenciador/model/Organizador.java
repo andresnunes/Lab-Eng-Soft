@@ -20,11 +20,11 @@ public class Organizador {
 	private String nome;
 	
 	@NotEmpty
-	@Column(length = 14, nullable = false)
+	@Column(length = 14, nullable = false, unique = true)
 	private String cpf;
 	
 	@NotEmpty
-	@Column(length = 30, nullable = false)
+	@Column(length = 30, nullable = false, unique = true)
 	private String email;
 	
 	@NotEmpty

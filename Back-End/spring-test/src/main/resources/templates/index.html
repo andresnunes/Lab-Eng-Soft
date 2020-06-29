@@ -17,7 +17,7 @@
                     <a href="#" class="brand-logo">Listas</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="/torneio/cadastrar" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Novo torneio!</a></li>
-						<li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Atleta</a></li>
+						<li><a href="/atleta/cadastrar" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Atleta</a></li>
                         <li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>Logout</a></li>
                     </ul>
                 </div>
@@ -26,7 +26,6 @@
                 <table class="container">
             <thead>
                 <tr>
-                    <th>Clube</th>
                     <th>Data</th>
                     <th>Editar</th>
                     <th>Deletar</th>
@@ -34,26 +33,7 @@
             </thead>
             <tbody>
                 <tr th:each="torneio : ${torneios}">
-                    <td><p><span th:text=""></span></td>
                     <td><p><span th:text="${torneio.data_inicio}"></span></td>
-                    <td><a class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
-                    <td><a class="waves-effect waves-light btn-small"><i class="material-icons">delete</i></a></td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="container">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Clube</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="atleta : ${atletas}">
-                    <td><p><span th:text="${atleta.nome}"></span></td>
-                    <td><p><span th:text="${atleta.clube.nome}"></span></td>
                     <td><a class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
                     <td><a class="waves-effect waves-light btn-small"><i class="material-icons">delete</i></a></td>
                 </tr>

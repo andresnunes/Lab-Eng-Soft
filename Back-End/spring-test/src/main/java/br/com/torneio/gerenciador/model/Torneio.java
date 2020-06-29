@@ -1,6 +1,7 @@
 package br.com.torneio.gerenciador.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +17,15 @@ public class Torneio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
+	//LocalDate
+	private String data_inicio;
+	
 	@ManyToOne @JoinColumn
 	private Atleta atleta_vencedor;
 	
 	@ManyToOne @JoinColumn
 	private Clube clube;
 	
-	private LocalDate data_inicio;
-	
-	//MANYTOMANY LISTA DE ATLETAS
 	@ManyToMany
 	@JoinTable(name="torneio_atleta", joinColumns = {@JoinColumn(name="torneio_id")},inverseJoinColumns = {@JoinColumn(name="atleta_id")})
 	private List<Atleta> atletas_participantes;
@@ -39,11 +39,11 @@ public class Torneio {
 		this.id = id;
 	}
 	
-	public LocalDate getData_inicio() {
+	public String getData_inicio() {
 		return data_inicio;
 	}
 
-	public void setData_inicio(LocalDate data_inicio) {
+	public void setData_inicio(String data_inicio) {
 		this.data_inicio = data_inicio;
 	}
 

@@ -21,9 +21,8 @@
                 </div>
             </nav>
         </header>
-        <th:block th:include="mensagemValidacao"></th:block>
+        
         <form class="container formTorneio" method="post">
-            Clube: <input type="text" value="" name="" />
             <div class="row">
                 <div class="input-field col s4">
                     Data inicial: <input type="date" value="" name="data_inicio" />
@@ -33,6 +32,7 @@
                 </div>
             </div>
         </form>
+        <th:block th:include="mensagemValidacao"></th:block>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
     </body>
