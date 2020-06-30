@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Torneio {
@@ -18,6 +19,7 @@ public class Torneio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	//LocalDate
+	@NotEmpty //enquanto torneio form nao é configurado, provisorio
 	private String data_inicio;
 	
 	@ManyToOne @JoinColumn
