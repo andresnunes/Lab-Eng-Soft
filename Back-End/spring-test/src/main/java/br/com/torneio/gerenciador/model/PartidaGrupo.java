@@ -17,23 +17,11 @@ public class PartidaGrupo {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	private LocalTime hora;
-	private LocalDateTime data;
-	
-	@OneToMany
-	private Atleta atleta1;
-	
-	@OneToMany
-	private Atleta atleta2;
-	
-	@OneToMany
-	private Atleta atleta3;
-	
 	@ManyToOne
 	private Torneio torneio;
 	
-	@OneToMany
-	private Atleta vencendor;
+	private LocalTime hora;
+	private LocalDateTime data;
 	
 	private Long nivelPartida;
 	

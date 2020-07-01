@@ -14,6 +14,8 @@ public class Atleta {
 	private int idade;
 	@ManyToOne
 	private Clube clube;
+	private Long pontosGrupo;
+	
 	
 	public Atleta() {
 		
@@ -53,4 +55,13 @@ public class Atleta {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
+	
+	public Long getPontosGrupo() {
+		return pontosGrupo;
+	}
+
+	public void setPontosGrupo(Long pontosGrupo) {
+		this.pontosGrupo = pontosGrupo;
+	}
+
 }
