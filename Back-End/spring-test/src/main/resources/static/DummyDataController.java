@@ -39,21 +39,22 @@ public class DummyDataController {
 		@RequestMapping("/teste1")
 		public void  teste1() {
 			//TESTAGEM DO CRUD, insertOK, read?, update?, delete? EM TABELAS 1..n n..1 1..1			
+		
+			Clube clube1 = new Clube();
+			clube1.setNome("Nipo");
+			clube1.setCnpj("123456789");
+			clube1.setEmail("nipo@email.com");
+			clube1.setEndereco("Rua tal, n 12");
+			//clube1.setOrganizador(organizador1); //att. INVERTI ///o correto pois o atributo organizador_id esta na tabela do clube
 			
 			Organizador organizador1 = new Organizador();
 			organizador1.setCpf("963852741");
 			organizador1.setEmail("organizador1@email.com");
 			organizador1.setNome("Leoncio Nipo");
 			organizador1.setSenha("123");
-			//organizador1.setClube(clube1);
-			or.save(organizador1);			
-			Clube clube1 = new Clube();
-			clube1.setNome("Nipo");
-			clube1.setCnpj("123456789");
-			clube1.setEmail("nipo@email.com");
-			clube1.setEndereco("Rua tal, n 12");
-			clube1.setOrganizador(organizador1); // o correto pois o atributo organizador_id esta na tabela do clube
-					
+			organizador1.setClube(clube1);
+			or.save(organizador1);	
+			
 			Organizador organizador2 = new Organizador();
 			organizador2.setCpf("741852963");
 			organizador2.setEmail("organizador2@email.com");

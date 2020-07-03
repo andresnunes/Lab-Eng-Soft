@@ -13,7 +13,7 @@ public class ClubeDto {
 	
 	public ClubeDto(Clube clube) {
 		this.id = clube.getId();
-		this.nome = clube.getNome();
+		this.nome = clube.getNomeClube();
 		this.endereco = clube.getEndereco();
 	}
 	

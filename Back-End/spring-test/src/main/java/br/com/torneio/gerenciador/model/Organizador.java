@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
@@ -32,7 +33,8 @@ public class Organizador {
 	private String senha;
 	
 	//@Column furutamente pra manyToMany colocar comando a baixo no clube, e tornar organizador lista, depois trazer o @joinColum de la pra cá
-	@OneToOne( mappedBy="organizador", cascade=javax.persistence.CascadeType.ALL)
+	@OneToOne //INVERTI MAPEAMENTO DE TABELA
+	@JoinColumn
 	private Clube clube;
 	
 	public String getNome() {

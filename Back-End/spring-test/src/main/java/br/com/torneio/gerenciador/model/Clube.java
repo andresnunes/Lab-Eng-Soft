@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -18,14 +17,14 @@ public class Clube {
 	
 
 	//@NotEmpty = @Valid do javax
-	@Column(length = 20, nullable = false)
-	private String nome;
+	@Column(length = 20, nullable = false)//, name = "nome"
+	private String nomeClube;
 	
 	@Column(nullable = false)
 	private String cnpj;
 	
-	@Column(length = 30, nullable = false)
-	private String email;
+	@Column(length = 30, nullable = false)//, name	= "email"
+	private String emailClube;
 	
 	@Column(length = 50, nullable = false)
 	private String endereco;
@@ -33,18 +32,18 @@ public class Clube {
 	@OneToMany ( mappedBy="clube", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
 	private List<Atleta> atletas;
 	
-	@OneToOne //por enquanto um clube tem um organizador - EM CASO OneToMany ver comentario no model. Clube
-	@JoinColumn
+	//INVERTI MAPEAMENTO DE TABELA
+	@OneToOne ( mappedBy="clube", cascade=javax.persistence.CascadeType.ALL) //por enquanto um clube tem um organizador - EM CASO OneToMany ver comentario no model. Clube
 	private Organizador organizador;
 	
 	@OneToMany( mappedBy="clube", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
 	private List<Torneio> torneios;
 	
-	public String getNome() {
-		return nome;
+	public String getNomeClube() {
+		return nomeClube;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeClube(String nomeClube) {
+		this.nomeClube = nomeClube;
 	}
 	
 	public String getCnpj() {
@@ -54,11 +53,11 @@ public class Clube {
 		this.cnpj = cnpj;
 	}
 	
-	public String getEmail() {
-		return email;
+	public String getEmailClube() {
+		return emailClube;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailClube(String emailClube) {
+		this.emailClube = emailClube;
 	}
 	
 	public String getEndereco() {

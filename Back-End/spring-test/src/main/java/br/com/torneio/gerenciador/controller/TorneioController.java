@@ -72,9 +72,9 @@ public class TorneioController {
 	CRIAR PAINEL DE CLUBES "cadastre seu clube!" ira cadastrar clube e um organizador obrigatoriamente, 
 	no futuro no many to many, varios organizadores poderão fazer parte de um clube > futuramente ORGANIZADOR ACESSA CLUBE,
 	HOJE, organizador loga e tem acesso aos torneios.	
-	/*
+	*/
 	
-	
+	//@PathVariable("id_organizador") long id_organizador, QUANDO TORNEIO TIVER OBRIGATORIAMENTE UM CLUBE
 	@GetMapping("/deletar")
     public String deleteTorneio(long codigoTorneio){
         Torneio torneio = tr.findById(codigoTorneio);

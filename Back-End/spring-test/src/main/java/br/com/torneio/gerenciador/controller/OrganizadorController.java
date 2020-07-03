@@ -33,7 +33,7 @@ public class OrganizadorController {
 	}
 	
 	@RequestMapping("/signup")
-	public String signup() { return("signup");}
+	public String signup() { return("formOrganizador");}
 	
 	@PostMapping("/signup") 
 	public String saveOrganizador(@Valid Organizador organizador, BindingResult result, RedirectAttributes attributes){

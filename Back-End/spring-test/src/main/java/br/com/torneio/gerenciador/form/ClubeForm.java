@@ -49,7 +49,7 @@ public class ClubeForm {
 	}
 
 	public Clube converter(ClubeRepository clubeRepository) {
-		Clube clube = clubeRepository.findByNome(nome).get(0);
+		Clube clube = clubeRepository.findByNomeClube(nome).get(0);
 		return clube;
 	}
 	
