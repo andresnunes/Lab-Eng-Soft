@@ -27,7 +27,7 @@ public class OrganizadorController {
 	public String getOrganizador(/*@Valid dto? pra gerar um login valido?,*/ Organizador organizador){
 		Optional<Organizador> organizador1 = or.findByEmail(organizador.getEmail());
 		if(organizador1.isPresent()) { 
-			return "redirect:/torneio/view";
+			return "redirect:/"+ organizador1.get().getId() +"/torneio/view";
 			}
 		return "redirect:/organizador/login";
 	}
@@ -43,7 +43,7 @@ public class OrganizadorController {
             return "redirect:/organizador/signup";
         }
 		or.save(organizador);	
-		return "redirect:/torneio/view";
+		return "redirect:/"+ organizador.getId() +"/torneio/view";
 	}
 	
 }

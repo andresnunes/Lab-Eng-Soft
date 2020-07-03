@@ -13,17 +13,17 @@
     <body>
         <header>
             <nav>
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Listas</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="/torneio/cadastrar" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Novo torneio!</a></li>
-						<li><a href="/atleta/cadastrar" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Atleta</a></li>
+                <div  class="nav-wrapper" >                   
+                    <ul th:each="organizador : ${organizador}" id="nav-mobile" class="right hide-on-med-and-down">
+                    	<li><h5>Bem vindo <span th:text="${organizador.get().getNome()}"></span></h5></li>
+                        <li><a th:href="${(#mvc.url('TC#formTorneio').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Novo torneio!</a></li>
+						<li><a href="/atleta/cadastrar" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar atleta ao Clube</a></li>
                         <li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>Logout</a></li>
                     </ul>
                 </div>
             </nav>
         </header>
-                <table class="container">
+        <table class="container">
             <thead>
                 <tr>
                 	<th>Id</th>
@@ -38,6 +38,7 @@
                     <td><p><span th:text="${torneio.data_inicio}"></span></td>
                     <td><a href="/torneio/editar" class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
                     <td><a th:href="${(#mvc.url('TC#deleteTorneio').arg(0,torneio.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons">delete</i></a></td>
+          </tr>
             </tbody>
         </table>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
