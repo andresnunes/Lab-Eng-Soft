@@ -35,22 +35,25 @@ public class TorneioController {
 	@Autowired
 	OrganizadorRepository or;
 
-	@GetMapping("/view")  //DO ORGANIZADOR LOGADO FUTURAMENTE
-	public ModelAndView listarTorneios(@PathVariable("id_organizador") long id_organizador){
+	@GetMapping("/view")
+	public ModelAndView listTorneios(@PathVariable("id_organizador") long id_organizador){
 		ModelAndView mv = new ModelAndView("index");
 		Optional<Organizador> organizador = or.findById(id_organizador);
         mv.addObject("organizador", organizador);
 		
-		Iterable<Torneio> torneios = tr.findAll();
+		Iterable<Torneio> torneios = tr.findByClube(organizador.get().getClube());
 		mv.addObject("torneios", torneios);
 		System.out.println("O organizador de id " + organizador.get().getId() + " acessou o painel de torneios"); 
 		return mv;
 	}
 
 	@RequestMapping("/cadastrar")
-	public String formTorneio(@PathVariable("id_organizador") long id_organizador) {
+	public ModelAndView formCadastroTorneio(@PathVariable("id_organizador") long id_organizador) {
+		ModelAndView mv = new ModelAndView("FormTorneio");
+		Optional<Organizador> organizador = or.findById(id_organizador);
+        mv.addObject("organizador", organizador);
 		System.out.println("O organizador de id " + id_organizador +" acessou o formulario de cadastro de torneio"); 
-		return "formTorneio" ;
+		return mv;
 	}
 	
 	@PostMapping("/cadastrar")
@@ -67,39 +70,47 @@ public class TorneioController {
         System.out.println("Clube sediador do torneio:" + organizador.get().getClube());
         return "redirect:/{id_organizador}/torneio/view";		
 	}
-	
-	/*
-	CRIAR PAINEL DE CLUBES "cadastre seu clube!" ira cadastrar clube e um organizador obrigatoriamente, 
-	no futuro no many to many, varios organizadores poderão fazer parte de um clube > futuramente ORGANIZADOR ACESSA CLUBE,
-	HOJE, organizador loga e tem acesso aos torneios.	
-	*/
-	
-	//@PathVariable("id_organizador") long id_organizador, QUANDO TORNEIO TIVER OBRIGATORIAMENTE UM CLUBE
+
 	@GetMapping("/deletar")
-    public String deleteTorneio(long codigoTorneio){
+    public String deleteTorneio(@PathVariable("id_organizador") long id_organizador, long codigoTorneio){
         Torneio torneio = tr.findById(codigoTorneio);
         tr.delete(torneio);
         return "redirect:/{id_organizador}/torneio/view";
     }
-	/*
-	@RequestMapping("/editar")
-	public ModelAndView updateFormTorneio(long codigoTorneio) {
-		Torneio torneio = tr.findById(codigoTorneio);
-		ModelAndView mv = new ModelAndView("UpdateFormTorneio");
-		mv.addObject("torneio.data", torneio.getData_inicio());
-		return mv;
 
-	}	
-	@PutMapping("/editar")
-	public String updateTorneio(long codigoTorneio) {
-		Torneio torneio = tr.findById(codigoTorneio);
-		tr.save(torneio);
-		return "redirect:/torneio/view";
+	// melhoria, o formulario de cadastro e de edição serem o mesmo?
+	//para esconder o formulario post teria que fazer o thymeleaf entender pelo request mapping qual formulario ele teria que renderizar na tela
+	//nao temos tempo, ô rolé, fica pra proxima versão
+	@RequestMapping("/editar/{id_torneio}") // se tiver tempo mais facil criar outro html com o put no form e tentar puxar os dados
+	public ModelAndView formEditarTorneio(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_torneio")  long id_torneio) {
+		ModelAndView mv = new ModelAndView("Torneio");
+		Optional<Organizador> organizador = or.findById(id_organizador);
+        mv.addObject("organizador", organizador);         
+		Torneio torneio = tr.findById(id_torneio);
+		mv.addObject("torneio", torneio);
+		return mv;
 	}
+	//metodo PUT, nao upava, resolver depois	
+	@PostMapping("/editar/{id_torneio}")
+	public String updateTorneio(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_torneio") long id_torneio, @Valid Torneio torneio, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()){
+            attributes.addFlashAttribute("mensagem", "Verifique os campos");
+            System.out.println("O organizador de id " + id_organizador +" falhou em editar o torneio de id " + torneio.getId()); 
+        return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
+        }	
+		Torneio torneioUpdated = tr.findById(id_torneio);
+		torneioUpdated.setData_inicio(torneio.getData_inicio());
+        tr.save(torneioUpdated);
+        System.out.println("O organizador de id " + id_organizador +" atualizou torneio com data em " + torneio.getData_inicio()); 
+        return "redirect:/{id_organizador}/torneio/view";	
+	}
+
 	
+
+
 	//GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 	
-	*/
+	
 	
 	
 	

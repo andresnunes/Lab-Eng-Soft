@@ -28,6 +28,7 @@ public class Atleta {
 	@ManyToOne @JoinColumn
 	private Clube clube;
 	
+	//dar update pra ver torneio vencido e torneio concorrido
 	@OneToMany ( mappedBy = "atleta_vencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
 	private List<Torneio> torneios_vencidos;
 	

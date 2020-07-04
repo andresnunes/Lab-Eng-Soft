@@ -15,15 +15,14 @@ public class Clube {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 	
-
 	//@NotEmpty = @Valid do javax
-	@Column(length = 20, nullable = false)//, name = "nome"
+	@Column(length = 20, nullable = false, name = "nome")
 	private String nomeClube;
 	
 	@Column(nullable = false)
 	private String cnpj;
 	
-	@Column(length = 30, nullable = false)//, name	= "email"
+	@Column(length = 30, nullable = false, name	= "email")
 	private String emailClube;
 	
 	@Column(length = 50, nullable = false)

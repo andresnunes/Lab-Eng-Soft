@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.torneio.gerenciador.model.Atleta;
+import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
 import br.com.torneio.gerenciador.repository.AtletaRepository;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
@@ -42,10 +43,12 @@ public class AtletaController {
 	
 	@Autowired
 	private ClubeRepository clubeRepository;
-
+//IMRPOTAR ORG igual os outros modells
 	@RequestMapping("/cadastrar") //modealandview
 	public ModelAndView formAtleta() {
 		ModelAndView mv = new ModelAndView("formAtleta");
+		//Optional<Organizador> organizador = or.findById(id_organizador);
+        //mv.addObject("organizador", organizador);  
 		Iterable<Atleta> atletas = ar.findAll();
 		mv.addObject("atletas", atletas);
 		return mv;

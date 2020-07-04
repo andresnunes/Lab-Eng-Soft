@@ -31,7 +31,7 @@ public class OrganizadorController {
 			}
 		return "redirect:/organizador/login";
 	}
-	
+	/*TEMPORARIAMENTE INABILITADO POIS O CADASTRO DE CLUBE CADASTRA UM ORGANIZADOR SO*/
 	@RequestMapping("/signup")
 	public String signup() { return("formOrganizador");}
 	

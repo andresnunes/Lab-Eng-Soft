@@ -21,12 +21,11 @@
                 </div>
             </nav>
         </header>
-        
-        <form class="container formTorneio" method="post">
+        <form class="container formTorneio" th:each="torneio : ${torneio}" method="post">
             <div class="row">
                 <div class="input-field col s4">
                 <label for="data_inicio">Data inicial:</label>
-                     <input type="date" value="" name="data_inicio" />
+                     <input type="date" th:value="${torneio.data_inicio}" name="data_inicio" />
                 </div>
                 <div class="input-field col s4">
                     <button class="waves-effect waves-light btn" type="submit">Salvar</button>
