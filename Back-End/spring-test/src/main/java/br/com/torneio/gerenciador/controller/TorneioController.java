@@ -90,6 +90,7 @@ public class TorneioController {
 		mv.addObject("torneio", torneio);
 		return mv;
 	}
+
 	//metodo PUT, nao upava, resolver depois	
 	@PostMapping("/editar/{id_torneio}")
 	public String updateTorneio(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_torneio") long id_torneio, @Valid Torneio torneio, BindingResult result, RedirectAttributes attributes) {
@@ -110,7 +111,7 @@ public class TorneioController {
 
 	//GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 	
-	
+	//https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf	
 	
 	
 	

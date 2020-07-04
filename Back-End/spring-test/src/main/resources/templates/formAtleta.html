@@ -43,7 +43,7 @@
                 <tr th:each="atleta : ${atletas}">
                     <td><span th:text="${atleta.nome}" ></span></td>
                     <td><span th:text="${atleta.idade}" ></span></td>
-                    <td><a th:href="${(#mvc.url('AC#deleteAtleta').arg(0,atleta.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons">delete</i></a></td>
+                    <td><a th:href="${(#mvc.url('AC#deleteAtleta').arg(0,atleta.clube.id).arg(1,atleta.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
             

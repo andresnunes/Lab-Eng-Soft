@@ -29,46 +29,52 @@ import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
 import br.com.torneio.gerenciador.repository.AtletaRepository;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
+import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 import br.com.torneio.gerenciador.dto.AtletaDto;
 import br.com.torneio.gerenciador.form.AtletaForm;
 import br.com.torneio.gerenciador.form.AtualizaAtletaForm;
 
 //@RestController
 @Controller
-@RequestMapping("/atleta")
+@RequestMapping("{id_organizador}/atleta")
 public class AtletaController {
 
 	@Autowired
 	private AtletaRepository ar;
-	
 	@Autowired
-	private ClubeRepository clubeRepository;
-//IMRPOTAR ORG igual os outros modells
-	@RequestMapping("/cadastrar") //modealandview
-	public ModelAndView formAtleta() {
+	OrganizadorRepository or;	
+	@Autowired
+	private ClubeRepository cr;
+	
+	
+	@RequestMapping("/cadastrar")
+	public ModelAndView formCadastroAtleta(@PathVariable("id_organizador") long id_organizador) {
 		ModelAndView mv = new ModelAndView("formAtleta");
-		//Optional<Organizador> organizador = or.findById(id_organizador);
-        //mv.addObject("organizador", organizador);  
-		Iterable<Atleta> atletas = ar.findAll();
+		Optional<Organizador> organizador = or.findById(id_organizador);
+        mv.addObject("organizador", organizador);          
+		Iterable<Atleta> atletas = ar.findByClube(organizador.get().getClube());		
 		mv.addObject("atletas", atletas);
 		return mv;
 	}
 	
 	@PostMapping("/cadastrar")
-	public String saveAtleta(@Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
+	public String saveAtleta(@PathVariable("id_organizador") long id_organizador, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
         if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Verifique os campos");
         return "redirect:/atleta/cadastrar";
         }
+        Optional<Organizador> organizador = or.findById(id_organizador);
+        atleta.setClube(organizador.get().getClube());
         ar.save(atleta);
-        return "redirect:/atleta/cadastrar";	
+        return "redirect:/{id_organizador}/atleta/cadastrar";	
 	}
 	
+	
 	@GetMapping("/deletar")
-    public String deleteAtleta(long codigoAtleta){
+    public String deleteAtleta(@PathVariable("id_organizador") long id_organizador, long codigoAtleta){
         Atleta atleta = ar.findById(codigoAtleta);
         ar.delete(atleta);
-        return "redirect:/atleta/cadastrar";
+        return "redirect:/{id_organizador}/atleta/cadastrar";
     }
 	
 	
