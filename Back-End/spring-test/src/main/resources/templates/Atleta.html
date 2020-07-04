@@ -24,32 +24,15 @@
         </header>
         <th:block th:include="mensagemValidacao"></th:block>
         <div class="container formAtleta">
-            <form method="POST">
-                <h5>Novo atleta</h5>
+            <form method="POST" th:each="atleta : ${atleta}">
+                <h5>Editar atleta</h5>
                 <label for="nome">Nome: </label>
-                <input type="text" value="" name="nome"/>
+                <input type="text" th:value="${atleta.nome}" name="nome"/>
                 <label for="idade">Idade: </label>
-                <input type="text" value="" name="idade"/>
-                <button type="submit" class="waves-effect waves-light btn">Adicionar Atleta</button> 
+                <input type="text" th:value="${atleta.idade}" name="idade"/>
+                <button type="submit" class="waves-effect waves-light btn">Atualizar atleta</button> 
             </form>
         </div>
-        <table class="container listaAtletas">
-            <thead>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Editar</th>
-                <th>Deletar</th>
-            </thead>
-            <tbody>
-                <tr th:each="atleta : ${atletas}">
-                    <td><span th:text="${atleta.nome}" ></span></td>
-                    <td><span th:text="${atleta.idade}" ></span></td>
-                    <td><a th:href="${(#mvc.url('AC#formEditarAtleta').arg(0,organizador.get().getId()).arg(1,atleta.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons">person</i></a></td>
-                    <td><a th:href="${(#mvc.url('AC#deleteAtleta').arg(0,organizador.get().getId()).arg(1,atleta.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons">delete_forever</i></a></td>
-                </tr>
-            </tbody>
-            
-        </table>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
     </body>

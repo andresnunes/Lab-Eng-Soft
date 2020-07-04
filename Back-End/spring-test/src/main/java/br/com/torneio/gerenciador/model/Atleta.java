@@ -12,17 +12,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Atleta {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	//@NotEmpty = @Valid do javax 
+	@NotEmpty //= @Valid do javax 
 	@Column(length = 30, nullable = false)
 	private String nome;
 	
-	//@Column   
+	
+	//@Column @NotEmpty 
 	private int idade;
 
 	@ManyToOne @JoinColumn

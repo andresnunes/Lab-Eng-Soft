@@ -57,6 +57,7 @@ public class AtletaController {
 		return mv;
 	}
 	
+	//rever os @valids e os do html 0,organizador.get().getId()
 	@PostMapping("/cadastrar")
 	public String saveAtleta(@PathVariable("id_organizador") long id_organizador, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
         if(result.hasErrors()){
@@ -78,10 +79,35 @@ public class AtletaController {
     }
 	
 	
-	
+	@RequestMapping("/editar/{id_atleta}") // se tiver tempo mais facil criar outro html com o put no form e tentar puxar os dados
+	public ModelAndView formEditarAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta")  long id_atleta) {
+		ModelAndView mv = new ModelAndView("Atleta");
+		Optional<Organizador> organizador = or.findById(id_organizador);
+        mv.addObject("organizador", organizador);         
+		Atleta atleta = ar.findById(id_atleta);
+		mv.addObject("atleta", atleta);
+		return mv;
+	}
+
+
+	//metodo PUT, nao upava, resolver depois	
+	@PostMapping("/editar/{id_atleta}")
+	public String updateAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta") long id_atleta, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()){
+            attributes.addFlashAttribute("mensagem", "Verifique os campos");
+            System.out.println("O organizador de id " + id_organizador +" falhou em editar o atleta de id " + atleta.getId()); 
+            return "redirect:/{id_organizador}/atleta/editar/{id_atleta}";
+        }	
+		Atleta atletaUpdated = ar.findById(id_atleta);
+		atletaUpdated.setNome(atleta.getNome());
+		atletaUpdated.setIdade(atleta.getIdade());
+        ar.save(atletaUpdated);
+        System.out.println("O organizador de id " + id_organizador +" atualizou atleta de id " + id_atleta); 
+        return "redirect:/{id_organizador}/torneio/view";	
+	}	
+
 
 	/*
-	
 	@GetMapping
 	public List<AtletaDto> listaAtleta(String nomeAtleta){
 		if (nomeAtleta != null) {
