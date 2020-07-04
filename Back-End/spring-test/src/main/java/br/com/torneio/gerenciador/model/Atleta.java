@@ -33,8 +33,8 @@ public class Atleta {
 	private List<Torneio> torneios_vencidos;
 	
 
-	@ManyToMany(mappedBy = "atletas_participantes", cascade = CascadeType.ALL)
-	private List<Torneio> torneios_concorridos;
+	@ManyToMany(mappedBy = "atletasParticipantes", cascade = CascadeType.ALL)
+	private List<Torneio> torneiosConcorridos;
 
 	
 	public Atleta() {
@@ -83,12 +83,12 @@ public class Atleta {
 		this.torneios_vencidos = torneios_vencidos;
 	}
 
-	public List<Torneio> getTorneios_concorridos() {
-		return torneios_concorridos;
+	public List<Torneio> getorneiosConcorridos() {
+		return torneiosConcorridos;
 	}
 
-	public void setTorneios_concorridos(List<Torneio> torneios_concorridos) {
-		this.torneios_concorridos = torneios_concorridos;
+	public void setorneiosConcorridos(List<Torneio> torneiosConcorridos) {
+		this.torneiosConcorridos = torneiosConcorridos;
 	}
 	
 }

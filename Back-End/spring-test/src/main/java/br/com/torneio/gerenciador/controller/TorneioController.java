@@ -1,5 +1,6 @@
 package br.com.torneio.gerenciador.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
+import br.com.torneio.gerenciador.repository.AtletaRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 import br.com.torneio.gerenciador.repository.TorneioRepository;
 
@@ -34,6 +37,8 @@ public class TorneioController {
 	TorneioRepository tr;
 	@Autowired
 	OrganizadorRepository or;
+	@Autowired
+	AtletaRepository ar;
 
 	@GetMapping("/view")
 	public ModelAndView listTorneios(@PathVariable("id_organizador") long id_organizador){
@@ -88,9 +93,15 @@ public class TorneioController {
         mv.addObject("organizador", organizador);         
 		Torneio torneio = tr.findById(id_torneio);
 		mv.addObject("torneio", torneio);
+		Iterable<Atleta> atletas1 = torneio.getAtletasParticipantes();//tr.findByAtletasParticipantes(torneio);
+		mv.addObject("atletas1", atletas1);
+		//FAZER A LISTA DOS NAO PARTICIPANTES
+		//pode ser necessaria uma entidade de implementação do torneioRepository
+		Iterable<Atleta> atletas2 = ar.findAll();
+		mv.addObject("atletas2", atletas2);
 		return mv;
 	}
-
+	
 	//metodo PUT, nao upava, resolver depois	
 	@PostMapping("/editar/{id_torneio}")
 	public String updateTorneio(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_torneio") long id_torneio, @Valid Torneio torneio, BindingResult result, RedirectAttributes attributes) {
@@ -107,7 +118,17 @@ public class TorneioController {
 	}
 
 	
-
+	@RequestMapping("/editar/{id_torneio}/atleta/{id_atleta}") //id de atleta em path, pra funcionar no postman
+	public String saveAtletaTorneio(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_torneio") long id_torneio, @PathVariable("id_atleta") long id_atleta) {
+		Torneio torneio = tr.findById(id_torneio);
+		Atleta atleta = ar.findById(id_atleta);
+		List<Atleta> atletas = torneio.getAtletasParticipantes(); 
+		atletas.add(atleta);
+		System.out.println(atletas);
+		torneio.setAtletasParticipantes(atletas);
+		tr.save(torneio);
+		return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
+	}
 
 	//GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 	

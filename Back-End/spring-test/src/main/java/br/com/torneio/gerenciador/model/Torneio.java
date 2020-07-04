@@ -30,7 +30,7 @@ public class Torneio {
 	
 	@ManyToMany
 	@JoinTable(name="torneio_atleta", joinColumns = {@JoinColumn(name="torneio_id")},inverseJoinColumns = {@JoinColumn(name="atleta_id")})
-	private List<Atleta> atletas_participantes;
+	private List<Atleta> atletasParticipantes;
 
 	
 	public Long getId() {
@@ -65,12 +65,12 @@ public class Torneio {
 		this.clube = clube;
 	}
 
-	public List<Atleta> getAtletas_participantes() {
-		return atletas_participantes;
+	public List<Atleta> getAtletasParticipantes() {
+		return atletasParticipantes;
 	}
 
-	public void setAtletas_participantes(List<Atleta> atletas_participantes) {
-		this.atletas_participantes = atletas_participantes;
+	public void setAtletasParticipantes(List<Atleta> atletasParticipantes) {
+		this.atletasParticipantes = atletasParticipantes;
 	}
 
 }

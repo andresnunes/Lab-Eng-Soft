@@ -13,7 +13,7 @@ public interface AtletaRepository extends JpaRepository<Atleta,Long>{
 	List<Atleta> findByNome(String nome);
 	Atleta findById(long id);
 	Iterable<Atleta> findByClube(Clube clube);
-	
+	//List<Torneio> findByTorneios_concorridos(Atleta atleta);
 	//procurar todos os atletas do torneio
 	//Iterable<Atleta> findByTorneio(Torneio torneio);
 }
