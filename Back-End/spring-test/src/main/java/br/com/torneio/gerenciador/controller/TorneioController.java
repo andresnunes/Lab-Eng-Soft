@@ -93,11 +93,10 @@ public class TorneioController {
         mv.addObject("organizador", organizador);         
 		Torneio torneio = tr.findById(id_torneio);
 		mv.addObject("torneio", torneio);
-		Iterable<Atleta> atletas1 = torneio.getAtletasParticipantes();//tr.findByAtletasParticipantes(torneio);
+		List<Atleta> atletas1 = torneio.getAtletasParticipantes();//tr.findByAtletasParticipantes(torneio);
 		mv.addObject("atletas1", atletas1);
-		//FAZER A LISTA DOS NAO PARTICIPANTES
-		//pode ser necessaria uma entidade de implementação do torneioRepository
-		Iterable<Atleta> atletas2 = ar.findAll();
+		List<Atleta> atletas2 = ar.findAll();
+		atletas2.removeAll(atletas1);
 		mv.addObject("atletas2", atletas2);
 		return mv;
 	}
