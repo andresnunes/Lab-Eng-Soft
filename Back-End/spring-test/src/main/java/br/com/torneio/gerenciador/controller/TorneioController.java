@@ -129,13 +129,19 @@ public class TorneioController {
 		return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
 	}
 
-	//GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 	
+	@RequestMapping("/editar/{id_torneio}/atleta")
+    public String deleteAtletaTorneio(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_torneio") long id_torneio, long id_atleta){
+		Torneio torneio = tr.findById(id_torneio);
+		Atleta atleta = ar.findById(id_atleta);
+		List<Atleta> atletas = torneio.getAtletasParticipantes(); 
+		atletas.remove(atleta);
+        tr.save(torneio);
+        return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
+    }
+	
+	
+	//GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html mais chique	
 	//https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf	
-	
-	
-	
-	
-	
 	
 }

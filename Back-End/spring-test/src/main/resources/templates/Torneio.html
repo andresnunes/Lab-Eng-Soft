@@ -43,21 +43,56 @@
 	</form>
 	<th:block th:include="mensagemValidacao"></th:block>
 	<div class="container">
-	<div class="formAtleta">
-		<h5>Atletas cadastrados no torneio</h5>
-		<ul th:each="atleta : ${atletas1}">
-			<li><span th:text="${atleta.nome}"></span></li>
-		</ul>
+		<div class="formAtletaAdicionado">
+			<h5>Atletas cadastrados no torneio</h5>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Clube</th>
+						<th>Deletar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="atleta : ${atletas1}">
+						<td><p>
+								<span th:text="${atleta.nome}"></span></td>
+						<td><p>
+								<span th:text="${atleta.clube.nomeClube}"></span></td>
+						<td><a
+							th:href="${(#mvc.url('TC#deleteAtletaTorneio').arg(0,organizador.get().getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
+							class="waves-effect waves-light btn-small"><i
+								class="material-icons">delete</i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="formAtletaGeral">
+			<h5>Lista geral de atletas</h5>
+			<table>
+				<thead>
+					<tr>
+					    <th>Adicionar</th>
+						<th>Nome</th>
+						<th>Idade</th>
+						<th>Clube</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="atleta : ${atletas2}">
+						<td><a th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.get().getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"><i
+								class="material-icons">add</i></a></td>
+						<td><span
+								th:text="${atleta.nome}"></span></td>
+						<td><p>
+								<span th:text="${atleta.idade}"></span></td>
+						<td><p>
+								<span th:text="${atleta.clube.nomeClube}"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class="formAtleta">
-		<h5>Lista geral de atletas</h5>
-		<ul th:each="atleta : ${atletas2}">
-			<li><a th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.get().getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"><span th:text="${atleta.nome}"></a></span></li>
-		</ul>
-	</div>
-</div>
-
-
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
