@@ -53,7 +53,7 @@ public class AtletaController {
 		Optional<Organizador> organizador = or.findById(id_organizador);
         mv.addObject("organizador", organizador);          
 		Iterable<Atleta> atletas = ar.findByClube(organizador.get().getClube());		
-		mv.addObject("atletas", atletas);
+		mv.addObject("atletas", atletas); 
 		return mv;
 	}
 	
@@ -82,9 +82,15 @@ public class AtletaController {
 	@RequestMapping("/editar/{id_atleta}") // se tiver tempo mais facil criar outro html com o put no form e tentar puxar os dados
 	public ModelAndView formEditarAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta")  long id_atleta) {
 		ModelAndView mv = new ModelAndView("Atleta");
+		
 		Optional<Organizador> organizador = or.findById(id_organizador);
-        mv.addObject("organizador", organizador);         
 		Atleta atleta = ar.findById(id_atleta);
+        List<Torneio> torneiosConcorridos = atleta.getTorneiosConcorridos();
+        List<Torneio> torneiosVencidos = atleta.getTorneiosVencidos();
+		
+        mv.addObject("organizador", organizador);       		
+		mv.addObject("torneiosConcorridos", torneiosConcorridos);
+		mv.addObject("torneiosVencidos", torneiosVencidos);
 		mv.addObject("atleta", atleta);
 		return mv;
 	}

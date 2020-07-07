@@ -22,8 +22,25 @@
                 </div>
             </nav>
         </header>
-        <th:block th:include="mensagemValidacao"></th:block>
+        
+  
+        
         <div class="container formAtleta">
+        	<div class="row">
+	        	<h5>Ficha do atleta</h5>
+	        	<p>Nome: <span th:text="${atleta.nome}" ></span></p>
+	            <p>Idade: <span th:text="${atleta.idade}" ></span>            
+	            <p>Torneios Concorridos:</p>
+	            <ul>
+	            	<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosConcorridos.id)).build()}" th:each="torneiosConcorridos: ${atleta.torneiosConcorridos}"><li><span th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span></li></a>
+	            </ul>           	
+	            <p>Torneios Vencidos:</p>
+	            <ul>
+	            	<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosVencidos.id)).build()}" th:each="torneiosVencidos: ${atleta.torneiosVencidos}"><li><span th:text="'Data: '+${torneiosVencidos.data_inicio}+' - Clube: '+${torneiosVencidos.clube.nomeClube}"></span></li></a>
+	            </ul>            
+          	</div>
+            
+            
             <form method="POST" th:each="atleta : ${atleta}">
                 <h5>Editar atleta</h5>
                 <label for="nome">Nome: </label>
@@ -33,6 +50,7 @@
                 <button type="submit" class="waves-effect waves-light btn">Atualizar atleta</button> 
             </form>
         </div>
+        <th:block th:include="mensagemValidacao"></th:block>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
     </body>

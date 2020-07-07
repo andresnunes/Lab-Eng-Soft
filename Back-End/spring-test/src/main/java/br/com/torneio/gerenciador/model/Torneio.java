@@ -23,7 +23,7 @@ public class Torneio {
 	private String data_inicio;
 	
 	@ManyToOne @JoinColumn
-	private Atleta atleta_vencedor;
+	private Atleta atletaVencedor;
 	
 	@ManyToOne @JoinColumn
 	private Clube clube;
@@ -49,12 +49,12 @@ public class Torneio {
 		this.data_inicio = data_inicio;
 	}
 
-	public Atleta getAtleta_vencedor() {
-		return atleta_vencedor;
+	public Atleta getAtletaVencedor() {
+		return atletaVencedor;
 	}
 
-	public void setAtleta_vencedor(Atleta atleta_vencedor) {
-		this.atleta_vencedor = atleta_vencedor;
+	public void setAtletaVencedor(Atleta atletaVencedor) {
+		this.atletaVencedor = atletaVencedor;
 	}
 
 	public Clube getClube() {
