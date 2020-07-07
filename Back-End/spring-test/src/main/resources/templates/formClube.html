@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/style/style.css" />
+<title>Tenis - springtenis release</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Cadastro de Clube</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/" class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Login</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<form class="container formClube" method="post">
+		<div class="row">
+			<h4>Cadastro de clube</h4>
+			<div th:object="${clube}">
+			<div class="input-field col s6">
+				<label for="nomec">Nome:</label> <input type="text" id="nomec"
+					value="Nipo" th:value="${nomeClube}" name="nomeClube" />
+			</div>
+			<div class="input-field col s6">
+				<label for="cpfc">CNPJ:</label> <input type="text" id="cnpjc"
+					value="123456789091234" th:value="${cnpj}" name="cnpj" />
+			</div>
+			<div class="input-field col s6">
+				<label for="emailc">Email:</label> <input type="text" id="emailc"
+					value="nipo@email" th:value="${emailClube}" name="emailClube"  />
+			</div>
+			<div class="input-field col s6">
+				<label for="enderecoc">Endereço:</label> <input type="text"
+					id="enderecoc" value="Rua X, nº 123" th:value="${endereco}"
+					name="endereco" />
+			</div>
+			</div>
+			<h5>Cadastro de organizador</h5>
+			<div th:object="${organizador}">
+				<div class="input-field col s10">
+					<label for="nomeo">Nome:</label> <input type="text" id="nomeo"
+						value="Organizador Nipo" th:value="${nome}" name="nome" />
+				</div>
+				<div class="input-field col s4">
+					<label for="cpfo">CPF:</label> <input type="text" id="cpfo"
+						value="12345678909" th:value="${cpf}" name="cpf" />
+				</div>
+				<div class="input-field col s6">
+					<label for="emailo">Email:</label> <input type="text" id="emailo"
+						value="organizadorNipo@email" th:value="${email}" name="email" />
+				</div>
+				<div class="input-field col s4">
+					<label for="senhao">Senha:</label> <input type="text" id="senhao"
+						value="123" th:value="${senha}" name="senha" />
+				</div>
+			</div>
+			<div class="input-field col s3">
+				<button class="waves-effect waves-light btn" type="submit">
+					<i class="material-icons left">arrow_upward</i>Cadastrar
+				</button>
+			</div>
+		</div>
+	</form>
+	<th:block th:include="mensagemValidacao"></th:block>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

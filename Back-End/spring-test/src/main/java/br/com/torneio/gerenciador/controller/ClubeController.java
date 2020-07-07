@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,22 +20,43 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.torneio.gerenciador.dto.ClubeDto;
 import br.com.torneio.gerenciador.form.AtualizaClubeForm;
 import br.com.torneio.gerenciador.form.ClubeForm;
 import br.com.torneio.gerenciador.model.Clube;
+import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
+import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 
 
-@RestController
+@Controller
 @RequestMapping("/clube")
 public class ClubeController {
 	@Autowired
-	private ClubeRepository clubeRepository ;
-		
+	private ClubeRepository cr;
+	@Autowired
+	private OrganizadorRepository or;
 	
+	@RequestMapping("/signup")
+	public String signup() { return("formClube");}
+	
+	@PostMapping("/signup") 
+	public String saveClube(@Valid Clube clube, @Valid Organizador organizador, BindingResult result, RedirectAttributes attributes){
+		if(result.hasErrors()){
+            attributes.addFlashAttribute("mensagem", "Verifique os campos");
+            System.out.println("Verifique os campos");
+            return "redirect:/clube/signup";
+        }
+		cr.save(clube);	
+//FURURAMENTE VERIFICAR A PERSISTENCIA SEGURA DOS DADOS PRA HOJE, OK
+		organizador.setClube(clube);
+		or.save(organizador);	
+		return "redirect:/"+ organizador.getId() +"/torneio/view";
+	}
+	/*
 	@GetMapping
 	public List<ClubeDto> listaClube(String nomeClube){
 		if (nomeClube == null) {
@@ -80,5 +104,5 @@ public class ClubeController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+	*/
 }

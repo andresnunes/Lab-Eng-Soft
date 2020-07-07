@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/style/style.css" />
+<title>Tenis - Torneio release</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Tenis na mesa</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li id="btn_signup"><a href="/"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Login do
+							organizador</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<th:block th:include="mensagemValidacao"></th:block>
+	<div id="signup" class="container formOrganizador">
+		<form method="post">
+			<div class="row">
+				<h4>Cadastro de organizador</h4>
+				<div class="input-field col s10">
+					<label for="nomec">Nome:</label> <input type="text" id="nomec"
+						value="Organizador 1" name="nome" />
+				</div>
+				<div class="input-field col s4">
+					<label for="cpfc">CPF:</label> <input type="text" id="cpfc"
+						value="12345678909" name="cpf" />
+				</div>
+				<div class="input-field col s6">
+					<label for="emailc">Email:</label> <input type="text" id="emailc"
+						value="organizador1@email" name="email" />
+				</div>
+				<div class="input-field col s4">
+					<label for="senhac">Senha:</label> <input type="text" id="senhac"
+						value="123" name="senha" />
+				</div>
+				<div class="input-field col s3">
+					<button class="waves-effect waves-light btn" type="submit">
+						<i class="material-icons left">arrow_upward</i>Cadastrar
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

@@ -8,6 +8,6 @@ import br.com.torneio.gerenciador.model.Clube;
 
 public interface ClubeRepository extends JpaRepository<Clube, Long> {
 
-	List<Clube> findByNome(String nome);
+	List<Clube> findByNomeClube(String nomeClube);
 
 }

@@ -51,9 +51,9 @@ public class AtualizaClubeForm {
 	public Clube atualizar(Long id, ClubeRepository clubeRepository) {
 		Clube clube = clubeRepository.getOne(id);
 		
-		clube.setNome(this.nome);
+		clube.setNomeClube(this.nome);
 		clube.setCnpj(this.cnpj);
-		clube.setEmail(this.email);
+		clube.setEmailClube(this.email);
 		clube.setEndereco(this.endereco);
 
 		

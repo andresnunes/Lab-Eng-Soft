@@ -1,23 +1,23 @@
 package br.com.torneio.gerenciador.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotNull;
 
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
 
 public class ClubeForm {
 
-	@NotNull @NotEmpty
+	//@NotNull @NotEmpty
 	private String nome;
 	
-	@NotNull @NotEmpty
+	//@NotNull @NotEmpty
 	private String cnpj;
 	
-	@NotNull @NotEmpty
+	//@NotNull @NotEmpty
 	private String email;
 	
-	@NotNull @NotEmpty
+	//@NotNull @NotEmpty
 	private String endereco;
 	
 	public String getNome() {
@@ -49,7 +49,7 @@ public class ClubeForm {
 	}
 
 	public Clube converter(ClubeRepository clubeRepository) {
-		Clube clube = clubeRepository.findByNome(nome).get(0);
+		Clube clube = clubeRepository.findByNomeClube(nome).get(0);
 		return clube;
 	}
 	
