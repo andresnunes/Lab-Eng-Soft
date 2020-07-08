@@ -30,9 +30,9 @@ public class ClubeController {
 	
 
 	@PostMapping("/signup") 
-	public String saveClube(@Valid Clube clube, @Valid Organizador organizador, BindingResult result, RedirectAttributes attributes){
-		if(result.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Verifique os campos");
+	public String saveClube(@Valid Clube clube, BindingResult result, RedirectAttributes attributes, @Valid Organizador organizador, BindingResult result2, RedirectAttributes attributes2){
+		if(result.hasErrors() || result2.hasErrors()){
+            attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/clube/signup";
         }
 		saveClubeRest(clube, organizador);	

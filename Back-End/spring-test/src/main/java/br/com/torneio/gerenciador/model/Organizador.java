@@ -1,5 +1,7 @@
 package br.com.torneio.gerenciador.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,8 @@ import javax.validation.constraints.NotEmpty;
 
 
 @Entity 
-public class Organizador {
+public class Organizador implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 	
@@ -33,7 +36,7 @@ public class Organizador {
 	private String senha;
 	
 	//@Column furutamente pra manyToMany colocar comando a baixo no clube, e tornar organizador lista, depois trazer o @joinColum de la pra cá
-	@OneToOne //INVERTI MAPEAMENTO DE TABELA
+	@OneToOne 
 	@JoinColumn
 	private Clube clube;
 	
