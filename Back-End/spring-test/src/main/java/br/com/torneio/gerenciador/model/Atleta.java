@@ -31,6 +31,8 @@ public class Atleta implements Serializable{
 
 	@ManyToOne @JoinColumn
 	private Clube clube;
+	private Long pontosGrupo;
+	
 	
 	@OneToMany ( mappedBy = "atletaVencedor", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Torneio> torneiosVencidos;

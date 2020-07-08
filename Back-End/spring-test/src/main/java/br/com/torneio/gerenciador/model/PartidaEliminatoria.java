@@ -1,12 +1,15 @@
 package br.com.torneio.gerenciador.model;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 public class PartidaEliminatoria {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -15,20 +18,28 @@ public class PartidaEliminatoria {
 	private LocalTime hora;
 	private LocalTime data;
 	
-	@OneToMany
+	@ManyToOne
 	private Atleta atleta1;
 	
-	@OneToMany
+	@ManyToOne
 	private Atleta atleta2;
 	
 	@ManyToOne
 	private Torneio torneio;
 	
-	@OneToMany
+	@ManyToOne
 	private Atleta vencendor;
 	
 	private Long nivelPartida;
 	
+	public PartidaEliminatoria() {
+		
+	}
+	
+	public PartidaEliminatoria(Atleta atleta1, Atleta atleta2) {
+		this.atleta1 = atleta1;
+		this.atleta2 = atleta2;
+	}
 	
 	public Long getId() {
 		return id;
@@ -78,5 +89,31 @@ public class PartidaEliminatoria {
 	public void setNivelPartida(Long nivelPartida) {
 		this.nivelPartida = nivelPartida;
 	}
-	
+
+	public List<PartidaEliminatoria> CriaEliminatoria(List<PartidaGrupo> partidasGrupo){
+	    
+		List<Atleta> atletasPrimeiro = new ArrayList<Atleta>();
+	    List<Atleta> atletasSegundo = new ArrayList<Atleta>();
+
+	    
+	    //Collection.sort(partidasGrupo, compardor)
+	    partidasGrupo.forEach((partida)->{
+	    	atletasPrimeiro.add(partida.getVencedor1());
+	        atletasSegundo.add(partida.getVencedor2());
+	    });
+	    
+	    Comparator<Atleta> compareByPontos = (Atleta a1, Atleta a2) 
+	    				-> a1.getPontosGrupo().compareTo(a2.getPontosGrupo());
+	    
+	    Collections.sort(atletasPrimeiro, compareByPontos);
+	    Collections.sort(atletasSegundo, compareByPontos.reversed());
+	    
+	    List<PartidaEliminatoria> partidaEliminatoria = new ArrayList<PartidaEliminatoria>();
+	    
+	    for (int i=0; i < atletasPrimeiro.size(); i++ ){
+	    	partidaEliminatoria.add(new PartidaEliminatoria(atletasPrimeiro.get(i), atletasSegundo.get(i)));
+	    }
+	    
+	    return partidaEliminatoria;
+	}
 }
