@@ -29,8 +29,8 @@ import br.com.torneio.gerenciador.repository.TorneioRepository;
 
 
 
-//@RestController expectativa
-@Controller       //realidade
+
+@Controller
 @RequestMapping("{id_organizador}/torneio")
 public class TorneioController {
 	@Autowired

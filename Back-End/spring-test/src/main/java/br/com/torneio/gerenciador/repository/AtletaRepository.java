@@ -20,7 +20,7 @@ public interface AtletaRepository extends JpaRepository<Atleta,Long>{
 	//Iterable<Atleta> findByTorneio(Torneio torneio);
 	
 	/*
-	 * https://stackoverflow.com/questions/45708748/returning-value-from-a-many-to-many-relationship
+	 * 
 	 * 
 	 * 
 	@Query(value = "w.id, w.id_author, b.id, b.title, b.year, a.id_author, a.name, a.surname 
