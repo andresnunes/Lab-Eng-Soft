@@ -45,6 +45,7 @@ public class AtletaController {
 		return mv;
 	}
 	
+	
 	@PostMapping("/cadastrar")
 	public String saveAtleta(@PathVariable("id_organizador") long id_organizador, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()){
@@ -64,6 +65,7 @@ public class AtletaController {
 	    ar.save(atletaSave);
 	}
 
+	
 	@RequestMapping("/deletar")
     public String deleteAtleta(@PathVariable("id_organizador") long id_organizador, long codigoAtleta){
 		deleteAtletaService(codigoAtleta);
@@ -89,8 +91,6 @@ public class AtletaController {
         atleta.setTorneiosVencidos(null);
         ar.delete(atleta);		
 	}
-	
-	
 	
 	
 	@RequestMapping("/editar/{id_atleta}")

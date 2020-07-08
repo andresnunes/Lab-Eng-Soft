@@ -41,19 +41,22 @@
 			</p>
 			<p>
 				Idade: <span th:text="${atleta.idade}"></span>
+			</p>
+			<ul>
 			<p>Torneios Concorridos:</p>
-			<ul>
-				<a
-					th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosConcorridos.id)).build()}"
-					th:each="torneiosConcorridos: ${atleta.torneiosConcorridos}"><li><span
-						th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span></li></a>
+				<li th:each="torneiosConcorridos: ${atleta.torneiosConcorridos}">
+				<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosConcorridos.id)).build()}">
+					<span th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span>
+					
+				</a></li>
 			</ul>
-			<p>Torneios Vencidos:</p>
+						 
 			<ul>
-				<a
-					th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosVencidos.id)).build()}"
-					th:each="torneiosVencidos: ${atleta.torneiosVencidos}"><li><span
-						th:text="'Data: '+${torneiosVencidos.data_inicio}+' - Clube: '+${torneiosVencidos.clube.nomeClube}"></span></li></a>
+			<p>Torneios Vencidos:</p>
+				<li th:each="torneiosVencidos: ${atleta.torneiosVencidos}"><a
+					th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosVencidos.id)).build()}">
+					<span th:text="'Data: '+${torneiosVencidos.data_inicio}+' - Clube: '+${torneiosVencidos.clube.nomeClube}"></span>
+				</a></li>
 			</ul>
 		</div>
 
@@ -65,7 +68,7 @@
 						th:value="${atleta.nome}" name="nome" />
 				</div>
 				<div class="input-field col s1">
-					<label for="idade">Idade: </label> <input type="number"
+					<label for="idade">Idade: </label> <input type="number" max="125" min="0"
 						th:value="${atleta.idade}" name="idade" />
 				</div>
 				<div class="input-field col s6">

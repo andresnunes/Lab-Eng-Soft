@@ -39,15 +39,15 @@
 						th:value="${nome}" name="nome" />
 				</div>
 				<div class="input-field col s1">
-					<label for="idade">Idade: </label> <input type="number"
+					<label for="idade">Idade: </label> <input type="number" max="125" min="0"
 						th:value="${idade}" name="idade" />
 				</div>
 				<div class="input-field col s6">
 					<button type="submit" class="waves-effect waves-light btn">Adicionar
 						Atleta</button>
 				</div>
+			</div>
 		</form>
-	</div>
 	</div>
 	<th:block th:include="mensagemValidacao"></th:block>
 	<table class="container listaAtletas">
@@ -71,7 +71,6 @@
 						class="material-icons">delete_forever</i></a></td>
 			</tr>
 		</tbody>
-
 	</table>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

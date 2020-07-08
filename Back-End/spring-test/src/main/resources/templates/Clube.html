@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -9,78 +10,92 @@
 	href="/materialize/css/materialize.min.css" media="screen,projection" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/style/style.css" />
-<title>Tenis - springtenis release</title>
+<title>Tenis - Torneio release</title>
 </head>
 <body>
 	<header>
 		<nav>
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo">Cadastro de Clube</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<a href="#" class="brand-logo">Clube</a>
+				<ul th:each="organizador : ${organizador}" id="nav-mobile"
+					class="right hide-on-med-and-down">
+					<li><a
+						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Lista de
+							torneios</a></li>
 					<li><a href="/" class="waves-effect waves-light btn"><i
-							class="material-icons left">format_list_bulleted</i>Login</a></li>
+							class="material-icons left">arrow_forward</i>Logout</a></li>
 				</ul>
 			</div>
 		</nav>
 	</header>
+	<div  class="container" >
+		<h4>Clube</h4>
+			<ul>
+			<p>Torneios sediados:</p>
+				<li th:each="torneios: ${clube.torneios}">
+				<a th:href="${(#mvc.url('CC#formClubeR').arg(0,organizador.get().getId()).arg(1,torneios.id)).build()}">
+					<span th:text="'Data: '+${torneios.data_inicio}"></span>					
+				</a></li>
 
-	<form class="container formClube" method="post" name="formClube">
+			</ul>
+		
+		
+		
+	<form class="formClube" method="post" name="formClube">
 		<div class="row">
-			<h4>Cadastro de clube</h4>
-			<div th:object="${clube}">
+		
+			<div th:each="clube : ${clube}">
 			<div class="input-field col s6">
 				<label for="nomec">Nome:</label> <input type="text" id="nomec"
-					th:value="${nomeClube}" name="nomeClube" />
+					th:value="${clube.nomeClube}" name="nomeClube" />
 			</div>
 			<div class="input-field col s6">
 				<label for="cnpj">CNPJ:</label> <input type="text" id="cnpj"
-					th:value="${cnpj}" name="cnpj" onKeyPress="MascaraCNPJ(formClube.cnpj);" 
+					th:value="${clube.cnpj}" name="cnpj" onKeyPress="MascaraCNPJ(formClube.cnpj);" 
 					maxlength="18"/>
 			</div>
 			<div class="input-field col s6">
 				<label for="emailc">Email:</label> <input type="email" id="emailc"
-					th:value="${emailClube}" name="emailClube"  />
+					th:value="${clube.emailClube}" name="emailClube"  />
 			</div>
 			<div class="input-field col s6">
 				<label for="enderecoc">Endereço:</label> <input type="text"
-					id="enderecoc" th:value="${endereco}"
+					id="enderecoc" th:value="${clube.endereco}"
 					name="endereco" />
 			</div>
 			</div>
-			<h5>Cadastro de organizador</h5>
-			<div th:object="${organizador}">
-
+			<h5>Organizador</h5>
+			<div th:each="organizador : ${organizador}">
 				<div class="input-field col s6">
 					<label for="emailo">Email:</label> <input type="email" id="emailo"
-						th:value="${email}" name="email" />
+						th:value="${organizador.get().getEmail()}" name="email" />
 				</div>
 				<div class="input-field col s4">
 					<label for="senhao">Senha:</label> <input type="password" id="senhao"
-						th:value="${senha}" name="senha" />
+						th:value="${organizador.get().getSenha()}" name="senha" />
 				</div>
 				<div class="input-field col s6">
 					<label for="nomeo">Nome:</label> <input type="text" id="nomeo"
-						th:value="${nome}" name="nome" />
+						th:value="${organizador.get().getNome()}" name="nome" />
 				</div>
 				<div class="input-field col s4">
 					<label for="cpf">CPF:</label> <input type="text" id="cpf"
-						th:value="${cpf}" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
+						th:value="${organizador.get().getCpf()}" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
 				</div>
-				
-				
-				
+			</div>
 			</div>
 			<div class="input-field col s3">
 				<button class="waves-effect waves-light btn" type="submit">
-					<i class="material-icons left">arrow_upward</i>Cadastrar
+					<i class="material-icons left">arrow_upward</i>Atualizar
 				</button>
 			</div>
-		</div>
-	</form>
+		
+	</form></div>
 	<th:block th:include="mensagemValidacao"></th:block>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
-	<script type="text/javascript" src="/script/script.js"></script>
 </body>
 </html>
