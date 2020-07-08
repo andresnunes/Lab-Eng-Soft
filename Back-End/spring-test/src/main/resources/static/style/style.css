@@ -1,0 +1,74 @@
+.detalhesTorneio{
+        box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    padding-bottom: 5px;
+    margin-top: 50px;
+    
+}
+.formAtleta{
+    box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    margin-top: 50px; 
+}
+
+.formAtletaAdicionado{
+	float: left;
+	width: 35%;
+    box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    margin-top: 50px; 
+}
+.formAtletaGeral{
+	float: right;
+	width: 60%;
+    box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    margin-top: 50px; 
+    margin-bottom: 20px;
+}
+.formAtletaGeral tr{
+    //box-shadow: 0px 0px 5px grey;
+    margin: 0px;
+    padding: 0px;
+}
+.formOrganizador{	
+	box-shadow: 0px 0px 5px grey;
+	float: center;
+	margin-top: 50px;
+	padding-left: 3%;
+	padding-top:1%;
+}
+
+.formTorneio{
+    box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    margin-top: 50px; 
+}
+.listaAtletas{
+    box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    margin-top: 50px; 
+    margin-bottom: 50px; 
+}
+.listaTorneios{
+    box-shadow: 0px 0px 5px grey;
+    padding: 20px;
+    margin-top: 50px; 
+    margin-bottom: 50px; 
+}
+
+.nav-wrapper{    
+    background-color: slategray;
+}
+.btn{
+    background-color: #00838f;    
+}
+body{
+    background-color: mintcream;
+}
+
+
+#login{}
+#signup{}
+
+.ocultar{display.none;}
