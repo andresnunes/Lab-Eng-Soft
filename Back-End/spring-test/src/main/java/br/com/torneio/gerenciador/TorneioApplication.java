@@ -31,5 +31,6 @@ https://blog.caelum.com.br/entendendo-o-serialversionuid/
 https://www.it-swarm.dev/pt/spring/thymeleaf-mostra-o-texto-se-o-atributo-e-propriedade-existirem/1043677425/
 https://pt.stackoverflow.com/questions/192115/como-limitar-um-input-do-tipo-number-para-apenas-3-caracteres
 //GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html	
-//https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf	
+//https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf
+https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis/	
  */

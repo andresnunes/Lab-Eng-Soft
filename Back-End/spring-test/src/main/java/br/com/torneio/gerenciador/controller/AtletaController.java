@@ -21,6 +21,7 @@ import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
 import br.com.torneio.gerenciador.repository.AtletaRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
+import br.com.torneio.gerenciador.repository.TorneioRepository;
 
 
 @Controller
@@ -31,7 +32,8 @@ public class AtletaController {
 	private AtletaRepository ar;
 	@Autowired
 	OrganizadorRepository or;	
-
+	@Autowired
+	TorneioRepository tr;
 	
 	@RequestMapping("/cadastrar")
 	public ModelAndView formCadastroAtleta(@PathVariable("id_organizador") long id_organizador) {
@@ -62,11 +64,6 @@ public class AtletaController {
 	    ar.save(atletaSave);
 	}
 
-	//deletar atleta inscrito em algum torneio, do clube > torneio apaga
-	//não permitir que atleta cadastrado em torneio seja apagado
-	//cascade = CascadeType.ALL, porque não é possivel referenciar um objeto que não exista no banco
-	//ao deletar atleta verificar se ele esta inscrito em algum torneio, apagar o id dele da lista de atletas
-	//participantes, so então apagar atleta
 	@RequestMapping("/deletar")
     public String deleteAtleta(@PathVariable("id_organizador") long id_organizador, long codigoAtleta){
 		deleteAtletaService(codigoAtleta);
@@ -75,9 +72,26 @@ public class AtletaController {
 	@ResponseBody
 	@DeleteMapping
 	private void deleteAtletaService(long codigoAtleta){
-        Atleta atleta = ar.findById(codigoAtleta);
+		Atleta atleta = ar.findById(codigoAtleta);
+        List<Torneio> torneiosConcorridos = atleta.getTorneiosConcorridos();
+        List<Torneio> torneiosVencidos = atleta.getTorneiosVencidos();
+        for(Torneio torneio : torneiosConcorridos) {
+        	List<Atleta> atletas = torneio.getAtletasParticipantes();
+    		atletas.remove(atleta);
+            tr.save(torneio);
+        }
+        for(Torneio torneio : torneiosVencidos) {
+        	List<Atleta> atletas = torneio.getAtletasParticipantes();
+    		atletas.remove(atleta);
+            tr.save(torneio);
+        }
+        atleta.setTorneiosConcorridos(null); //ou criar um outro obj atleta pra atualizar o obj e herdando null
+        atleta.setTorneiosVencidos(null);
         ar.delete(atleta);		
 	}
+	
+	
+	
 	
 	@RequestMapping("/editar/{id_atleta}")
 	public ModelAndView formEditarAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta")  long id_atleta) {

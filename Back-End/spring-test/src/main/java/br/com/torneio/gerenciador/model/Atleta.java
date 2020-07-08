@@ -32,7 +32,7 @@ public class Atleta implements Serializable{
 	@ManyToOne @JoinColumn
 	private Clube clube;
 	
-	@OneToMany ( mappedBy = "atletaVencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
+	@OneToMany ( mappedBy = "atletaVencedor", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Torneio> torneiosVencidos;
 	
 	@ManyToMany(mappedBy = "atletasParticipantes", cascade = CascadeType.ALL)
