@@ -13,18 +13,23 @@ public class TorneioApplication {
 /* CHECK LIST
 -Criar template /error
 -fazer detalhes club, onde aparece organizador e torneios sediados
-OK-fazer ficha de atleta, quantos torneios ganhou e quantos torneios participou
+	OK-fazer ficha de atleta, quantos torneios ganhou e quantos torneios participou
 -fazer hall de torneios para clube também poder cadastrar seus atletas em torneios de terceiros
 -criar a edição de organizadores
-- deixar os mapeamentos  coerentes
-- converter os controles pra restcontroller(), acho que o motivo que não tá dando certo é que, precisa retornar uma url no json e eu não sei fazer isso nessa versão do spring que estamos usando
--arrumar os formulários de edição pra PUT, em vez de post
+	OK- deixar os mapeamentos  coerentes
 -arrumar o design
--testar todas as validações
--implementar controller form e dto ..
+	OK-testar todas as validações
+	-implementar controller form > FOI IMPLEMENTADO NO LOGIN PARA USAR AS VALIDAÇÕES PARA LOCAR COM EMAIL E SENHA de organizador
+-verificar dto ..
 -fazer tela de detalhamento torneios particulados e torneios vencidos por atleta
 -pesar na lógica de inabilitar botões por torneio lotado de atleta
 -logica de inabitar demais botões como excluir torneio em andamento, excluir atleta de torneio em andamento
--definir mascaras para os inputs
+	-definir mascaras para os inputs
+
+Links interessantes
 https://blog.caelum.com.br/entendendo-o-serialversionuid/
+https://www.it-swarm.dev/pt/spring/thymeleaf-mostra-o-texto-se-o-atributo-e-propriedade-existirem/1043677425/
+https://pt.stackoverflow.com/questions/192115/como-limitar-um-input-do-tipo-number-para-apenas-3-caracteres
+//GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html	
+//https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf	
  */

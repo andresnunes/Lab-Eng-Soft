@@ -1,40 +1,28 @@
 package br.com.torneio.gerenciador.controller;
 
-import java.net.URI;
+
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
+import javax.persistence.CascadeType;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
 import br.com.torneio.gerenciador.repository.AtletaRepository;
-import br.com.torneio.gerenciador.repository.ClubeRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
-import br.com.torneio.gerenciador.dto.AtletaDto;
-import br.com.torneio.gerenciador.form.AtletaForm;
-import br.com.torneio.gerenciador.form.AtualizaAtletaForm;
 
-//@RestController
+
 @Controller
 @RequestMapping("{id_organizador}/atleta")
 public class AtletaController {
@@ -43,9 +31,7 @@ public class AtletaController {
 	private AtletaRepository ar;
 	@Autowired
 	OrganizadorRepository or;	
-	@Autowired
-	private ClubeRepository cr;
-	
+
 	
 	@RequestMapping("/cadastrar")
 	public ModelAndView formCadastroAtleta(@PathVariable("id_organizador") long id_organizador) {
@@ -57,29 +43,43 @@ public class AtletaController {
 		return mv;
 	}
 	
-	//rever os @valids e os do html 0,organizador.get().getId()
 	@PostMapping("/cadastrar")
 	public String saveAtleta(@PathVariable("id_organizador") long id_organizador, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
-        if(result.hasErrors()){
+		if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Verifique os campos");
-        return "redirect:/atleta/cadastrar";
+            return "redirect:/{id_organizador}/atleta/cadastrar";
         }
-        Optional<Organizador> organizador = or.findById(id_organizador);
-        atleta.setClube(organizador.get().getClube());
-        ar.save(atleta);
+        saveAtletaService(atleta, id_organizador);
         return "redirect:/{id_organizador}/atleta/cadastrar";	
 	}
-	
-	
-	@GetMapping("/deletar")
+	@ResponseBody
+	private void saveAtletaService(Atleta atleta, long id_organizador) {
+        Optional<Organizador> organizador = or.findById(id_organizador);
+        Atleta atletaSave = new Atleta();
+        atletaSave.setIdade((atleta.getIdade()));
+        atletaSave.setNome(atleta.getNome());
+	    atletaSave.setClube(organizador.get().getClube());
+	    ar.save(atletaSave);
+	}
+
+	//deletar atleta inscrito em algum torneio, do clube > torneio apaga
+	//não permitir que atleta cadastrado em torneio seja apagado
+	//cascade = CascadeType.ALL, porque não é possivel referenciar um objeto que não exista no banco
+	//ao deletar atleta verificar se ele esta inscrito em algum torneio, apagar o id dele da lista de atletas
+	//participantes, so então apagar atleta
+	@RequestMapping("/deletar")
     public String deleteAtleta(@PathVariable("id_organizador") long id_organizador, long codigoAtleta){
-        Atleta atleta = ar.findById(codigoAtleta);
-        ar.delete(atleta);
+		deleteAtletaService(codigoAtleta);
         return "redirect:/{id_organizador}/atleta/cadastrar";
     }
+	@ResponseBody
+	@DeleteMapping
+	private void deleteAtletaService(long codigoAtleta){
+        Atleta atleta = ar.findById(codigoAtleta);
+        ar.delete(atleta);		
+	}
 	
-	
-	@RequestMapping("/editar/{id_atleta}") // se tiver tempo mais facil criar outro html com o put no form e tentar puxar os dados
+	@RequestMapping("/editar/{id_atleta}")
 	public ModelAndView formEditarAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta")  long id_atleta) {
 		ModelAndView mv = new ModelAndView("Atleta");
 		
@@ -94,9 +94,6 @@ public class AtletaController {
 		mv.addObject("atleta", atleta);
 		return mv;
 	}
-
-
-	//metodo PUT, nao upava, resolver depois	
 	@PostMapping("/editar/{id_atleta}")
 	public String updateAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta") long id_atleta, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()){
@@ -104,15 +101,32 @@ public class AtletaController {
             System.out.println("O organizador de id " + id_organizador +" falhou em editar o atleta de id " + atleta.getId()); 
             return "redirect:/{id_organizador}/atleta/editar/{id_atleta}";
         }	
+		updateAtletaService(id_atleta,atleta); 
+        return "redirect:/{id_organizador}/atleta/cadastrar";	
+	}
+	@ResponseBody
+	private void updateAtletaService(long id_atleta, Atleta atleta) {
 		Atleta atletaUpdated = ar.findById(id_atleta);
 		atletaUpdated.setNome(atleta.getNome());
 		atletaUpdated.setIdade(atleta.getIdade());
-        ar.save(atletaUpdated);
-        System.out.println("O organizador de id " + id_organizador +" atualizou atleta de id " + id_atleta); 
-        return "redirect:/{id_organizador}/torneio/view";	
-	}	
+        ar.save(atletaUpdated); 		
+	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	@GetMapping
 	public List<AtletaDto> listaAtleta(String nomeAtleta){

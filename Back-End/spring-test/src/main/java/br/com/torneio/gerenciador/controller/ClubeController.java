@@ -35,12 +35,11 @@ public class ClubeController {
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/clube/signup";
         }
-		saveClubeRest(clube, organizador);	
+		saveClubeService(clube, organizador);	
 		return "redirect:/"+ organizador.getId() +"/torneio/view";
 	}
-	
 	@ResponseBody
-	private void saveClubeRest(Clube clube, Organizador organizador) {
+	private void saveClubeService(Clube clube, Organizador organizador) {
 		cr.save(clube);	
 		organizador.setClube(clube);
 		or.save(organizador);

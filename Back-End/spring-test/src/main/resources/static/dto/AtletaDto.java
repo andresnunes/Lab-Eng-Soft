@@ -10,14 +10,16 @@ public class AtletaDto {
 
 	private Long id;
 	private String nome;
+	private int idade;
 	private Clube clube;
 	
 	public AtletaDto(Atleta atleta) {
 		this.id = atleta.getId();
 		this.nome = atleta.getNome();
 		this.clube = atleta.getClube();
+		this.idade = atleta.getIdade();
 	}
-	
+		
 	public Long getId() {
 		return id;
 	}
@@ -36,7 +38,14 @@ public class AtletaDto {
 	public void setClube(Clube clube) {
 		this.clube = clube;
 	}
-	
+	public int getIdade() {
+		return idade;
+	}
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+
 	public static List<AtletaDto> converter(List<Atleta> atleta){
 		return atleta.stream().map(AtletaDto::new).collect(Collectors.toList());
 	}

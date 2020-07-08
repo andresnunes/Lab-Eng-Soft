@@ -1,5 +1,6 @@
 package br.com.torneio.gerenciador.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -14,12 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Torneio {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Torneio implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	//LocalDate
-	@NotEmpty //enquanto torneio form nao é configurado, provisorio
+	//LocalDate - alterar a para yymmdd para ter compatibilidade com o banco
+	@NotEmpty
 	private String data_inicio;
 	
 	@ManyToOne @JoinColumn
