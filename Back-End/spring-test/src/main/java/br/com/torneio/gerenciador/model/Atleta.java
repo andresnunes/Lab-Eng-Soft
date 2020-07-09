@@ -33,24 +33,24 @@ public class Atleta {
 	
 	
 	//dar update pra ver torneio vencido e torneio concorrido
-	@OneToMany ( mappedBy = "atleta_vencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
-	private List<Torneio> torneios_vencidos;
+	@OneToMany ( mappedBy = "atletaVencedor", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
+	private List<Torneio> torneiosVencidos;
 	
 
 	@ManyToMany(mappedBy = "atletasParticipantes", cascade = CascadeType.ALL)
 	private List<Torneio> torneiosConcorridos;
 
-	
 	public Atleta() {
 		
 	}
-	
-	public Atleta(String nome,int idade, Clube clube) {
+		
+
+	public Atleta(String nome, int idade, Clube clube) {
 		this.nome = nome;
 		this.idade = idade;
 		this.clube = clube;
-	}	
-	
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -79,19 +79,19 @@ public class Atleta {
 		this.idade = idade;
 	}
 
-	public List<Torneio> getTorneios_vencidos() {
-		return torneios_vencidos;
+	public List<Torneio> getTorneiosVencidos() {
+		return torneiosVencidos;
 	}
 
-	public void setTorneios_vencidos(List<Torneio> torneios_vencidos) {
-		this.torneios_vencidos = torneios_vencidos;
+	public void setTorneiosVencidos(List<Torneio> torneiosVencidos) {
+		this.torneiosVencidos = torneiosVencidos;
 	}
 
-	public List<Torneio> getorneiosConcorridos() {
+	public List<Torneio> getTorneiosConcorridos() {
 		return torneiosConcorridos;
 	}
 
-	public void setorneiosConcorridos(List<Torneio> torneiosConcorridos) {
+	public void setTorneiosConcorridos(List<Torneio> torneiosConcorridos) {
 		this.torneiosConcorridos = torneiosConcorridos;
 	}
 	
