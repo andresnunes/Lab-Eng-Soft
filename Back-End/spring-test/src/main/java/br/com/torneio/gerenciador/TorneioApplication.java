@@ -13,7 +13,7 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
-
+fazer contador de atletas
 definir oq ue vai ser feito com formorganizador
 melhorar rotas de clube	
 arrumar mensagem flutuante de aviso
