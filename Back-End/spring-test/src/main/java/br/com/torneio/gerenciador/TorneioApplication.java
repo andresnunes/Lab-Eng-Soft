@@ -13,6 +13,7 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
+LocalDate - alterar a para dd/mm/yy para USABILIDADE
 fazer contador de atletas
 definir oq ue vai ser feito com formorganizador
 melhorar rotas de clube	

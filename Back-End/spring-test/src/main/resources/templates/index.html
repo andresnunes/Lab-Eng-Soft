@@ -15,6 +15,7 @@
             <nav>
                 <div  class="nav-wrapper" >                   
                     <ul th:each="organizador : ${organizador}" id="nav-mobile" class="right hide-on-med-and-down">
+                  		<li><a th:href="${(#mvc.url('CC#formClube').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Ficha do Clube</a></li>
                     	<li><h5>Bem vindo <span th:text="${organizador.get().getNome()}"></span></h5></li>
                         <li><a th:href="${(#mvc.url('TC#formCadastroTorneio').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Novo torneio!</a></li>
 						<li><a th:href="${(#mvc.url('AC#formCadastroAtleta').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar atleta ao Clube</a></li>

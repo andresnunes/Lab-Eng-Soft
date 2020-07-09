@@ -1,39 +1,88 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="/style/style.css" />
-        <title>Tenis - Torneio release</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Cadastro de Atletas</a>
-                    <ul th:each="organizador : ${organizador}" id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de torneios</a></li>
-                        <li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>Logout</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <th:block th:include="mensagemValidacao"></th:block>
-        <div class="container formAtleta">
-            <form method="POST" th:each="atleta : ${atleta}">
-                <h5>Editar atleta</h5>
-                <label for="nome">Nome: </label>
-                <input type="text" th:value="${atleta.nome}" name="nome"/>
-                <label for="idade">Idade: </label>
-                <input type="text" th:value="${atleta.idade}" name="idade"/>
-                <button type="submit" class="waves-effect waves-light btn">Atualizar atleta</button> 
-            </form>
-        </div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/style/style.css" />
+<title>Tenis - Torneio release</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Cadastro de Atletas</a>
+				<ul th:each="organizador : ${organizador}" id="nav-mobile"
+					class="right hide-on-med-and-down">
+					<li><a
+						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Lista de
+							torneios</a></li>
+					<li><a href="/" class="waves-effect waves-light btn"><i
+							class="material-icons left">arrow_forward</i>Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+
+
+	<div class="container formAtleta">
+		<div class="row">
+			<h5>Ficha do atleta</h5>
+			<p>
+				Nome: <span th:text="${atleta.nome}"></span>
+			</p>
+			<p>
+				Idade: <span th:text="${atleta.idade}"></span>
+			</p>
+			<ul>
+			<p>Torneios Concorridos:</p>
+				<li th:each="torneiosConcorridos: ${atleta.torneiosConcorridos}">
+				<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosConcorridos.id)).build()}">
+					<span th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span>
+					
+				</a></li>
+			</ul>
+						 
+			<ul>
+			<p>Torneios Vencidos:</p>
+				<li th:each="torneiosVencidos: ${atleta.torneiosVencidos}"><a
+					th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosVencidos.id)).build()}">
+					<span th:text="'Data: '+${torneiosVencidos.data_inicio}+' - Clube: '+${torneiosVencidos.clube.nomeClube}"></span>
+				</a></li>
+			</ul>
+		</div>
+
+		<form th:each="atleta : ${atleta}" method="post">
+			<div class="row">
+				<h5>Editar atleta</h5>
+				<div class="input-field col s6">
+					<label for="nome">Nome: </label> <input type="text"
+						th:value="${atleta.nome}" name="nome" />
+				</div>
+				<div class="input-field col s1">
+					<label for="idade">Idade: </label> <input type="number" max="125" min="0"
+						th:value="${atleta.idade}" name="idade" />
+				</div>
+				<div class="input-field col s6">
+					<button type="submit" class="waves-effect waves-light btn">Atualizar
+						atleta</button>
+				</div>
+			</div>
+		</form>
+
+
+	</div>
+	<th:block th:include="mensagemValidacao"></th:block>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
 </html>

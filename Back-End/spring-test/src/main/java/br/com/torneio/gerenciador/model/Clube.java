@@ -1,7 +1,8 @@
 package br.com.torneio.gerenciador.model;
+//OKstella_front
 
+import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,29 +10,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Clube {
+public class Clube implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 	
-	//@NotEmpty = @Valid do javax
+	@NotEmpty
 	@Column(length = 20, nullable = false, name = "nome")
 	private String nomeClube;
 	
+	@NotEmpty
 	@Column(nullable = false)
 	private String cnpj;
 	
+	@NotEmpty
 	@Column(length = 30, nullable = false, name	= "email")
 	private String emailClube;
 	
+	@NotEmpty
 	@Column(length = 50, nullable = false)
 	private String endereco;
 	
 	@OneToMany ( mappedBy="clube", orphanRemoval = true, cascade=javax.persistence.CascadeType.ALL)
 	private List<Atleta> atletas;
 	
-	//INVERTI MAPEAMENTO DE TABELA
 	@OneToOne ( mappedBy="clube", cascade=javax.persistence.CascadeType.ALL) //por enquanto um clube tem um organizador - EM CASO OneToMany ver comentario no model. Clube
 	private Organizador organizador;
 	
@@ -44,21 +49,18 @@ public class Clube {
 	public void setNomeClube(String nomeClube) {
 		this.nomeClube = nomeClube;
 	}
-	
 	public String getCnpj() {
 		return cnpj;
 	}
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	
 	public String getEmailClube() {
 		return emailClube;
 	}
 	public void setEmailClube(String emailClube) {
 		this.emailClube = emailClube;
 	}
-	
 	public String getEndereco() {
 		return endereco;
 	}
