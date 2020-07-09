@@ -21,6 +21,7 @@ INSERT INTO TORNEIO(data_inicio, clube_id) VALUES('2020-12-29', 1);
 
 
 INSERT INTO TORNEIO_ATLETA(torneio_id, atleta_id) VALUES(1, 1);
+INSERT INTO TORNEIO_ATLETA(torneio_id, atleta_id) VALUES(1, 2);
 
 
 
