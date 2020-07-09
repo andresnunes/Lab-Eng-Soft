@@ -13,7 +13,11 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
-	alterar organizador
+
+definir oq ue vai ser feito com formorganizador
+melhorar rotas de clube	
+arrumar mensagem flutuante de aviso
+permitir alterar organizador pelo formulario do clube
 	nao pode ser feito 	/-Criar template /error
 	inviavel para esta release/-fazer detalhes club, onde aparece organizador e torneios sediados
 	OK-fazer ficha de atleta, quantos torneios ganhou e quantos torneios participou
