@@ -16,27 +16,28 @@
 	<header>
 		<nav>
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo">Tenis na mesa</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li id="btn_login"><a href="/clube/signup"
-						class="waves-effect waves-light btn"><i
-							class="material-icons left">format_list_bulleted</i>Cadastro de 
-							clube</a></li>
+				<a href="#" class="brand-logo"><fh>TT Manager</fh></a>
+				<ul id="nav-mobile" class="right hide-on-down">
+					<li>
+						<a href="/clube/signup"	class="waves-effect waves-light btn">
+							<i class="material-icons left">format_list_bulleted</i>Cadastro de clube
+						</a>
+					</li>
 				</ul>
 			</div>
 		</nav>
 	</header>
-	<th:block th:include="mensagemValidacao"></th:block>
+
 	<div id="login" class="container formOrganizador">
 		<form method="post">
 			<div class="row">
-				<h4>Login de organizador</h4>
+				<fh4>Login de organizador</fh4>
 				<div class="input-field col s6">
-					<label for="email">Email:</label> <input type="email" id="emaile"
+					<label for="email">Email:</label> <input type="email" id="in"
 						value="organizadorSP@email" name="email" />
 				</div>
 				<div class="input-field col s3">
-					<label for="senha">Senha:</label> <input type="password" id="senhae"
+					<label for="senha">Senha:</label> <input type="password" id="in"
 						value="senha" name="senha" />
 				</div>
 				<div class="input-field col s3">
@@ -45,7 +46,8 @@
 					</button>
 				</div>
 			</div>
-		</form>
+			<th:block th:include="mensagemValidacao"></th:block>
+		</form>		
 	</div>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

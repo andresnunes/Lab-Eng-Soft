@@ -7,9 +7,9 @@ import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 
 public class OrganizadorForm {
 
-	@NotEmpty
+	@NotEmpty(message = "Digite um email cadastrado")
 	private String email;
-	@NotEmpty
+	@NotEmpty(message = "Digite uma senha cadastrada")
 	private String senha;
 	
 	

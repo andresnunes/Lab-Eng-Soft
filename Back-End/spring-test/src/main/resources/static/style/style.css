@@ -1,5 +1,72 @@
+body{
+	background-color: rgb(0,162,232);font-family:"Trebuchet MS", Helvetica, sans-serif; font-weight: bold;
+	background-image: url(/image/table-tenis-3946115_1280.jpg);
+	background-size: cover;
+}
+
+
+.nav-wrapper{background-color: rgb(127,127,127); padding-left: 10px;}
+.btn{background-color: rgb(237,28,36);font-family:"Trebuchet MS", Helvetica, sans-serif; font-weight: bold;}
+.btn:hover{background-color: #ff6c6c;}
+.btn:active{background-color: rgb(237,28,36);}
+.btn:focus{background-color: rgb(237,28,36);}
+
+
+
+
+.container{
+	background-color: rgba(240,240,255,0.8);
+	box-shadow: 0 0 8px graytext;
+	border-radius: 5px;
+	padding: 20px;
+	margin-top: 50px;
+}
+
+
+#in{border-bottom: 1px solid #c0c0c0;padding-bottom:0px;box-shadow:none;}
+#in:focus{border-bottom: 1px solid #b81414;box-shadow:none;padding-bottom: 0px;}
+#in:active{border-bottom: 1px solid #b81414;box-shadow:none;padding-bottom: 0px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+p, fh, fh4{ }
+fh{	font-size: 30px;}
+fh4{ font-size: 35px;}
+fhb{ font-size: 20px;}
+div{background-color: rgba(0,240,255,0.0);}
+.formOrganizador{	
+	float: center;
+	width: 52%;
+	padding-bottom: 0px;
+	padding-left: 30px;
+}
+
 .detalhesTorneio{
-        box-shadow: 0px 0px 5px grey;
+    box-shadow: 0px 0px 5px grey;
     padding: 20px;
     padding-bottom: 5px;
     margin-top: 50px;
@@ -10,7 +77,6 @@
     padding: 20px;
     margin-top: 50px; 
 }
-
 .formAtletaAdicionado{
 	float: left;
 	width: 35%;
@@ -31,14 +97,6 @@
     margin: 0px;
     padding: 0px;
 }
-.formOrganizador{	
-	box-shadow: 0px 0px 5px grey;
-	float: center;
-	margin-top: 50px;
-	padding-left: 3%;
-	padding-top:1%;
-}
-
 .formTorneio{
     box-shadow: 0px 0px 5px grey;
     padding: 20px;
@@ -56,19 +114,6 @@
     margin-top: 50px; 
     margin-bottom: 50px; 
 }
-
-.nav-wrapper{    
-    background-color: slategray;
-}
-.btn{
-    background-color: #00838f;    
-}
-body{
-    background-color: mintcream;
-}
-
-
-#login{}
 #signup{}
-
+#login{}
 .ocultar{display.none;}

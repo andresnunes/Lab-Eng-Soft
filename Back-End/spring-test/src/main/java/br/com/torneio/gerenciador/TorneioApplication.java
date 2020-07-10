@@ -13,6 +13,7 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
+tirar sombreado de memoria do input, resolver problema de id unico nos inputs
 LocalDate - alterar a para dd/mm/yy para USABILIDADE
 fazer contador de atletas
 definir oq ue vai ser feito com formorganizador

@@ -29,21 +29,21 @@
 			<h4>Cadastro de clube</h4>
 			<div th:object="${clube}">
 			<div class="input-field col s6">
-				<label for="nomec">Nome:</label> <input type="text" id="nomec"
+				<label>Nome:</label> <input type="text" id="in"
 					th:value="${nomeClube}" name="nomeClube" />
 			</div>
 			<div class="input-field col s6">
-				<label for="cnpj">CNPJ:</label> <input type="text" id="cnpj"
+				<label for="cnpj">CNPJ:</label> <input type="text" id="in"
 					th:value="${cnpj}" name="cnpj" onKeyPress="MascaraCNPJ(formClube.cnpj);" 
 					maxlength="18"/>
 			</div>
 			<div class="input-field col s6">
-				<label for="emailc">Email:</label> <input type="email" id="emailc"
+				<label for="emailc">Email:</label> <input type="email" id="in"
 					th:value="${emailClube}" name="emailClube"  />
 			</div>
 			<div class="input-field col s6">
 				<label for="enderecoc">Endereço:</label> <input type="text"
-					id="enderecoc" th:value="${endereco}"
+					id="in" th:value="${endereco}"
 					name="endereco" />
 			</div>
 			</div>
@@ -51,19 +51,19 @@
 			<div th:object="${organizador}">
 
 				<div class="input-field col s6">
-					<label for="emailo">Email:</label> <input type="email" id="emailo"
+					<label for="emailo">Email:</label> <input type="email" id="in"
 						th:value="${email}" name="email" />
 				</div>
 				<div class="input-field col s4">
-					<label for="senhao">Senha:</label> <input type="password" id="senhao"
+					<label for="senhao">Senha:</label> <input type="password" id="in"
 						th:value="${senha}" name="senha" />
 				</div>
 				<div class="input-field col s6">
-					<label for="nomeo">Nome:</label> <input type="text" id="nomeo"
+					<label for="nomeo">Nome:</label> <input type="text" id="in"
 						th:value="${nome}" name="nome" />
 				</div>
 				<div class="input-field col s4">
-					<label for="cpf">CPF:</label> <input type="text" id="cpf"
+					<label for="cpf">CPF:</label> <input type="text" id="in"
 						th:value="${cpf}" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
 				</div>
 				
