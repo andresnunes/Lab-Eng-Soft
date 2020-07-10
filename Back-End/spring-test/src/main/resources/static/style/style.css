@@ -5,7 +5,8 @@ body{
 }
 
 
-.nav-wrapper{background-color: rgb(127,127,127); padding-left: 10px;}
+nav{background-color: rgba(0,0,0,0); height: 60px;}
+.nav-wrapper{background-color: rgba(0,0,0,0.5); padding-left: 10px;}
 .btn{background-color: rgb(237,28,36);font-family:"Trebuchet MS", Helvetica, sans-serif; font-weight: bold;}
 .btn:hover{background-color: #ff6c6c;}
 .btn:active{background-color: rgb(237,28,36);}
@@ -20,18 +21,17 @@ body{
 	border-radius: 5px;
 	padding: 20px;
 	margin-top: 50px;
+	margin-bottom: 50px;
 }
+.table{	padding-left: 40px;}
+
+input{border-bottom: 1.5px solid #c0c0c0  !important ;box-shadow:none  !important ;}
+input:focus, input:active{border-bottom: 1.5px solid #b81414  !important ;box-shadow:none !important ;}
 
 
-#in{border-bottom: 1px solid #c0c0c0;padding-bottom:0px;box-shadow:none;}
-#in:focus{border-bottom: 1px solid #b81414;box-shadow:none;padding-bottom: 0px;}
-#in:active{border-bottom: 1px solid #b81414;box-shadow:none;padding-bottom: 0px;}
-
-
-
-
-
-
+.ball,.ball:focus{background-color: #ffc04a; box-shadow: inset  0px 0px 10px #ff7b2d, 0px 0px 5px #8a4c00; border-radius: 50%; height: 35px;width: 35px;padding: 0px;}
+.ball:hover,.ball:active{background-color: white; box-shadow: inset  0px 0px 8px #c0c0c0  ,0px 0px 5px #999999;}
+.ball:hover,.ball:active> .material-icons{color: #242424;}
 
 
 
@@ -58,6 +58,10 @@ fh{	font-size: 30px;}
 fh4{ font-size: 35px;}
 fhb{ font-size: 20px;}
 div{background-color: rgba(0,240,255,0.0);}
+
+
+
+
 .formOrganizador{	
 	float: center;
 	width: 52%;

@@ -12,11 +12,11 @@
     </head>
     <body>
         <header>
-            <nav>
-                <div  class="nav-wrapper" >                   
-                    <ul th:each="organizador : ${organizador}" id="nav-mobile" class="right hide-on-med-and-down">
-                  		<li><a th:href="${(#mvc.url('CC#formClube').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Ficha do Clube</a></li>
-                    	<li><h5>Bem vindo <span th:text="${organizador.get().getNome()}"></span></h5></li>
+            <nav id="nav">
+                <div  class="nav-wrapper" th:each="organizador : ${organizador}">  
+                		<a href="#" class="brand-logo "><fh>Bem vindo <span th:text="${organizador.get().getNome()}"></span></fh></a>                 
+                    <ul  id="nav-mobile" class="right hide-on-med-and-down">
+                    	<li><a th:href="${(#mvc.url('CC#formClube').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Ficha do Clube</a></li>
                         <li><a th:href="${(#mvc.url('TC#formCadastroTorneio').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Novo torneio!</a></li>
 						<li><a th:href="${(#mvc.url('AC#formCadastroAtleta').arg(0,organizador.get().getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar atleta ao Clube</a></li>
                         <li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>Logout</a></li>
@@ -27,19 +27,19 @@
         <table class="container">
             <thead>
                 <tr>
-                	<th>Id</th>
-                    <th>Data</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
+                	<th style="width: 3%; text-align:center;">ID</th>
+                    <th style="width: 10%; ">Data</th>
+                    <th style="width: 2%;text-align:center; ">Editar</th>
+                    <th style="width: 2%;text-align:center; ">Deletar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="torneio : ${torneios}">
-                    <td><p><span th:text="${torneio.id}"></span></td>
+                <tr th:each="torneio : ${torneios}">                	
+                    <td style="text-align:center;"><p><span th:text="${torneio.id}"></span></td>
                     <td><p><span th:text="${torneio.data_inicio}"></span></td>
-                    <td><a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneio.id)).build()}"  class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
-                    <td><a th:href="${(#mvc.url('TC#deleteTorneio').arg(0,organizador.get().getId()).arg(1,torneio.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons">delete</i></a></td>
-          </tr>
+                    <td style="text-align:center;"><a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneio.id)).build()}"  class=" btn-small ball"><i class="material-icons">edit</i></a></td>
+                    <td style="text-align:center;"><a th:href="${(#mvc.url('TC#deleteTorneio').arg(0,organizador.get().getId()).arg(1,torneio.id)).build()}" class="btn-small ball"><i class="material-icons">delete</i></a></td>
+          		</tr>
             </tbody>
         </table>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

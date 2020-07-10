@@ -52,22 +52,24 @@
 	<th:block th:include="mensagemValidacao"></th:block>
 	<table class="container listaAtletas">
 		<thead>
-			<th>Nome</th>
-			<th>Idade</th>
-			<th>Editar</th>
-			<th>Deletar</th>
+			<tr>
+				<th style="width: 10%; text-align:center;">Nome</th>
+				<th style="width: 3%; text-align:center;">Idade</th>
+				<th style="width: 3%; text-align:center;">Editar</th>
+				<th style="width: 3%; text-align:center;">Deletar</th>
+			<tr>
 		</thead>
 		<tbody>
 			<tr th:each="atletas : ${atletas}">
-				<td><span th:text="${atletas.nome}"></span></td>
-				<td><span th:text="${atletas.idade}"></span></td>
-				<td><a
+				<td style="text-align:center;"><span th:text="${atletas.nome}"></span></td>
+				<td style="text-align:center;"><span th:text="${atletas.idade}"></span></td>
+				<td style="text-align:center;"><a
 					th:href="${(#mvc.url('AC#formEditarAtleta').arg(0,organizador.get().getId()).arg(1,atletas.id)).build()}"
-					class="waves-effect waves-light btn-small"><i
+					class="waves-effect waves-light btn-small ball"><i
 						class="material-icons">person</i></a></td>
-				<td><a
+				<td style="text-align:center;"><a
 					th:href="${(#mvc.url('AC#deleteAtleta').arg(0,organizador.get().getId()).arg(1,atletas.id)).build()}"
-					class="waves-effect waves-light btn-small"><i
+					class="waves-effect waves-light btn-small ball"><i
 						class="material-icons">delete_forever</i></a></td>
 			</tr>
 		</tbody>

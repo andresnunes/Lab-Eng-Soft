@@ -13,6 +13,9 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
+data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
+verificar porque as validações nao correm nos formularios de edição
+urgente ele nao faz update de clube corretamente em vez disso cria outro clube
 tirar sombreado de memoria do input, resolver problema de id unico nos inputs
 LocalDate - alterar a para dd/mm/yy para USABILIDADE
 fazer contador de atletas
@@ -40,4 +43,5 @@ https://blog.caelum.com.br/entendendo-o-serialversionuid/
 //GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html	
 //https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf
 https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis/	
+
  */

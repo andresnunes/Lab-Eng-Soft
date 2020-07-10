@@ -29,21 +29,21 @@
 			<h4>Cadastro de clube</h4>
 			<div th:object="${clube}">
 			<div class="input-field col s6">
-				<label>Nome:</label> <input type="text" id="in"
+				<label>Nome:</label> <input type="text" 
 					th:value="${nomeClube}" name="nomeClube" />
 			</div>
 			<div class="input-field col s6">
-				<label for="cnpj">CNPJ:</label> <input type="text" id="in"
+				<label for="cnpj">CNPJ:</label> <input type="text" 
 					th:value="${cnpj}" name="cnpj" onKeyPress="MascaraCNPJ(formClube.cnpj);" 
-					maxlength="18"/>
+					maxlength="18" onBlur="ValidarCNPJ(formClube.cnpj);"/>
 			</div>
 			<div class="input-field col s6">
-				<label for="emailc">Email:</label> <input type="email" id="in"
+				<label for="emailc">Email:</label> <input type="email" 
 					th:value="${emailClube}" name="emailClube"  />
 			</div>
 			<div class="input-field col s6">
 				<label for="enderecoc">Endereço:</label> <input type="text"
-					id="in" th:value="${endereco}"
+				    th:value="${endereco}"
 					name="endereco" />
 			</div>
 			</div>
@@ -51,20 +51,20 @@
 			<div th:object="${organizador}">
 
 				<div class="input-field col s6">
-					<label for="emailo">Email:</label> <input type="email" id="in"
+					<label for="emailo">Email:</label> <input type="email" 
 						th:value="${email}" name="email" />
 				</div>
 				<div class="input-field col s4">
-					<label for="senhao">Senha:</label> <input type="password" id="in"
+					<label for="senhao">Senha:</label> <input type="password"
 						th:value="${senha}" name="senha" />
 				</div>
 				<div class="input-field col s6">
-					<label for="nomeo">Nome:</label> <input type="text" id="in"
+					<label for="nomeo">Nome:</label> <input type="text" 
 						th:value="${nome}" name="nome" />
 				</div>
 				<div class="input-field col s4">
-					<label for="cpf">CPF:</label> <input type="text" id="in"
-						th:value="${cpf}" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
+					<label for="cpf">CPF:</label> <input type="text" 
+						th:value="${cpf}" name="cpf" maxlength="14" onkeyup="cpfCheck(this)" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
 				</div>
 				
 				
@@ -76,8 +76,9 @@
 				</button>
 			</div>
 		</div>
+		<th:block th:include="mensagemValidacao"></th:block>
 	</form>
-	<th:block th:include="mensagemValidacao"></th:block>
+	
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
