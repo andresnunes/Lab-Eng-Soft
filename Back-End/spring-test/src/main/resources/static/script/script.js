@@ -5,6 +5,31 @@
 
 
 
+
+
+
+
+
+
+//Com js pode fazer da seguinte forma
+// O input type=date vem no seguinte formato yyyy-mm-dd
+
+// Para setar o valor caso esteja no formato dd/mm/yyyy
+
+//document.querySelector('[type=date]').value = '08/06/2017'.split('/').reverse().join('-');
+
+// Para transformar de '2017-06-08' (formato devolvido no //document.querySelector('[type=date]').value) para //'08/06/2017'. Pode fazer isso: 
+
+//var brDate = '2017-06-08'.split('-').reverse().join('/');
+//var inputDate = '08/06/2017'.split('/').reverse().join('-');
+
+//console.log("br date: " + brDate);
+//console.log("input date: " + inputDate);
+
+
+
+
+
 //deixar os validadores com span
 //validador de cpf https://pt.stackoverflow.com/questions/295564/como-validar-cpf-com-m%C3%A1scara-em-javascript
 function is_cpf(c) {

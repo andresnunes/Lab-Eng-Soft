@@ -37,7 +37,9 @@ permitir alterar organizador pelo formulario do clube
 -pesar na lógica de inabilitar botões por torneio lotado de atleta
 -logica de inabitar demais botões como excluir torneio em andamento, excluir atleta de torneio em andamento
 	OK-definir mascaras para os inputs restrições
+	
 Links interessantes
+https://www.4devs.com.br/gerador_de_cnpj
 https://blog.caelum.com.br/entendendo-o-serialversionuid/
 		https://www.it-swarm.dev/pt/spring/thymeleaf-mostra-o-texto-se-o-atributo-e-propriedade-existirem/1043677425/ 
 		https://pt.stackoverflow.com/questions/192115/como-limitar-um-input-do-tipo-number-para-apenas-3-caracteres
