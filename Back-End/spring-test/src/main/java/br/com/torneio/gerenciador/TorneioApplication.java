@@ -13,7 +13,7 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
-data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
+	OK-data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
 verificar porque as validações nao correm nos formularios de edição
 urgente ele nao faz update de clube corretamente em vez disso cria outro clube
 tirar sombreado de memoria do input

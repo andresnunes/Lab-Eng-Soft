@@ -2,6 +2,7 @@ package br.com.torneio.gerenciador.controller;
 //OKstella_front
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -35,13 +36,21 @@ public class TorneioController {
 	AtletaRepository ar;
 
 	@GetMapping("/view")
-	public ModelAndView listTorneios(@PathVariable("id_organizador") long id_organizador) {
+	public ModelAndView listTorneios(@PathVariable("id_organizador") long id_organizador) throws ParseException {
 		ModelAndView mv = new ModelAndView("index");
 		Optional<Organizador> organizador = or.findById(id_organizador);
 		mv.addObject("organizador", organizador);
 
 		Iterable<Torneio> torneios = tr.findByClube(organizador.get().getClube());
-		mv.addObject("torneios", torneios);
+		List<Torneio> torneioView = new ArrayList<Torneio>() ;
+		
+        for(Torneio torneio : torneios) {     	
+            Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
+    		torneio.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
+        	torneioView.add(torneio);
+        }
+		
+		mv.addObject("torneios", torneioView);
 		return mv;
 	}
 
@@ -65,11 +74,9 @@ public class TorneioController {
 	}
 
 	@ResponseBody
-	private void saveTorneioService(long id_organizador, Torneio torneio) throws ParseException {
+	private void saveTorneioService(long id_organizador, Torneio torneio) {
 		Optional<Organizador> organizador = or.findById(id_organizador);
 		torneio.setClube(organizador.get().getClube());
-		Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
-		torneio.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
 		tr.save(torneio);
 	}
 
@@ -119,10 +126,9 @@ public class TorneioController {
 
 	
 	@ResponseBody// @PutMapping("/editar/{id_torneio}")
-	private void updateTorneioService(long id_torneio, Torneio torneio) throws ParseException {
+	private void updateTorneioService(long id_torneio, Torneio torneio) {
 		Torneio torneioUpdated = tr.findById(id_torneio);
-		Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
-		torneioUpdated.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
+		torneioUpdated.setData_inicio(torneio.getData_inicio());
 		tr.save(torneioUpdated);
 	}
 
