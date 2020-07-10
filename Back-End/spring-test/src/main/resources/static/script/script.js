@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 //deixar os validadores com span
 //validador de cpf https://pt.stackoverflow.com/questions/295564/como-validar-cpf-com-m%C3%A1scara-em-javascript
 function is_cpf(c) {

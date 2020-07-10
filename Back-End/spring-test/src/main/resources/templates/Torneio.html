@@ -42,7 +42,7 @@
 		</div>
 	</form>
 	<th:block th:include="mensagemValidacao"></th:block>
-	<div class="container">
+	<div class="container" style="background-color: transparent;padding: 0px; border: 0px;">
 		<div class="formAtletaAdicionado">
 			<h5>Atletas cadastrados no torneio</h5>
 			<table>
@@ -61,7 +61,7 @@
 								<span th:text="${atleta.clube.nomeClube}"></span></td>
 						<td><a
 							th:href="${(#mvc.url('TC#deleteAtletaTorneio').arg(0,organizador.get().getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
-							class="waves-effect waves-light btn-small"><i
+							class="waves-effect waves-light btn-small ball"><i
 								class="material-icons">delete</i></a></td>
 					</tr>
 				</tbody>
@@ -80,8 +80,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="atleta : ${atletas2}">
-						<td><a th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.get().getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"><i
-								class="material-icons">add</i></a></td>
+						<td><a th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.get().getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
+						class="waves-effect waves-light btn-small ball"><i 
+							class="material-icons">add</i></a></td>
 						<td><span
 								th:text="${atleta.nome}"></span></td>
 						<td><p>

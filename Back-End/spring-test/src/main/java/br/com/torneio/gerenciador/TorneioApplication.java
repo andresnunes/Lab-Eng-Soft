@@ -16,8 +16,9 @@ public class TorneioApplication {
 data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
 verificar porque as validações nao correm nos formularios de edição
 urgente ele nao faz update de clube corretamente em vez disso cria outro clube
-tirar sombreado de memoria do input, resolver problema de id unico nos inputs
-LocalDate - alterar a para dd/mm/yy para USABILIDADE
+tirar sombreado de memoria do input
+	OK-resolver problema de id unico nos inputs
+	OK-LocalDate - alterar a para dd/mm/yy para USABILIDADE
 fazer contador de atletas
 definir oq ue vai ser feito com formorganizador
 melhorar rotas de clube	
