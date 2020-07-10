@@ -22,6 +22,7 @@ import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
 import br.com.torneio.gerenciador.repository.AtletaRepository;
+import br.com.torneio.gerenciador.repository.OrganizadorFormRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 import br.com.torneio.gerenciador.repository.TorneioRepository;
 
@@ -33,15 +34,17 @@ public class TorneioController {
 	@Autowired
 	OrganizadorRepository or;
 	@Autowired
+	OrganizadorFormRepository ofr;
+	@Autowired
 	AtletaRepository ar;
 
 	@GetMapping("/view")
 	public ModelAndView listTorneios(@PathVariable("id_organizador") long id_organizador) throws ParseException {
 		ModelAndView mv = new ModelAndView("index");
-		Optional<Organizador> organizador = or.findById(id_organizador);
+		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador", organizador);
 
-		Iterable<Torneio> torneios = tr.findByClube(organizador.get().getClube());
+		Iterable<Torneio> torneios = tr.findByClube(organizador.getClube());
 		List<Torneio> torneioView = new ArrayList<Torneio>() ;
 		
         for(Torneio torneio : torneios) {     	
@@ -57,7 +60,7 @@ public class TorneioController {
 	@RequestMapping("/cadastrar")
 	public ModelAndView formCadastroTorneio(@PathVariable("id_organizador") long id_organizador) {
 		ModelAndView mv = new ModelAndView("FormTorneio");
-		Optional<Organizador> organizador = or.findById(id_organizador);
+		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador", organizador);
 		return mv;
 	}
@@ -75,8 +78,8 @@ public class TorneioController {
 
 	@ResponseBody
 	private void saveTorneioService(long id_organizador, Torneio torneio) {
-		Optional<Organizador> organizador = or.findById(id_organizador);
-		torneio.setClube(organizador.get().getClube());
+		Organizador organizador = or.findById(id_organizador);
+		torneio.setClube(organizador.getClube());
 		tr.save(torneio);
 	}
 
@@ -100,7 +103,7 @@ public class TorneioController {
 	public ModelAndView formEditarTorneio(@PathVariable("id_organizador") long id_organizador,
 			@PathVariable("id_torneio") long id_torneio) {
 		ModelAndView mv = new ModelAndView("Torneio");
-		Optional<Organizador> organizador = or.findById(id_organizador);
+		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador", organizador);
 		Torneio torneio = tr.findById(id_torneio);
 		mv.addObject("torneio", torneio);

@@ -14,13 +14,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.torneio.gerenciador.form.OrganizadorForm;
 import br.com.torneio.gerenciador.model.Organizador;
+import br.com.torneio.gerenciador.repository.OrganizadorFormRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 
 @Controller
 @RequestMapping("/organizador")
 public class OrganizadorController {
 	@Autowired
-	OrganizadorRepository or;
+	OrganizadorFormRepository ofr;
 	
 	@RequestMapping("/login")
 	public String login() { return("login");}
@@ -31,7 +32,7 @@ public class OrganizadorController {
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/organizador/login";
         }
-		Optional<Organizador> organizador1 = or.findByEmail(organizador.getEmail());
+		Optional<Organizador> organizador1 = ofr.findByEmail(organizador.getEmail());
 		if(organizador1.isPresent() && 
 				organizador1.get().getSenha().intern()==organizador.getSenha().intern()) { 
 			return "redirect:/"+ organizador1.get().getId() +"/torneio/view";

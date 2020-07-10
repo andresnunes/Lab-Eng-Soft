@@ -49,9 +49,9 @@ public class ClubeController {
 	@RequestMapping("/{id_organizador}/editar")
 	public ModelAndView formClube(@PathVariable("id_organizador") long id_organizador){
 		ModelAndView mv = new ModelAndView("Clube");
-		Optional<Organizador> organizador = or.findById(id_organizador);
+		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador",organizador);
-		Clube clube = organizador.get().getClube();
+		Clube clube = organizador.getClube();
 		mv.addObject("clube",clube);
 		
 		List<Torneio> torneios = clube.getTorneios();
@@ -70,14 +70,35 @@ public class ClubeController {
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/{id_organizador}/editar";
         }
-		updateClubeService(clube, organizador);	
+		
+		
+		Organizador organizadorUpdated = or.findById(id_organizador);
+		updateClubeService(clube, organizadorUpdated.getClube().getId(), organizador, id_organizador);	
 		return "redirect:/"+ id_organizador +"/torneio/view";
 	}
 	@ResponseBody 
-	private void updateClubeService(Clube clube, Organizador organizador) {
-		//Organizador organizadorUpdate = or.findById(organizador.getId()); //TIRAR OPTIONAL
-		cr.save(clube);	
-		//or.save(organizador);
+	private void updateClubeService(Clube clube, long codigoClube, Organizador organizador, long codigoOrganizador) {
+		
+		Clube clubeUpdate = cr.findById(codigoClube);
+		clubeUpdate.setCnpj(clube.getCnpj());
+		clubeUpdate.setEmailClube(clube.getEmailClube());
+		clubeUpdate.setEndereco(clube.getEndereco());
+		clubeUpdate.setNomeClube(clube.getNomeClube());
+		//clubeUpdate.setOrganizador(organizadorUpdate.getId()); no caso many to one
+		
+		Organizador organizadorUpdate = or.findById(codigoOrganizador); 
+		organizadorUpdate.setCpf(organizador.getCpf());
+		organizadorUpdate.setEmail(organizador.getEmail());
+		organizadorUpdate.setNome(organizador.getNome());
+		organizadorUpdate.setSenha(organizador.getSenha());
+		//organizadorUpdate.get().setClube(clubeUpdate.getId());
+		
+		//mais seguro essa trabalhera de codigo porque se criar algum campo no banco que nao entrar no formulario nao precisa ficar arrumando
+		//organizador.setId(codigoOrganizador);	NAO NAO NAO
+		//or.save(organizador);                 NAO
+		
+		or.save(organizadorUpdate);
+		cr.save(clubeUpdate);	
 	}
 }
 	

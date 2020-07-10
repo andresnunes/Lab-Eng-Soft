@@ -20,7 +20,7 @@
 				<ul th:each="organizador : ${organizador}" id="nav-mobile"
 					class="right hide-on-med-and-down">
 					<li><a
-						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}"
+						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.getId())).build()}"
 						class="waves-effect waves-light btn"><i
 							class="material-icons left">format_list_bulleted</i>Lista de
 							torneios</a></li>
@@ -45,7 +45,7 @@
 			<ul>
 			<p>Torneios Concorridos:</p>
 				<li th:each="torneiosConcorridos: ${atleta.torneiosConcorridos}">
-				<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosConcorridos.id)).build()}">
+				<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneiosConcorridos.id)).build()}">
 					<span th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span>
 					
 				</a></li>
@@ -54,7 +54,7 @@
 			<ul>
 			<p>Torneios Vencidos:</p>
 				<li th:each="torneiosVencidos: ${atleta.torneiosVencidos}"><a
-					th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.get().getId()).arg(1,torneiosVencidos.id)).build()}">
+					th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneiosVencidos.id)).build()}">
 					<span th:text="'Data: '+${torneiosVencidos.data_inicio}+' - Clube: '+${torneiosVencidos.clube.nomeClube}"></span>
 				</a></li>
 			</ul>

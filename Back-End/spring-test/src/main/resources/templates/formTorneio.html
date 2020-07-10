@@ -15,7 +15,7 @@
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">Cadastro de torneio</a>
                     <ul th:each="organizador : ${organizador}" id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}"  class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de torneios</a></li>
+                        <li><a th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.getId())).build()}"  class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de torneios</a></li>
                         <li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>Logout</a></li>
                     </ul>
                 </div>

@@ -38,9 +38,9 @@ public class AtletaController {
 	@RequestMapping("/cadastrar")
 	public ModelAndView formCadastroAtleta(@PathVariable("id_organizador") long id_organizador) {
 		ModelAndView mv = new ModelAndView("formAtleta");
-		Optional<Organizador> organizador = or.findById(id_organizador);
+		Organizador organizador = or.findById(id_organizador);
         mv.addObject("organizador", organizador);          
-		Iterable<Atleta> atletas = ar.findByClube(organizador.get().getClube());		
+		Iterable<Atleta> atletas = ar.findByClube(organizador.getClube());		
 		mv.addObject("atletas", atletas);
 		return mv;
 	}
@@ -57,11 +57,11 @@ public class AtletaController {
 	}
 	@ResponseBody
 	private void saveAtletaService(Atleta atleta, long id_organizador) {
-        Optional<Organizador> organizador = or.findById(id_organizador);
+        Organizador organizador = or.findById(id_organizador);
         Atleta atletaSave = new Atleta();
         atletaSave.setIdade((atleta.getIdade()));
         atletaSave.setNome(atleta.getNome());
-	    atletaSave.setClube(organizador.get().getClube());
+	    atletaSave.setClube(organizador.getClube());
 	    ar.save(atletaSave);
 	}
 
@@ -97,7 +97,7 @@ public class AtletaController {
 	public ModelAndView formEditarAtleta(@PathVariable("id_organizador") long id_organizador, @PathVariable("id_atleta")  long id_atleta) {
 		ModelAndView mv = new ModelAndView("Atleta");
 		
-		Optional<Organizador> organizador = or.findById(id_organizador);
+		Organizador organizador = or.findById(id_organizador);
 		Atleta atleta = ar.findById(id_atleta);
         List<Torneio> torneiosConcorridos = atleta.getTorneiosConcorridos();
         List<Torneio> torneiosVencidos = atleta.getTorneiosVencidos();

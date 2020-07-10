@@ -15,7 +15,7 @@ public class TorneioApplication {
 /* CHECK LIST 
 	OK-data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
 verificar porque as validações nao correm nos formularios de edição
-urgente ele nao faz update de clube corretamente em vez disso cria outro clube
+	OK-urgente ele nao faz update de clube corretamente em vez disso cria outro clube
 tirar sombreado de memoria do input
 	OK-resolver problema de id unico nos inputs
 	OK-LocalDate - alterar a para dd/mm/yy para USABILIDADE
@@ -30,7 +30,7 @@ permitir alterar organizador pelo formulario do clube
 -fazer hall de torneios para clube também poder cadastrar seus atletas em torneios de terceiros
 	OK--criar a edição de organizadores
 	OK- deixar os mapeamentos  coerentes
--arrumar o design
+	OK-arrumar o design
 	OK-testar todas as validações
 	-implementar controller form > FOI IMPLEMENTADO NO LOGIN PARA USAR AS VALIDAÇÕES PARA LOCAR COM EMAIL E SENHA de organizador
 	timeout/-verificar dto ..

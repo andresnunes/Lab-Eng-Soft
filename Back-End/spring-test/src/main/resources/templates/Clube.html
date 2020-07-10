@@ -20,7 +20,7 @@
 				<ul th:each="organizador : ${organizador}" id="nav-mobile"
 					class="right hide-on-med-and-down">
 					<li><a
-						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}"
+						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.getId())).build()}"
 						class="waves-effect waves-light btn"><i
 							class="material-icons left">format_list_bulleted</i>Lista de
 							torneios</a></li>
@@ -35,7 +35,7 @@
 			<ul>
 				<li><p>Torneios sediados:</p></li>
 				<li th:each="torneios: ${clube.torneios}">
-				<a th:href="${(#mvc.url('CC#formClubeR').arg(0,organizador.get().getId()).arg(1,torneios.id)).build()}">
+				<a th:href="${(#mvc.url('CC#formClubeR').arg(0,organizador.getId()).arg(1,torneios.id)).build()}">
 					<span th:text="'Data: '+${torneios.data_inicio}"></span>					
 				</a></li>
 			</ul>	
@@ -68,19 +68,19 @@
 			<div th:each="organizador : ${organizador}">
 				<div class="input-field col s6">
 					<label for="emailo">Email:</label> <input type="email" 
-						th:value="${organizador.get().getEmail()}" name="email" />
+						th:value="${organizador.getEmail()}" name="email" />
 				</div>
 				<div class="input-field col s4">
 					<label for="senhao">Senha:</label> <input type="password" 
-						th:value="${organizador.get().getSenha()}" name="senha" />
+						th:value="${organizador.senha}" name="senha" />
 				</div>
 				<div class="input-field col s6">
 					<label for="nomeo">Nome:</label> <input type="text"
-						th:value="${organizador.get().getNome()}" name="nome" />
+						th:value="${organizador.nome}" name="nome" />
 				</div>
 				<div class="input-field col s4">
 					<label for="cpf">CPF:</label> <input type="text" 
-						th:value="${organizador.get().getCpf()}" name="cpf" maxlength="14"  onkeyup="cpfCheck(this)" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
+						th:value="${organizador.cpf}" name="cpf" maxlength="14"  onkeyup="cpfCheck(this)" onkeydown="javascript: fMasc( this, mCPF );"><span id="cpfResponse"></span>
 				</div>
 			</div>
 			</div>

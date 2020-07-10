@@ -20,7 +20,7 @@
 				<ul th:each="organizador : ${organizador}" id="nav-mobile"
 					class="right hide-on-med-and-down">
 					<li><a
-						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.get().getId())).build()}"
+						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.getId())).build()}"
 						class="waves-effect waves-light btn"><i
 							class="material-icons left">format_list_bulleted</i>Lista de
 							torneios</a></li>
@@ -64,11 +64,11 @@
 				<td style="text-align:center;"><span th:text="${atletas.nome}"></span></td>
 				<td style="text-align:center;"><span th:text="${atletas.idade}"></span></td>
 				<td style="text-align:center;"><a
-					th:href="${(#mvc.url('AC#formEditarAtleta').arg(0,organizador.get().getId()).arg(1,atletas.id)).build()}"
+					th:href="${(#mvc.url('AC#formEditarAtleta').arg(0,organizador.getId()).arg(1,atletas.id)).build()}"
 					class="waves-effect waves-light btn-small ball"><i
 						class="material-icons">person</i></a></td>
 				<td style="text-align:center;"><a
-					th:href="${(#mvc.url('AC#deleteAtleta').arg(0,organizador.get().getId()).arg(1,atletas.id)).build()}"
+					th:href="${(#mvc.url('AC#deleteAtleta').arg(0,organizador.getId()).arg(1,atletas.id)).build()}"
 					class="waves-effect waves-light btn-small ball"><i
 						class="material-icons">delete_forever</i></a></td>
 			</tr>

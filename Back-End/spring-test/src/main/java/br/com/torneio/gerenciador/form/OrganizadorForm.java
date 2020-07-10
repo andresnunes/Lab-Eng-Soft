@@ -30,7 +30,7 @@ public class OrganizadorForm {
 	
 	
 	public Organizador converter(OrganizadorRepository or) {
-		Organizador organizador = or.findByEmail(email).get();
+		Organizador organizador = or.findByEmail(email);
 		return organizador;
 	}
 	
