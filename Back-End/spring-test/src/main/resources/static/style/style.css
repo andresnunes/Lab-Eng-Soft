@@ -27,6 +27,14 @@ nav{background-color: rgba(0,0,0,0); height: 60px;}
 
 input{border-bottom: 1.5px solid #c0c0c0  !important ;box-shadow:none  !important ;}
 input:focus, input:active{border-bottom: 1.5px solid #b81414  !important ;box-shadow:none !important ;}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+
 
 
 .ball,.ball:focus{background-color: #ffc04a; box-shadow: inset  0px 0px 10px #ff7b2d, 0px 0px 5px #8a4c00; border-radius: 50%; height: 35px;width: 35px;padding: 0px;}
