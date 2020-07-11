@@ -15,8 +15,8 @@ INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Gabiru', 34, 2);
 INSERT INTO ATLETA(nome, idade, clube_id) VALUES('Murillo', 29, 2);
 
 
-INSERT INTO TORNEIO(data_inicio, clube_id) VALUES('2020-02-17', 1);
-INSERT INTO TORNEIO(data_inicio, clube_id) VALUES('2020-12-30', 1);
+INSERT INTO TORNEIO(data_inicio, nome, clube_id) VALUES('2020-02-17', 'Torneio1', 1);
+INSERT INTO TORNEIO(data_inicio, nome, clube_id) VALUES('2020-12-30', 'Torneio2', 1);
 
 
 

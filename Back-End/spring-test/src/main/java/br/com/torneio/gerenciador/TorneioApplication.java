@@ -13,8 +13,17 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
+
+	Nome de torneio / em torneios sediados tbm
+	Ordernar por data torneios. Ocultar ID
+	alterar titulo cadastro>dados organizador > // clube
+	alterar botão cadastro clube > email e cpf
+	transferir propriedade > botão criar um novo form em branco /mantendo o clube 
+
+
+na persistencia do banco controller alterar para nao salvar com cpf invalido?
 	OK-data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
-verificar porque as validações nao correm nos formularios de edição
+	Ok-verificar porque as validações nao correm nos formularios de edição
 	OK-urgente ele nao faz update de clube corretamente em vez disso cria outro clube
 	OK-tirar sombreado de memoria do input
 	OK-resolver problema de id unico nos inputs
@@ -23,6 +32,7 @@ fazer contador de atletas
 definir oq ue vai ser feito com formorganizador
 melhorar rotas de clube	
 arrumar mensagem flutuante de aviso
+	OK arrumar mensagens de validação
 permitir alterar organizador pelo formulario do clube
 	nao pode ser feito 	/-Criar template /error
 	inviavel para esta release/-fazer detalhes club, onde aparece organizador e torneios sediados
@@ -46,5 +56,6 @@ https://blog.caelum.com.br/entendendo-o-serialversionuid/
 //GERAR LISTAGEM https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html	
 //https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf
 https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis/	
+http://www.fidelis.work/chega-de-gambeta-como-validar-cnpj-e-cpf-corretamente/
 
  */

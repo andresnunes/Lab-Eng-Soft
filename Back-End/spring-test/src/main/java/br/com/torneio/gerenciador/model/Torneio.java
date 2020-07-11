@@ -22,6 +22,9 @@ public class Torneio implements Serializable {
 	@NotEmpty
 	private String data_inicio;	//dataInicio
 	
+	//@NotEmpty
+	//private String nome;
+	
 	@ManyToOne @JoinColumn
 	private Atleta atletaVencedor;
 	

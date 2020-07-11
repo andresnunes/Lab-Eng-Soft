@@ -17,4 +17,5 @@ public interface OrganizadorRepository extends JpaRepository<Organizador, String
 	//void save(Optional<Organizador> organizadorUpdate); //RETIRAR URGENTEMENTE O OPTIONAL DO findById, custe o que custar
 
 	Organizador findByEmail(@NotEmpty(message = "Digite um email cadastrado") String email);
+
 }

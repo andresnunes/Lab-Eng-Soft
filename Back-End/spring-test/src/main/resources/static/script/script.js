@@ -1,170 +1,195 @@
+function validarCNPJ(cnpj) {
 
+	try {
+		cnpj = cnpj.replace(/[^\d]+/g, '');
 
+		if (cnpj == '')
+			return false;
 
+		if (cnpj.length != 14)
+			return false;
 
+		// Elimina CNPJs invalidos conhecidos
+		if (cnpj == "00000000000000" || cnpj == "11111111111111"
+				|| cnpj == "22222222222222" || cnpj == "33333333333333"
+				|| cnpj == "44444444444444" || cnpj == "55555555555555"
+				|| cnpj == "66666666666666" || cnpj == "77777777777777"
+				|| cnpj == "88888888888888" || cnpj == "99999999999999")
+			return false;
 
+		// Valida DVs
+		tamanho = cnpj.length - 2
+		numeros = cnpj.substring(0, tamanho);
+		digitos = cnpj.substring(tamanho);
+		soma = 0;
+		pos = tamanho - 7;
+		for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+				pos = 9;
+		}
+		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		if (resultado != digitos.charAt(0))
+			return false;
 
+		tamanho = tamanho + 1;
+		numeros = cnpj.substring(0, tamanho);
+		soma = 0;
+		pos = tamanho - 7;
+		for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+				pos = 9;
+		}
+		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		if (resultado != digitos.charAt(1))
+			return false;
 
+		return true;
+	} catch (e) {
 
-
-
-
-
-
-//Com js pode fazer da seguinte forma
-// O input type=date vem no seguinte formato yyyy-mm-dd
-
-// Para setar o valor caso esteja no formato dd/mm/yyyy
-
-//document.querySelector('[type=date]').value = '08/06/2017'.split('/').reverse().join('-');
-
-// Para transformar de '2017-06-08' (formato devolvido no //document.querySelector('[type=date]').value) para //'08/06/2017'. Pode fazer isso: 
-
-//var brDate = '2017-06-08'.split('-').reverse().join('/');
-//var inputDate = '08/06/2017'.split('/').reverse().join('-');
-
-//console.log("br date: " + brDate);
-//console.log("input date: " + inputDate);
-
-
-
-
-
-//deixar os validadores com span
-//validador de cpf https://pt.stackoverflow.com/questions/295564/como-validar-cpf-com-m%C3%A1scara-em-javascript
-function is_cpf(c) {
-
-	if ((c = c.replace(/[^\d]/g, "")).length != 11)
-		return false
-
-	if (c == "00000000000")
 		return false;
-
-	var r;
-	var s = 0;
-
-	for (i = 1; i <= 9; i++)
-		s = s + parseInt(c[i - 1]) * (11 - i);
-
-	r = (s * 10) % 11;
-
-	if ((r == 10) || (r == 11))
-		r = 0;
-
-	if (r != parseInt(c[9]))
-		return false;
-
-	s = 0;
-
-	for (i = 1; i <= 10; i++)
-		s = s + parseInt(c[i - 1]) * (12 - i);
-
-	r = (s * 10) % 11;
-
-	if ((r == 10) || (r == 11))
-		r = 0;
-
-	if (r != parseInt(c[10]))
-		return false;
-
-	return true;
-}
-
-function fMasc(objeto, mascara) {
-	obj = objeto
-	masc = mascara
-	setTimeout("fMascEx()", 1)
-}
-
-function fMascEx() {
-	obj.value = masc(obj.value)
-}
-
-function mCPF(cpf) {
-	cpf = cpf.replace(/\D/g, "")
-	cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
-	cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
-	cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
-	return cpf
-}
-
-cpfCheck = function (el) {
-    document.getElementById('cpfResponse').innerHTML = is_cpf(el.value)? '<span style="color:green">válido</span>' : '<span style="color:red">inválido</span>';
-    if(el.value=='') document.getElementById('cpfResponse').innerHTML = '';
-}
-
-//JavaScript Document https://fabiobmed.com.br/2012/07/16/excelente-codigo-para-mascara-e-validacao-de-cnpj-cpf-cep-data-e-telefone/
-//adiciona mascara de cnpj
-function MascaraCNPJ(cnpj){
-      if(mascaraInteiro(cnpj)==false){
-              event.returnValue = false;
-      }       
-      return formataCampo(cnpj, '00.000.000/0000-00', event);
-}
-
-//valida numero inteiro com mascara
-function mascaraInteiro(){
-      if (event.keyCode < 48 || event.keyCode > 57){
-              event.returnValue = false;
-              return false;
-      }
-      return true;
-}
-
-//valida o CNPJ digitado
-function ValidarCNPJ(ObjCnpj){
-        var cnpj = ObjCnpj.value;
-        var valida = new Array(6,5,4,3,2,9,8,7,6,5,4,3,2);
-        var dig1= new Number;
-        var dig2= new Number;
-
-        exp = /\.|\-|\//g
-        cnpj = cnpj.toString().replace( exp, "" ); 
-        var digito = new Number(eval(cnpj.charAt(12)+cnpj.charAt(13)));
-
-        for(i = 0; i<valida.length; i++){
-                dig1 += (i>0? (cnpj.charAt(i-1)*valida[i]):0);  
-                dig2 += cnpj.charAt(i)*valida[i];       
-        }
-        dig1 = (((dig1%11)<2)? 0:(11-(dig1%11)));
-        dig2 = (((dig2%11)<2)? 0:(11-(dig2%11)));
-
-        if(((dig1*10)+dig2) != digito)  
-                alert('CNPJ Invalido!');
+	}
 
 }
 
-//formata de forma generica os campos
-function formataCampo(campo, Mascara, evento) { 
-      var boleanoMascara; 
-
-      var Digitato = evento.keyCode;
-      exp = /\-|\.|\/|\(|\)| /g
-      campoSoNumeros = campo.value.toString().replace( exp, "" ); 
-
-      var posicaoCampo = 0;    
-      var NovoValorCampo="";
-      var TamanhoMascara = campoSoNumeros.length;; 
-
-      if (Digitato != 8) { // backspace 
-              for(i=0; i<= TamanhoMascara; i++) { 
-                      boleanoMascara  = ((Mascara.charAt(i) == "-") || (Mascara.charAt(i) == ".")
-                                                              || (Mascara.charAt(i) == "/")) 
-                      boleanoMascara  = boleanoMascara || ((Mascara.charAt(i) == "(") 
-                                                              || (Mascara.charAt(i) == ")") || (Mascara.charAt(i) == " ")) 
-                      if (boleanoMascara) { 
-                              NovoValorCampo += Mascara.charAt(i); 
-                                TamanhoMascara++;
-                      }else { 
-                              NovoValorCampo += campoSoNumeros.charAt(posicaoCampo); 
-                              posicaoCampo++; 
-                        }              
-                }      
-              campo.value = NovoValorCampo;
-                return true; 
-      }else { 
-              return true; 
-      }
+cnpjCheck = function(el) {
+	document.getElementById('cnpjResponse').innerHTML = validarCNPJ(el.value) ? '<span style="color:blue">válido</span>'
+			: '<span style="color:red">inválido</span>';
+	if (el.value == '')
+		document.getElementById('cnpjResponse').innerHTML = '';
 }
-//fabiobmed.com.br/2012/07/16/excelente-codigo-para-mascara-e-validacao-de-cnpj-cpf-cep-data-e-telefone/
-//verificar validade de cpf https://pt.stackoverflow.com/questions/295564/como-validar-cpf-com-m%C3%A1scara-em-javascript
+
+
+function valideCPF(cpf) {
+
+    try {
+     var Soma;
+     var Resto;
+     var strCPF = cpf.replace("-", "").replace(".", "").replace(".", "")
+     Soma = 0;
+     
+
+
+		// Elimina CPFs invalidos conhecidos
+			   if (strCPF == "00000000000" || strCPF == "11111111111"
+				|| strCPF == "22222222222" || strCPF == "33333333333"
+				|| strCPF == "44444444444" || strCPF == "55555555555"
+				|| strCPF == "66666666666" || strCPF == "77777777777"
+				|| strCPF == "88888888888" || strCPF == "99999999999")
+			return false;
+     
+     for (i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+     Resto = (Soma * 10) % 11;
+
+     if ((Resto == 10) || (Resto == 11)) Resto = 0;
+     if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+     Soma = 0;
+     for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+     Resto = (Soma * 10) % 11;
+
+     if ((Resto == 10) || (Resto == 11)) Resto = 0;
+     if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+
+     return true;
+
+ } catch (e) {
+
+     return false;
+ }
+}
+
+cpfCheck = function(el) {
+	document.getElementById('cpfResponse').innerHTML = valideCPF(el.value) ? '<span style="color:blue">válido</span>'
+			: '<span style="color:red">inválido</span>';
+	if (el.value == '')
+		document.getElementById('cpfResponse').innerHTML = '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function txtBoxFormat(strField, sMask, evtKeyPress) {
+	var i, nCount, sValue, fldLen, mskLen, bolMask, sCod, nTecla;
+
+	if (document.all) { // Internet Explorer
+		nTecla = evtKeyPress.keyCode;
+	} else if (document.layers) { // Nestcape
+		nTecla = evtKeyPress.which;
+	} else if (document.getElementById) { // FireFox
+		nTecla = evtKeyPress.which;
+	}
+
+	if (nTecla != 8) {
+
+		sValue = document.getElementById(strField).value;
+
+		// Limpa todos os caracteres de formatação que
+		// já estiverem no campo.
+		sValue = sValue.toString().replace("-", "");
+		sValue = sValue.toString().replace("-", "");
+		sValue = sValue.toString().replace(".", "");
+		sValue = sValue.toString().replace(".", "");
+		sValue = sValue.toString().replace("/", "");
+		sValue = sValue.toString().replace("/", "");
+		sValue = sValue.toString().replace("(", "");
+		sValue = sValue.toString().replace("(", "");
+		sValue = sValue.toString().replace(")", "");
+		sValue = sValue.toString().replace(")", "");
+		sValue = sValue.toString().replace(" ", "");
+		sValue = sValue.toString().replace(" ", "");
+		sValue = sValue.toString().replace(":", "");
+		fldLen = sValue.length;
+		mskLen = sMask.length;
+
+		i = 0;
+		nCount = 0;
+		sCod = "";
+		mskLen = fldLen;
+
+		while (i <= mskLen) {
+			bolMask = ((sMask.charAt(i) == "-") || (sMask.charAt(i) == ".") || (sMask
+					.charAt(i) == "/"))
+			bolMask = bolMask
+					|| ((sMask.charAt(i) == "(") || (sMask.charAt(i) == ")") || (sMask
+							.charAt(i) == " "))
+			bolMask = bolMask || (sMask.charAt(i) == ":")
+
+			if (bolMask) {
+				sCod += sMask.charAt(i);
+				mskLen++;
+			} else {
+				sCod += sValue.charAt(nCount);
+				nCount++;
+			}
+
+			i++;
+		}
+
+		// objForm[strField].value = sCod;
+		document.getElementById(strField).value = sCod;
+
+		if (nTecla != 8) { // backspace
+			if (sMask.charAt(i - 1) == "9") { // apenas números...
+				return ((nTecla > 47) && (nTecla < 58));
+			} // números de 0 a 9
+			else { // qualquer caracter...
+				return true;
+			}
+		} else {
+			return true;
+		}
+	}
+}
