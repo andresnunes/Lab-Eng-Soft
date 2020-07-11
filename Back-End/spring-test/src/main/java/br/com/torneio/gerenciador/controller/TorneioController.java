@@ -4,8 +4,14 @@ package br.com.torneio.gerenciador.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +53,7 @@ public class TorneioController {
 		Iterable<Torneio> torneios = tr.findByClube(organizador.getClube());
 		List<Torneio> torneioView = new ArrayList<Torneio>() ;
 		
+		//FAZER SORT
         for(Torneio torneio : torneios) {     	
             Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
     		torneio.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
@@ -132,6 +139,7 @@ public class TorneioController {
 	private void updateTorneioService(long id_torneio, Torneio torneio) {
 		Torneio torneioUpdated = tr.findById(id_torneio);
 		torneioUpdated.setData_inicio(torneio.getData_inicio());
+		torneioUpdated.setNome(torneio.getNome());
 		tr.save(torneioUpdated);
 	}
 

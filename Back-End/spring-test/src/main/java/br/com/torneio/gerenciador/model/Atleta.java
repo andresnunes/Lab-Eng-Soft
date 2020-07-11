@@ -25,6 +25,10 @@ public class Atleta implements Serializable{
 	@Column(length = 30, nullable = false)
 	private String nome;
 	
+	@NotEmpty
+	@Column(length = 14, nullable = false, unique = true)
+	private String cpf;
+	
 	//@NotBlank//@NotEmpty // mesmo sem notação, nao permite cadastramento, mesmo com (nullable = true) NAO permite cadastramento em branco
 	@Column
 	private int idade;
@@ -56,6 +60,12 @@ public class Atleta implements Serializable{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	public Clube getClube() {
 		return clube;

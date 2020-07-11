@@ -22,8 +22,8 @@ public class Torneio implements Serializable {
 	@NotEmpty
 	private String data_inicio;	//dataInicio
 	
-	//@NotEmpty
-	//private String nome;
+	@NotEmpty
+	private String nome;
 	
 	@ManyToOne @JoinColumn
 	private Atleta atletaVencedor;
@@ -47,11 +47,17 @@ public class Torneio implements Serializable {
 	}
 	public void setData_inicio(String data_inicio) {
 		this.data_inicio = data_inicio;
+	}	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public Atleta getAtletVencedor() {
 		return atletaVencedor;
 	}
-	public void setAtleta_vencedor(Atleta atletaVencedor) {
+	public void setAtletaVencedor(Atleta atletaVencedor) {
 		this.atletaVencedor = atletaVencedor;
 	}
 	public Clube getClube() {

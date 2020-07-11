@@ -61,6 +61,7 @@ public class AtletaController {
         Atleta atletaSave = new Atleta();
         atletaSave.setIdade((atleta.getIdade()));
         atletaSave.setNome(atleta.getNome());
+        atletaSave.setCpf(atleta.getCpf());
 	    atletaSave.setClube(organizador.getClube());
 	    ar.save(atletaSave);
 	}

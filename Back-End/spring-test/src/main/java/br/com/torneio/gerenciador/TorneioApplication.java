@@ -13,12 +13,13 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
-
-	Nome de torneio / em torneios sediados tbm
-	Ordernar por data torneios. Ocultar ID
-	alterar titulo cadastro>dados organizador > // clube
-	alterar botão cadastro clube > email e cpf
-	transferir propriedade > botão criar um novo form em branco /mantendo o clube 
+Trocar nascimento por idade em todas as telas, no banco e no bbackend ;-;
+	OK-Nome de torneio / em torneios sediados tbm
+Ordernar por data torneios. 
+	OK-Ocultar ID
+	OKalterar titulo cadastro>dados organizador > // clube
+	OKalterar botão cadastro clube > email e cpf
+	OKtransferir propriedade > botão criar um novo form em branco /mantendo o clube 
 
 
 na persistencia do banco controller alterar para nao salvar com cpf invalido?

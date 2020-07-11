@@ -32,12 +32,16 @@
 	<form class="container formTorneio" th:each="torneio : ${torneio}"
 		method="post">
 		<div class="row">
-			<div class="input-field col s4">
+		    <div class="input-field col s12">
+                <label for="data_inicio">Nome:</label> <input type="text" 
+                    th:value="${torneio.nome}" name="nome"/>
+            </div>
+			<div class="input-field col s3">
 				<label for="data_inicio">Data inicial:</label> <input type="date"
 					th:value="${torneio.data_inicio}" name="data_inicio" />
 			</div>
-			<div class="input-field col s4">
-				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+			<div class="input-field col s3">
+				<button class="waves-effect waves-light btn" type="submit">Atualizar</button>
 			</div>
 		</div>
 	</form>

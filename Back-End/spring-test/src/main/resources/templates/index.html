@@ -26,17 +26,22 @@
         </header>
         <table class="container">
             <thead>
+            	<tr><th colspan="6" style="text-align:center;"><span th:text="${organizador.clube.nomeClube}"></span></th></tr>
                 <tr>
-                	<th style="width: 3%; text-align:center;">ID</th>
-                    <th style="width: 10%; ">Data</th>
+                	<th style="width: 1%;"></th>
+                	<th style="width: 10%;">Nome</th>
+                    <th style="width: 5%;">Data</th>
+                    <th style="width: 2%;text-align:center; ">Gerenciar</th>
                     <th style="width: 2%;text-align:center; ">Editar</th>
                     <th style="width: 2%;text-align:center; ">Deletar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="torneio : ${torneios}">                	
-                    <td style="text-align:center;"><p><span th:text="${torneio.id}"></span></td>
+                <tr th:each="torneio : ${torneios}">  
+                	<td></td>              	
+                    <td><p><span th:text="${torneio.nome}"></span></td>
                     <td><p><span th:text="${torneio.data_inicio}"></span></td>
+                    <td style="text-align:center;"><a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}"  class=" btn-small ball"><i class="material-icons">border_color</i></a></td>
                     <td style="text-align:center;"><a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}"  class=" btn-small ball"><i class="material-icons">edit</i></a></td>
                     <td style="text-align:center;"><a th:href="${(#mvc.url('TC#deleteTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}" class="btn-small ball"><i class="material-icons">delete</i></a></td>
           		</tr>

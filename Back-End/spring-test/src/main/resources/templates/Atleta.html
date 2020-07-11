@@ -42,12 +42,14 @@
 			<p>
 				Idade: <span th:text="${atleta.idade}"></span>
 			</p>
+			<p>
+				CPF: <span th:text="${atleta.cpf}"></span>
+			</p>
 			<ul>
 			<p>Torneios Concorridos:</p>
 				<li th:each="torneiosConcorridos: ${atleta.torneiosConcorridos}">
 				<a th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneiosConcorridos.id)).build()}">
-					<span th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span>
-					
+					<span th:text="'Data: '+${torneiosConcorridos.data_inicio}+' - Nome: '+${torneiosConcorridos.nome} +' - Clube: '+${torneiosConcorridos.clube.nomeClube}"></span>		
 				</a></li>
 			</ul>
 						 
@@ -71,6 +73,12 @@
 					<label for="idade">Idade: </label> <input type="number" max="125" min="0"
 						th:value="${atleta.idade}" name="idade" />
 				</div>
+				<div class="input-field col s5">
+					<label for="cpf">CPF:</label> <input type="text" id="cpf"
+						 th:value="${atleta.cpf}" name="cpf" maxlength="14"  onblur="" onkeydown=""
+						 onkeyup="cpfCheck(this)" onKeyPress="return txtBoxFormat(this.id, '999.999.999-99',event);"/>
+						 <span id="cpfResponse"></span>
+				</div>
 				<div class="input-field col s6">
 					<button type="submit" class="waves-effect waves-light btn">Atualizar
 						atleta</button>
@@ -84,5 +92,6 @@
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="/script/script.js"></script>
 </body>
 </html>

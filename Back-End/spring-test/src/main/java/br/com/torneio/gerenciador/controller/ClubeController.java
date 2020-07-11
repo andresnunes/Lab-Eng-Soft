@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import br.com.torneio.gerenciador.form.OrganizadorForm2;
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
@@ -58,17 +60,17 @@ public class ClubeController {
 		mv.addObject("torneios", torneios);
 		return mv;	
 	}
-	
+	//QUE QUE É ISSO??
 	@RequestMapping("/{id_organizador}/editar/{id_torneio}")
 	public String formClubeR(@PathVariable("id_organizador") long id_organizador, @PathVariable long id_torneio) {
 		return"redirect:/{id_organizador}/torneio/editar/"+id_torneio;		
 	}
 	
 	@PostMapping("/{id_organizador}/editar")
-	public String updateClube(@PathVariable("id_organizador") long id_organizador, @Valid Clube clube, BindingResult result, RedirectAttributes attributes, @Valid Organizador organizador, BindingResult result2, RedirectAttributes attributes2){
+	public String updateClube(@PathVariable("id_organizador") long id_organizador, @Valid Clube clube, BindingResult result, RedirectAttributes attributes, @Valid OrganizadorForm2 organizador, BindingResult result2, RedirectAttributes attributes2){
 		if(result.hasErrors() || result2.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
-            return "redirect:/{id_organizador}/editar";
+            return "redirect:/clube/{id_organizador}/editar";
         }
 		
 		
@@ -77,7 +79,7 @@ public class ClubeController {
 		return "redirect:/"+ id_organizador +"/torneio/view";
 	}
 	@ResponseBody 
-	private void updateClubeService(Clube clube, long codigoClube, Organizador organizador, long codigoOrganizador) {
+	private void updateClubeService(Clube clube, long codigoClube, OrganizadorForm2 organizador, long codigoOrganizador) {
 		
 		Clube clubeUpdate = cr.findById(codigoClube);
 		clubeUpdate.setCnpj(clube.getCnpj());
@@ -87,8 +89,8 @@ public class ClubeController {
 		//clubeUpdate.setOrganizador(organizadorUpdate.getId()); no caso many to one
 		
 		Organizador organizadorUpdate = or.findById(codigoOrganizador); 
-		organizadorUpdate.setCpf(organizador.getCpf());
-		organizadorUpdate.setEmail(organizador.getEmail());
+		//organizadorUpdate.setCpf(organizador.getCpf());
+		//organizadorUpdate.setEmail(organizador.getEmail());
 		organizadorUpdate.setNome(organizador.getNome());
 		organizadorUpdate.setSenha(organizador.getSenha());
 		//organizadorUpdate.get().setClube(clubeUpdate.getId());
@@ -97,7 +99,7 @@ public class ClubeController {
 		//organizador.setId(codigoOrganizador);	NAO NAO NAO
 		//or.save(organizador);                 NAO
 		
-		or.save(organizadorUpdate);
+		//or.save(organizadorUpdate); ??nao precisa dar save??
 		cr.save(clubeUpdate);	
 	}
 }
