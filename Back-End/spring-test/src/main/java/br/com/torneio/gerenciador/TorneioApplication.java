@@ -13,15 +13,20 @@ public class TorneioApplication {
 /**/
 
 /* CHECK LIST 
-Trocar nascimento por idade em todas as telas, no banco e no bbackend ;-;
+	
+	OKmandar print tela Clube input travado
+	formClube, Clube - nao aparece mensagem
+	OKnome Login tem que ocupar a linha toda
+	
+	OK-Trocar nascimento por idade em todas as telas, no banco e no bbackend ;-;
 	OK-Nome de torneio / em torneios sediados tbm
-Ordernar por data torneios. 
+	OK-Ordernar por data torneios. 
 	OK-Ocultar ID
 	OKalterar titulo cadastro>dados organizador > // clube
 	OKalterar botão cadastro clube > email e cpf
 	OKtransferir propriedade > botão criar um novo form em branco /mantendo o clube 
 
-
+implementar função de verificação de cpf existente e cnpj existente em todos os saves e updates / atleta e organizador
 na persistencia do banco controller alterar para nao salvar com cpf invalido?
 	OK-data.sql cadastrar cpf e cnpj valido porque mascaras de validação foram adicionadas
 	Ok-verificar porque as validações nao correm nos formularios de edição

@@ -12,7 +12,7 @@ public class AtualizaAtletaForm {
 	private String nome;
 	
 	@NotNull @NotEmpty
-	private int idade;
+	private String dataNascimento;
 	
 
 	public String getNome() {
@@ -23,19 +23,19 @@ public class AtualizaAtletaForm {
 		this.nome = nome;
 	}
 
-	public int getIdade() {
-		return idade;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public Atleta atualizar(Long id, AtletaRepository atletaRepository) {
 		Atleta atleta = atletaRepository.getOne(id);
 		
 		atleta.setNome(this.nome);
-		atleta.setIdade(this.idade);
+		atleta.setDataNascimento(this.dataNascimento);
 		
 		return atleta;
 	

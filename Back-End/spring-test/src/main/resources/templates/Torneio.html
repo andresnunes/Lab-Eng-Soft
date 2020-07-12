@@ -44,8 +44,9 @@
 				<button class="waves-effect waves-light btn" type="submit">Atualizar</button>
 			</div>
 		</div>
+		<th:block th:include="mensagemValidacao"></th:block>
 	</form>
-	<th:block th:include="mensagemValidacao"></th:block>
+	
 	<div class="container" style="background-color: transparent;padding: 0px; border: 0px;">
 		<div class="formAtletaAdicionado">
 			<h5>Atletas cadastrados no torneio</h5>
@@ -90,7 +91,7 @@
 						<td><span
 								th:text="${atleta.nome}"></span></td>
 						<td><p>
-								<span th:text="${atleta.idade}"></span></td>
+								<span th:text="${atleta.dataNascimento}"></span></td>
 						<td><p>
 								<span th:text="${atleta.clube.nomeClube}"></span></td>
 					</tr>

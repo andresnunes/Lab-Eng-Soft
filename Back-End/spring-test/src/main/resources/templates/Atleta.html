@@ -40,7 +40,7 @@
 				Nome: <span th:text="${atleta.nome}"></span>
 			</p>
 			<p>
-				Idade: <span th:text="${atleta.idade}"></span>
+				Data de nascimento: <span th:text="${atleta.dataNascimento}"></span>
 			</p>
 			<p>
 				CPF: <span th:text="${atleta.cpf}"></span>
@@ -69,14 +69,14 @@
 					<label for="nome">Nome: </label> <input type="text"
 						th:value="${atleta.nome}" name="nome" />
 				</div>
-				<div class="input-field col s1">
-					<label for="idade">Idade: </label> <input type="number" max="125" min="0"
-						th:value="${atleta.idade}" name="idade" />
+				<div class="input-field col s3">
+					<label for="dataNascimento">Data de nascimento: </label> <input type="date" 
+						th:value="${atleta.dataNascimento}" name="dataNascimento" />
 				</div>
-				<div class="input-field col s5">
+				<div class="input-field col s3">
 					<label for="cpf">CPF:</label> <input type="text" id="cpf"
-						 th:value="${atleta.cpf}" name="cpf" maxlength="14"  onblur="" onkeydown=""
-						 onkeyup="cpfCheck(this)" onKeyPress="return txtBoxFormat(this.id, '999.999.999-99',event);"/>
+						 th:value="${atleta.cpf}" name="cpf" maxlength="14" 					
+						 onkeyup="cpfCheck(this);txtBoxFormat(this.id, '999.999.999-99',event);" />
 						 <span id="cpfResponse"></span>
 				</div>
 				<div class="input-field col s6">
@@ -85,10 +85,10 @@
 				</div>
 			</div>
 		</form>
-
+	<th:block th:include="mensagemValidacao"></th:block>
 
 	</div>
-	<th:block th:include="mensagemValidacao"></th:block>
+	
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>

@@ -29,42 +29,40 @@
 				</ul>
 			</div>
 		</nav>
-	</header>
-	<div  class="" >		
+	</header>	
 	<form class="formClube container" method="post" name="formClube">
 		<div class="row">
 			<h5>Organizador</h5>
 			<div  th:object="${organizador}">
-				<div class="input-field col s6">
+				<div class="input-field col s7">
 					<label for="email">Email:</label> <input type="email" 
 						th:value="${email}" name="email" />
 				</div>
-				<div class="input-field col s4">
+				<div class="input-field col s5">
 					<label for="senha">Senha:</label> <input type="password" 
 						th:value="${senha}" name="senha" />
 				</div>
-				<div class="input-field col s6">
+				<div class="input-field col s7">
 					<label for="nome">Nome:</label> <input type="text"
 						th:value="${nome}" name="nome" />
 				</div>
-				<div class="input-field col s4">
-				
+				<div class="input-field col s5">				
 					<label for="cpf">CPF:</label> <input type="text" id="cpf"
-						 th:value="${cpf}" name="cpf" maxlength="14"  onblur="" onkeydown=""
-						 onkeyup="cpfCheck(this)" onKeyPress="return txtBoxFormat(this.id, '999.999.999-99',event);"/>
+						 th:value="${cpf}" name="cpf" maxlength="14"
+						 onkeyup="cpfCheck(this);txtBoxFormat(this.id, '999.999.999-99',event);"/>
 						 <span id="cpfResponse"></span>
 				</div>
+				<div class="input-field col s10"><th:block th:include="mensagemValidacao"></th:block></div>
+				
 			</div>
-			</div>
-			<div class="input-field col s3">
+			<div class="input-field col s3" style="margin-top: 0px;">
 				<button class="waves-effect waves-light btn" type="submit">
 					<i class="material-icons left">arrow_upward</i>Atualizar
 				</button>
-			</div>
-		
+				</div>			
+			</div>		
 		</form>
-	<th:block th:include="mensagemValidacao"></th:block>
-	</div>
+
 	
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

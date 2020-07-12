@@ -50,8 +50,8 @@
 			</div>
 			<div class="input-field col s6">
 				<label for="cnpj">CNPJ:</label> <input type="text" id="cnpj"
-					th:value="${clube.cnpj}" name="cnpj" maxlength="18" onkeydown="" 
-					onblur="cnpjCheck(this)"  onKeyPress="return txtBoxFormat(this.id, '99.999.999/9999-99',event);"/>
+					th:value="${clube.cnpj}" name="cnpj" maxlength="18"
+					onkeyup="cnpjCheck(this);txtBoxFormat(this.id, '99.999.999/9999-99',event);"/>
 					<span id="cnpjResponse"></span>
 					
 			</div>
@@ -69,12 +69,23 @@
 			<div th:each="organizador : ${organizador}">
 				<div class="input-field col s6">
 					<label for="nomeo">Nome:</label> <input type="text"
-						th:value="${organizador.nome}" name="nome" />
+						th:value="${organizador.nome}" name="nome"/>
 				</div>
 				<div class="input-field col s4">
 					<label for="senhao">Senha:</label> <input type="password" 
 						th:value="${organizador.senha}" name="senha" />
 				</div>
+				<div class="input-field col s6">
+					<label for="email">Email:</label> <input type="email" 
+						th:value="${organizador.email}" name="email" disabled/>
+				</div>
+				<div class="input-field col s4">
+				
+					<label for="cpf">CPF:</label> <input type="text" id="cpf"
+						 th:value="${organizador.cpf}" name="cpf"  disabled/>
+				</div>
+				
+				
 			</div>
 			</div>
 			<div class="input-field col s4">

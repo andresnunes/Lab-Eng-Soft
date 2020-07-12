@@ -48,6 +48,8 @@ public class ClubeController {
 		organizador.setClube(clube);
 		or.save(organizador);
 	}
+	
+	
 	@RequestMapping("/{id_organizador}/editar")
 	public ModelAndView formClube(@PathVariable("id_organizador") long id_organizador){
 		ModelAndView mv = new ModelAndView("Clube");
@@ -71,9 +73,7 @@ public class ClubeController {
 		if(result.hasErrors() || result2.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/clube/{id_organizador}/editar";
-        }
-		
-		
+        }		
 		Organizador organizadorUpdated = or.findById(id_organizador);
 		updateClubeService(clube, organizadorUpdated.getClube().getId(), organizador, id_organizador);	
 		return "redirect:/"+ id_organizador +"/torneio/view";
@@ -99,7 +99,7 @@ public class ClubeController {
 		//organizador.setId(codigoOrganizador);	NAO NAO NAO
 		//or.save(organizador);                 NAO
 		
-		//or.save(organizadorUpdate); ??nao precisa dar save??
+		//or.save(organizadorUpdate); //??nao precisa dar save??
 		cr.save(clubeUpdate);	
 	}
 }

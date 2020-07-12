@@ -31,7 +31,7 @@ public class Atleta implements Serializable{
 	
 	//@NotBlank//@NotEmpty // mesmo sem notação, nao permite cadastramento, mesmo com (nullable = true) NAO permite cadastramento em branco
 	@Column
-	private int idade;
+	private String dataNascimento;
 
 	@ManyToOne @JoinColumn
 	private Clube clube;
@@ -49,9 +49,9 @@ public class Atleta implements Serializable{
 		
 	}	
 
-	public Atleta(String nome, int idade, Clube clube) {
+	public Atleta(String nome, String dataNascimento, Clube clube) {
 		this.nome = nome;
-		this.idade = idade;
+		this.dataNascimento = dataNascimento;
 		this.clube = clube;
 	}
 
@@ -79,11 +79,11 @@ public class Atleta implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getIdade() {
-		return idade;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}	
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public List<Torneio> getTorneiosVencidos() {
 		return torneiosVencidos;

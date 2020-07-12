@@ -38,14 +38,15 @@
 					<label for="nome">Nome: </label> <input type="text"
 						th:value="${nome}" name="nome" />
 				</div>
-				<div class="input-field col s2">
-					<label for="idade">Idade: </label> <input type="number" max="125" min="0"
-						th:value="${idade}" name="idade" />
+				<div class="input-field col s5">
+					<label for="dataNascimento">Data de nascimento: </label> <input type="date"
+						th:value="${dataNascimento}" placeholder="" name="dataNascimento" />
 				</div>
-				<div class="input-field col s10">
+				<div class="input-field col s7">
 					<label for="cpf">CPF:</label> <input type="text" id="cpf"
 						 th:value="${cpf}" name="cpf" maxlength="14" 
-						 onkeyup="cpfCheck(this)" onKeyPress="return txtBoxFormat(this.id, '999.999.999-99',event);"/>
+						 onblur="" onkeydown=""
+						 onKeyPress="" onkeyup="cpfCheck(this);txtBoxFormat(this.id, '999.999.999-99',event);" />
 						 <span id="cpfResponse"></span>
 				</div>				
 				<div class="input-field col s6">
@@ -53,22 +54,25 @@
 						Atleta</button>
 				</div>
 			</div>
+			<th:block th:include="mensagemValidacao"></th:block>
 		</form>
 	</div>
-	<th:block th:include="mensagemValidacao"></th:block>
+	
 	<table class="container listaAtletas">
 		<thead>
 			<tr>
-				<th style="width: 10%; text-align:center;">Nome</th>
-				<th style="width: 3%; text-align:center;">Idade</th>
+				<th style="width: 1%;"></th>
+				<th style="width: 10%;">Nome</th>
+				<th style="width: 3%; text-align:center;">idade</th>
 				<th style="width: 3%; text-align:center;">Editar</th>
 				<th style="width: 3%; text-align:center;">Deletar</th>
 			<tr>
 		</thead>
 		<tbody>
 			<tr th:each="atletas : ${atletas}">
-				<td style="text-align:center;"><span th:text="${atletas.nome}"></span></td>
-				<td style="text-align:center;"><span th:text="${atletas.idade}"></span></td>
+				<td></td>
+				<td><span th:text="${atletas.nome}"></span></td>
+				<td style="text-align:center;"><span th:text="${atletas.dataNascimento}"></span></td>
 				<td style="text-align:center;"><a
 					th:href="${(#mvc.url('AC#formEditarAtleta').arg(0,organizador.getId()).arg(1,atletas.id)).build()}"
 					class="waves-effect waves-light btn-small ball"><i

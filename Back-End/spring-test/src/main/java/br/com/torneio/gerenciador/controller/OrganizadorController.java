@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.torneio.gerenciador.form.OrganizadorForm;
 import br.com.torneio.gerenciador.model.Clube;
@@ -45,15 +46,18 @@ public class OrganizadorController {
 	}
 	
 	@RequestMapping("/{id_organizador}/editar")
-	public String formOrganizador(@PathVariable("id_organizador") long id_organizador) {
-		return "Organizador";		
+	public ModelAndView formOrganizador(@PathVariable("id_organizador") long id_organizador) {
+		ModelAndView mv = new ModelAndView("Organizador");
+		Organizador organizador = or.findById(id_organizador);
+		mv.addObject("organizador",organizador);
+		return mv;		
 	}
 	
 	@PostMapping("/{id_organizador}/editar")
 	public String updateOrganizador(@PathVariable("id_organizador") long id_organizador, @Valid Organizador organizador, BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
-            return "redirect:/{id_organizador}/editar";
+            return "redirect:/organizador/{id_organizador}/editar";
         }
 		updateOrganizadorService(organizador, id_organizador);	
 		return "redirect:/"+ id_organizador +"/torneio/view";

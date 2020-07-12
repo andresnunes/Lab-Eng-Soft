@@ -25,7 +25,7 @@
 			</div>
 		</nav>
 	</header>
-	<th:block th:include="mensagemValidacao"></th:block>
+	
 	<div id="signup" class="container formOrganizador">
 		<form method="post">
 			<div class="row">
@@ -51,8 +51,10 @@
 						<i class="material-icons left">arrow_upward</i>Cadastrar
 					</button>
 				</div>
-			</div>
+				<div class="input-field col s10"><span th:include="mensagemValidacao"></span></div>
+			</div>			
 		</form>
+		
 	</div>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

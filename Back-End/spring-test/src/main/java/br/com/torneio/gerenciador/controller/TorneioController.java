@@ -3,7 +3,9 @@ package br.com.torneio.gerenciador.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -51,16 +53,35 @@ public class TorneioController {
 		mv.addObject("organizador", organizador);
 
 		Iterable<Torneio> torneios = tr.findByClube(organizador.getClube());
+		List<Torneio> torneioSort = new ArrayList<Torneio>() ;
 		List<Torneio> torneioView = new ArrayList<Torneio>() ;
 		
-		//FAZER SORT
-        for(Torneio torneio : torneios) {     	
-            Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
+     
+        for(Torneio torneio : torneios) {        	
+        	Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
+    		torneio.setData_inicio(Convert.convertCalendarToString("yyyyMMdd", cal));
+        	torneioSort.add(torneio); 
+        }
+       //BUBBLE SORT        
+        for(int i = 0; i<torneioSort.size(); i++){
+            for(int j = 0; j<torneioSort.size()-1; j++){
+            	//Torneio tmp = torneioSort.get(j);
+            	//Torneio tmp2 = torneioSort.get(j+1);
+            	int temp = Integer.parseInt(torneioSort.get(j).getData_inicio());
+            	int temp2 = Integer.parseInt(torneioSort.get(j+1).getData_inicio()); 
+                if(temp > temp2){
+                    Torneio aux = torneioSort.get(j);
+                    torneioSort.set(j, torneioSort.get(j+1));
+                    torneioSort.set(j+1, aux);
+                }
+            }
+        }
+        for(Torneio torneio : torneioSort) {     	
+            Calendar cal = Convert.convertStringToCalendar("yyyyMMdd", torneio.getData_inicio());
     		torneio.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
         	torneioView.add(torneio);
-        }
-		
-		mv.addObject("torneios", torneioView);
+        }    
+		mv.addObject("torneios", torneioSort);
 		return mv;
 	}
 
@@ -108,7 +129,7 @@ public class TorneioController {
 	// request mapping qual formulario ele teria que renderizar na tela
 	@RequestMapping("/editar/{id_torneio}")
 	public ModelAndView formEditarTorneio(@PathVariable("id_organizador") long id_organizador,
-			@PathVariable("id_torneio") long id_torneio) {
+			@PathVariable("id_torneio") long id_torneio) throws ParseException {
 		ModelAndView mv = new ModelAndView("Torneio");
 		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador", organizador);
@@ -118,7 +139,13 @@ public class TorneioController {
 		mv.addObject("atletas1", atletas1);
 		List<Atleta> atletas2 = ar.findAll();
 		atletas2.removeAll(atletas1);
-		mv.addObject("atletas2", atletas2);
+		List<Atleta> atletaView = new ArrayList<Atleta>() ;
+        for(Atleta atleta : atletas2) {     	
+        	atleta.setDataNascimento(Convert.calculaIdade("yyyy-MM-dd", atleta.getDataNascimento())); //setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
+        	atletaView.add(atleta);
+        }
+		mv.addObject("atletas2", atletaView);		
+		//mv.addObject("atletas2", atletas2);
 		return mv;
 	}
 

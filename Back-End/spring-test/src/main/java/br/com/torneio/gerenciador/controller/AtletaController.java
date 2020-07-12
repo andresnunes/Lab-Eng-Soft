@@ -1,6 +1,12 @@
 package br.com.torneio.gerenciador.controller;
 //OKstella_front
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -36,14 +42,30 @@ public class AtletaController {
 	
 	
 	@RequestMapping("/cadastrar")
-	public ModelAndView formCadastroAtleta(@PathVariable("id_organizador") long id_organizador) {
+	public ModelAndView formCadastroAtleta(@PathVariable("id_organizador") long id_organizador) throws ParseException {
 		ModelAndView mv = new ModelAndView("formAtleta");
 		Organizador organizador = or.findById(id_organizador);
         mv.addObject("organizador", organizador);          
-		Iterable<Atleta> atletas = ar.findByClube(organizador.getClube());		
-		mv.addObject("atletas", atletas);
+
+        Iterable<Atleta> atletas = ar.findByClube(organizador.getClube());
+		List<Atleta> atletaView = new ArrayList<Atleta>() ;
+
+        for(Atleta atleta : atletas) {     	
+        	atleta.setDataNascimento(Convert.calculaIdade("yyyy-MM-dd", atleta.getDataNascimento())); //setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
+        	atletaView.add(atleta);
+        }
+		mv.addObject("atletas", atletaView);
 		return mv;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	@PostMapping("/cadastrar")
@@ -52,6 +74,17 @@ public class AtletaController {
             attributes.addFlashAttribute("mensagem", "Verifique os campos");
             return "redirect:/{id_organizador}/atleta/cadastrar";
         }
+		
+		
+		//BUSCAR CPF NO BANCO, SE REPETIDO
+		List<Atleta> atletas = ar.findAll();
+		for(Atleta atletaCPF : atletas) {
+			if(atletaCPF.getCpf().intern()==atleta.getCpf().intern()) {
+				attributes.addFlashAttribute("mensagem", "CPF já cadastrado");
+	            return "redirect:/{id_organizador}/atleta/cadastrar";
+			}		
+		}
+		
         saveAtletaService(atleta, id_organizador);
         return "redirect:/{id_organizador}/atleta/cadastrar";	
 	}
@@ -59,7 +92,7 @@ public class AtletaController {
 	private void saveAtletaService(Atleta atleta, long id_organizador) {
         Organizador organizador = or.findById(id_organizador);
         Atleta atletaSave = new Atleta();
-        atletaSave.setIdade((atleta.getIdade()));
+        atletaSave.setDataNascimento((atleta.getDataNascimento()));
         atletaSave.setNome(atleta.getNome());
         atletaSave.setCpf(atleta.getCpf());
 	    atletaSave.setClube(organizador.getClube());
@@ -123,7 +156,7 @@ public class AtletaController {
 	private void updateAtletaService(long id_atleta, Atleta atleta) {
 		Atleta atletaUpdated = ar.findById(id_atleta);
 		atletaUpdated.setNome(atleta.getNome());
-		atletaUpdated.setIdade(atleta.getIdade());
+		atletaUpdated.setDataNascimento(atleta.getDataNascimento());
         ar.save(atletaUpdated); 		
 	}
 }

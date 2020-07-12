@@ -13,7 +13,7 @@ public class AtletaForm {
 	private String nome;
 	
 	//@NotNull @NotEmpty 
-	private int idade;
+	private String dataNascimento;
 	
 	//@NotNull @NotEmpty
 	private Long clube_id;
@@ -26,12 +26,12 @@ public class AtletaForm {
 		this.nome = nome;
 	}
 
-	public int getIdade() {
-		return idade;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public Long getNomeClube() {
@@ -44,7 +44,7 @@ public class AtletaForm {
 	
 	public Atleta converter(ClubeRepository clubeRepository) {
 		Optional<Clube> clube = clubeRepository.findById(clube_id);
-		return new Atleta(nome, idade, clube.get());
+		return new Atleta(nome, dataNascimento, clube.get());
 	}
 
 }
