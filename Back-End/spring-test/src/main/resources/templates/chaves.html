@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/style/style.css" />
+<title>Tenis - Torneio release</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Chaves do torneio</a>
+				<ul th:each="organizador : ${organizador}" id="nav-mobile"
+					class="right hide-on-med-and-down">
+					<li><a
+						th:href="${(#mvc.url('TC#listTorneios').arg(0,organizador.getId())).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Lista de
+							torneios</a></li>
+					<li><a href="/" class="waves-effect waves-light btn"><i
+							class="material-icons left">arrow_forward</i>Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+
+	<div th:each="atletas : ${atleta}">
+		<h5>Chaves</h5>
+	</div>
+	
+	<th:block th:include="mensagemValidacao"></th:block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="/script/script.js"></script>
+</body>
+</html>

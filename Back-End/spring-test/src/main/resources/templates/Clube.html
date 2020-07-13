@@ -84,10 +84,13 @@
 					<label for="cpf">CPF:</label> <input type="text" id="cpf"
 						 th:value="${organizador.cpf}" name="cpf"  disabled/>
 				</div>
-				
+				<div class="input-field col s10">
+					<th:block th:include="mensagemValidacao"></th:block>
+				</div>
 				
 			</div>
 			</div>
+			
 			<div class="input-field col s4">
 				<button class="waves-effect waves-light btn" type="submit">
 					<i class="material-icons left">arrow_upward</i>Atualizar
@@ -97,7 +100,7 @@
 						Transferir propriedade</a>		
 			</div>
 		</form>
-	<th:block th:include="mensagemValidacao"></th:block>
+	
 	</div>	
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

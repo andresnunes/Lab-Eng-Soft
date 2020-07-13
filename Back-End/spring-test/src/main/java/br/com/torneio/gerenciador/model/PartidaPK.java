@@ -8,7 +8,8 @@ import javax.persistence.ManyToOne;
 
 @Embeddable 
 public class PartidaPK implements Serializable {
-	
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne @JoinColumn
 	private Partidas partida;
 	

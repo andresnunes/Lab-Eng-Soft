@@ -1,6 +1,7 @@
 package br.com.torneio.gerenciador.controller;
 //OKstella_front
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.torneio.gerenciador.form.OrganizadorForm;
+import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.repository.OrganizadorFormRepository;
@@ -59,6 +61,20 @@ public class OrganizadorController {
             attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/organizador/{id_organizador}/editar";
         }
+		//BUSCAR EMAIL NO BANCO, SE REPETIDO
+		//BUSCAR CPF NO BANCO, SE REPETIDO
+		List<Organizador> organizadores = or.findAll();
+				organizadores.remove(or.findById(id_organizador)); //VERIFICAR ESSA LOGICA, porque ele pode cadastrar com o mesmo cpf/email o organizador do proprio clube, caso outro organizador de outro clube quiser se atualizar ou cadastrar com o cpf de OUTRO organizador ele nao consegue
+		for(Organizador organizadorBanco : organizadores) {
+			if(organizadorBanco.getCpf().intern()==organizador.getCpf().intern()) {
+				attributes.addFlashAttribute("mensagem", "CPF já cadastrado");
+	            return "redirect:/organizador/{id_organizador}/editar";
+			}
+			if(organizadorBanco.getEmail().intern()==organizador.getEmail().intern()) {
+				attributes.addFlashAttribute("mensagem", "Email já cadastrado");
+	            return "redirect:/organizador/{id_organizador}/editar";
+			}	
+		}
 		updateOrganizadorService(organizador, id_organizador);	
 		return "redirect:/"+ id_organizador +"/torneio/view";
 	}

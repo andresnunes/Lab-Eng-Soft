@@ -8,6 +8,14 @@ public class Partida {
 	
 	@EmbeddedId
 	private PartidaPK partida;
+
+	public PartidaPK getPartida() {
+		return partida;
+	}
+
+	public void setPartida(PartidaPK partida) {
+		this.partida = partida;
+	}
 	
 	/*
 	 * public Partidas getPartidaId() { return partida_id; }

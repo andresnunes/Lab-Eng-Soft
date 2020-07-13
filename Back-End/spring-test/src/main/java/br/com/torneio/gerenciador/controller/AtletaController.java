@@ -2,13 +2,8 @@ package br.com.torneio.gerenciador.controller;
 //OKstella_front
 
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -148,7 +143,17 @@ public class AtletaController {
             attributes.addFlashAttribute("mensagem", "Verifique os campos");
             System.out.println("O organizador de id " + id_organizador +" falhou em editar o atleta de id " + atleta.getId()); 
             return "redirect:/{id_organizador}/atleta/editar/{id_atleta}";
-        }	
+		}
+		//BUSCAR CPF NO BANCO, SE REPETIDO, e ele nao for da entidade que eu to querendo atualizar
+				List<Atleta> atletas = ar.findAll();
+				atletas.remove(ar.findById(id_atleta));
+				//atletas.remove(atleta);
+				for(Atleta atletaCPF : atletas) {
+					if(atletaCPF.getCpf().intern()==atleta.getCpf().intern()) {
+						attributes.addFlashAttribute("mensagem", "CPF já cadastrado");
+						return "redirect:/{id_organizador}/atleta/editar/{id_atleta}";
+					}		
+				}
 		updateAtletaService(id_atleta,atleta); 
         return "redirect:/{id_organizador}/atleta/cadastrar";	
 	}

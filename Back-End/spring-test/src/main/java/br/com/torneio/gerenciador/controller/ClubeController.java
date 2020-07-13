@@ -2,7 +2,6 @@ package br.com.torneio.gerenciador.controller;
 //OKstella_front
 
 import java.util.List;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.com.torneio.gerenciador.form.OrganizadorForm2;
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.model.Organizador;
@@ -36,11 +34,38 @@ public class ClubeController {
 	@PostMapping("/signup") 
 	public String saveClube(@Valid Clube clube, BindingResult result, RedirectAttributes attributes, @Valid Organizador organizador, BindingResult result2, RedirectAttributes attributes2){
 		if(result.hasErrors() || result2.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
-            return "redirect:/clube/signup";
+            //attributes.addFlashAttribute("mensagem", "Verifique os campos");
+            attributes2.addFlashAttribute("mensagem", "Verifique os campos");
+            return ("redirect:/clube/signup");
         }
+		//BUSCAR EMAIL NO BANCO, SE REPETIDO
+		//BUSCAR CNPJ NO BANCO, SE REPETIDO
+		List<Clube> clubes = cr.findAll();
+		for(Clube clubeBanco : clubes) {
+			if(clubeBanco.getCnpj().intern()==clube.getCnpj().intern()) {
+				attributes2.addFlashAttribute("mensagem", "CNPJ já cadastrado");
+				return  ("formClube");
+			}
+			if(clubeBanco.getEmailClube().intern()==clube.getEmailClube().intern()) {
+				attributes2.addFlashAttribute("mensagem", "Email já cadastrado");
+	            return ("redirect:/clube/signup");
+			}	
+		}
+		//BUSCAR EMAIL NO BANCO, SE REPETIDO
+		//BUSCAR CPF NO BANCO, SE REPETIDO
+		List<Organizador> organizadores = or.findAll();
+		for(Organizador organizadorBanco : organizadores) {
+			if(organizadorBanco.getCpf().intern()==organizador.getCpf().intern()) {
+				attributes2.addFlashAttribute("mensagem", "CPF já cadastrado");
+	            return  ("redirect:/clube/signup"); 
+			}
+			if(organizadorBanco.getEmail().intern()==organizador.getEmail().intern()) {
+				attributes2.addFlashAttribute("mensagem", "Email já cadastrado");
+	            return  ("redirect:/clube/signup");
+			}	
+		}
 		saveClubeService(clube, organizador);	
-		return "redirect:/"+ organizador.getId() +"/torneio/view";
+		return ("redirect:/"+ organizador.getId() +"/torneio/view");
 	}
 	@ResponseBody
 	private void saveClubeService(Clube clube, Organizador organizador) {
@@ -68,12 +93,28 @@ public class ClubeController {
 		return"redirect:/{id_organizador}/torneio/editar/"+id_torneio;		
 	}
 	
+
 	@PostMapping("/{id_organizador}/editar")
 	public String updateClube(@PathVariable("id_organizador") long id_organizador, @Valid Clube clube, BindingResult result, RedirectAttributes attributes, @Valid OrganizadorForm2 organizador, BindingResult result2, RedirectAttributes attributes2){
 		if(result.hasErrors() || result2.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Verifique os campos"); //!
+            attributes2.addFlashAttribute("mensagem", "Verifique os campos"); //!
             return "redirect:/clube/{id_organizador}/editar";
-        }		
+        }
+		//BUSCAR CNPJ NO BANCO, SE REPETIDO, e ele nao for da entidade que eu to querendo atualizar
+		//BUSCAR EMAIL NO BANCO, SE REPETIDO
+		List<Clube> clubes = cr.findAll();
+		//clubes.remove(clube);
+		clubes.remove(or.findById(id_organizador).getClube());
+		for(Clube clubeBanco : clubes) {
+			if(clubeBanco.getCnpj().intern()==clube.getCnpj().intern()) {
+				attributes2.addFlashAttribute("mensagem", "CNPJ já cadastrado");
+				return "redirect:/clube/{id_organizador}/editar";
+			}
+			if(clubeBanco.getEmailClube().intern()==clube.getEmailClube().intern()) {
+				attributes2.addFlashAttribute("mensagem", "Email já cadastrado");
+	            return "redirect:/clube/{id_organizador}/editar";
+			}	
+		}
 		Organizador organizadorUpdated = or.findById(id_organizador);
 		updateClubeService(clube, organizadorUpdated.getClube().getId(), organizador, id_organizador);	
 		return "redirect:/"+ id_organizador +"/torneio/view";
