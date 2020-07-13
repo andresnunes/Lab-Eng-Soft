@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.torneio.gerenciador.form.OrganizadorForm;
-import br.com.torneio.gerenciador.model.Atleta;
-import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.repository.OrganizadorFormRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
