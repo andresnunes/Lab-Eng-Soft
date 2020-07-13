@@ -1,7 +1,5 @@
 package br.com.torneio.gerenciador.repository;
 
-import java.util.Optional;
-
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.jpa.repository.JpaRepository;

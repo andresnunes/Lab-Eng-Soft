@@ -2,8 +2,6 @@ package br.com.torneio.gerenciador.form;
 
 import java.util.Optional;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.repository.ClubeRepository;

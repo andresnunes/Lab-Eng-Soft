@@ -2,8 +2,6 @@ package br.com.torneio.gerenciador.form;
 //OKstella_front
 
 import javax.validation.constraints.NotEmpty;
-import br.com.torneio.gerenciador.model.Organizador;
-import br.com.torneio.gerenciador.repository.OrganizadorRepository;
 
 public class OrganizadorForm2 {
 
