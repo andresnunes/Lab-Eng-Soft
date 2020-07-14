@@ -10,7 +10,12 @@ public class TorneioApplication {
 		SpringApplication.run(TorneioApplication.class, args);
 	}
 }
-/**/
+/*
+ * 
+COLOCAR ALLERT NA TELA NUMERO DE ATLETAS NO TORNEIO > 16
+ * 
+ * 
+ * */
 
 /* CHECK LIST 
 -revisitar e otimizar os controllers, fazer funções para comandos repetidos

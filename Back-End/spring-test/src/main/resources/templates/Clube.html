@@ -40,9 +40,14 @@
 				</a></li>
 				<li><p>Torneios vencidos:</p></li>
 				<li th:each="torneiosVencidos: ${torneiosVencidos}">
-				<a>
+				<a th:href="${(#mvc.url('CC#formClubeR').arg(0,organizador.getId()).arg(1,torneiosVencidos.id)).build()}">
 					<span th:text="'Data: '+${torneiosVencidos.data_inicio}+'  -  Nome: '+${torneiosVencidos.nome}"></span>					
-				</a></li>
+				</a>
+				<a th:href="${(#mvc.url('AC#formEditarAtleta').arg(0,organizador.getId()).arg(1,torneiosVencidos.getAtletaVencedor().getId())).build()}">
+					<span th:text="' - Atleta: '+${torneiosVencidos.getAtletaVencedor().getNome()}"></span>					
+				</a>
+				</li>
+				
 			</ul>	
 		
 		

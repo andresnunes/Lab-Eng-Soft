@@ -23,6 +23,7 @@ import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
 import br.com.torneio.gerenciador.repository.ClubeRepository;
 import br.com.torneio.gerenciador.repository.OrganizadorRepository;
+import br.com.torneio.gerenciador.repository.TorneioRepository;
 
 @Controller
 @RequestMapping("/clube")
@@ -31,6 +32,8 @@ public class ClubeController {
 	private ClubeRepository cr;
 	@Autowired
 	private OrganizadorRepository or;
+	@Autowired
+	private TorneioRepository tr;
 	
 	@RequestMapping("/signup")
 	public String signup() { 
