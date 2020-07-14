@@ -54,7 +54,7 @@ public class Torneio implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Atleta getAtletVencedor() {
+	public Atleta getAtletaVencedor() {
 		return atletaVencedor;
 	}
 	public void setAtletaVencedor(Atleta atletaVencedor) {

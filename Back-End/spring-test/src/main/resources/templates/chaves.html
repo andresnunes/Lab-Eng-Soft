@@ -16,7 +16,7 @@
 	<header>
 		<nav>
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo">Chaves do torneio</a>
+				<a href="#" class="brand-logo">Gerenciar torneio</a>
 				<ul th:each="organizador : ${organizador}" id="nav-mobile"
 					class="right hide-on-med-and-down">
 					<li><a
@@ -30,31 +30,44 @@
 			</div>
 		</nav>
 	</header>
-
-
-	<div th:each="atletas : ${atleta}">
-		<h5>Chaves</h5>
-	</div>
-	
-	<th:block th:include="mensagemValidacao"></th:block>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<div class="container">
+		<h5>Torneio</h5>	
+		<ul th:each="torneio : ${torneio}">
+			<li>
+				Nome: <span th:text="${torneio.nome}"></span>
+			</li>
+			<li>
+				Data: <span th:text="${torneio.data_inicio}"></span>
+			</li>
+			<li th:each="atletaVencedor : ${torneio.getAtletaVencedor()}">
+				<span th:text="'Atleta vencedor: '+${atletaVencedor.nome}+' - Clube: '+${atletaVencedor.clube.nomeClube}"></span>
+			</li>
+		</ul>			
+		</div>
+		<div class="container">
+			<h5>Promover atleta a vencedor</h5>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Clube</th>
+						<th>Vencedor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="atleta : ${atletas1}">
+						<td><p>
+								<span th:text="${atleta.nome}"></span></td>
+						<td><p>
+								<span th:text="${atleta.clube.nomeClube}"></span></td>
+						<td><a
+							th:href="${(#mvc.url('PC#saveAtletaVencedor').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
+							class="waves-effect waves-light btn-small ball"><i
+								class="material-icons">add</i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>		
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
 	<script type="text/javascript" src="/script/script.js"></script>
 </body>

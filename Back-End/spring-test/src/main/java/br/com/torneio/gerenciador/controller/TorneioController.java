@@ -4,6 +4,7 @@ package br.com.torneio.gerenciador.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,15 @@ public class TorneioController {
 			attributes.addFlashAttribute("mensagem", "Verifique os campos");
 			return "redirect:/{id_organizador}/torneio/cadastrar";
 		}
+		//verificação data
+		Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
+		String dataTorneio = Convert.convertCalendarToString("yyyyMMdd", cal);		
+		Calendar today = Calendar.getInstance();
+		String dataHoje = Convert.convertCalendarToString("yyyyMMdd", today);
+		if( Integer.parseInt(dataTorneio)< Integer.parseInt(dataHoje)) {
+			attributes.addFlashAttribute("mensagem", "Torneio so pode ser cadastrado para uma data futura");
+			return "redirect:/{id_organizador}/torneio/cadastrar";
+		}
 		saveTorneioService(id_organizador, torneio);
 		return "redirect:/{id_organizador}/torneio/view";
 	}
@@ -115,9 +125,6 @@ public class TorneioController {
 		tr.delete(torneio);
 	}
 
-	// melhoria, o formulario de cadastro e de edição serem o mesmo?
-	// para esconder o formulario post teria que fazer o thymeleaf entender pelo
-	// request mapping qual formulario ele teria que renderizar na tela
 	@RequestMapping("/editar/{id_torneio}")
 	public ModelAndView formEditarTorneio(@PathVariable("id_organizador") long id_organizador,
 			@PathVariable("id_torneio") long id_torneio) throws ParseException {
@@ -148,6 +155,15 @@ public class TorneioController {
 			attributes.addFlashAttribute("mensagem", "Verifique os campos");
 			return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
 		}
+		//verificação data
+		Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
+		String dataTorneio = Convert.convertCalendarToString("yyyyMMdd", cal);		
+		Calendar today = Calendar.getInstance();
+		String dataHoje = Convert.convertCalendarToString("yyyyMMdd", today);
+		if( Integer.parseInt(dataTorneio)< Integer.parseInt(dataHoje)) {
+			attributes.addFlashAttribute("mensagem", "O torneio so pode ser remarcado para uma data futura");
+			return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
+		}
 		updateTorneioService(id_torneio, torneio);
 		return "redirect:/{id_organizador}/torneio/view";
 	}
@@ -163,7 +179,14 @@ public class TorneioController {
 
 	@RequestMapping("/editar/{id_torneio}/atleta/{id_atleta}") // id de atleta em path, pra funcionar no postman
 	public String saveAtletaTorneio(@PathVariable("id_organizador") long id_organizador,
-			@PathVariable("id_torneio") long id_torneio, @PathVariable("id_atleta") long id_atleta) {
+			@PathVariable("id_torneio") long id_torneio, @PathVariable("id_atleta") long id_atleta, RedirectAttributes attributes) {
+		Torneio torneio = tr.findById(id_torneio);
+		//limitação de 16 atletas por torneio
+		int count = torneio.getAtletasParticipantes().size();
+		if(count > 16 -1) {
+			attributes.addFlashAttribute("mensagem", "Vagas excedidas");
+			return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
+		}
 		saveAtletaTorneioService(id_torneio, id_atleta);
 		return "redirect:/{id_organizador}/torneio/editar/{id_torneio}";
 	}
