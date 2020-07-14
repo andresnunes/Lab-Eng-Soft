@@ -43,37 +43,8 @@ public class TorneioController {
 		ModelAndView mv = new ModelAndView("index");
 		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador", organizador);
-
 		Iterable<Torneio> torneios = tr.findByClube(organizador.getClube());
-		List<Torneio> torneioSort = new ArrayList<Torneio>() ;
-		List<Torneio> torneioView = new ArrayList<Torneio>() ;
-		
-     
-        for(Torneio torneio : torneios) {        	
-        	Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
-    		torneio.setData_inicio(Convert.convertCalendarToString("yyyyMMdd", cal));
-        	torneioSort.add(torneio); 
-        }
-       //BUBBLE SORT        
-        for(int i = 0; i<torneioSort.size(); i++){
-            for(int j = 0; j<torneioSort.size()-1; j++){
-            	//Torneio tmp = torneioSort.get(j);
-            	//Torneio tmp2 = torneioSort.get(j+1);
-            	int temp = Integer.parseInt(torneioSort.get(j).getData_inicio());
-            	int temp2 = Integer.parseInt(torneioSort.get(j+1).getData_inicio()); 
-                if(temp > temp2){
-                    Torneio aux = torneioSort.get(j);
-                    torneioSort.set(j, torneioSort.get(j+1));
-                    torneioSort.set(j+1, aux);
-                }
-            }
-        }
-        for(Torneio torneio : torneioSort) {     	
-            Calendar cal = Convert.convertStringToCalendar("yyyyMMdd", torneio.getData_inicio());
-    		torneio.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
-        	torneioView.add(torneio);
-        }    
-		mv.addObject("torneios", torneioSort);
+		mv.addObject("torneios", Convert.ordenarTorneioDataBS(torneios));
 		return mv;
 	}
 

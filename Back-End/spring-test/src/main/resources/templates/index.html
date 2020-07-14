@@ -42,8 +42,8 @@
                     <td><p><span th:text="${torneio.nome}"></span></td>
                     <td><p><span th:text="${torneio.data_inicio}"></span></td>
                     <td style="text-align:center;"><a th:disabled="${torneio.getAtletasParticipantes().size()<16}" th:href="${(#mvc.url('PC#listChaves').arg(0,organizador.getId()).arg(1,torneio.id)).build()}"  class=" btn-small ball"><i class="material-icons">border_color</i></a></td>
-                    <td style="text-align:center;"><a th:disabled="${torneio.getAtletaVencedor()!=null}" th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}"  class=" btn-small ball"><i class="material-icons">edit</i></a></td>
-                    <td style="text-align:center;"><a th:disabled="${torneio.getAtletaVencedor()!=null}" th:href="${(#mvc.url('TC#deleteTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}" class="btn-small ball"><i class="material-icons">delete</i></a></td>
+                    <td style="text-align:center;"><a th:disabled="${torneio.getAtletaVencedor()}" th:href="${(#mvc.url('TC#formEditarTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}"  class=" btn-small ball"><i class="material-icons">edit</i></a></td>
+                    <td style="text-align:center;"><a th:disabled="${torneio.getAtletaVencedor()}" th:href="${(#mvc.url('TC#deleteTorneio').arg(0,organizador.getId()).arg(1,torneio.id)).build()}" class="btn-small ball"><i class="material-icons">delete</i></a></td>
           		</tr>
             </tbody>
         </table>

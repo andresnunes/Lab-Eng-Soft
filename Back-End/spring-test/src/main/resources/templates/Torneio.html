@@ -33,16 +33,17 @@
 		method="post">
 		<div class="row">
 		    <div class="input-field col s12">
-                <label for="data_inicio">Nome:</label> <input type="text" 
+                <label for="data_inicio">Nome:</label> <input type="text" th:disabled="${torneio.getAtletaVencedor()}"
                     th:value="${torneio.nome}" name="nome"/>
             </div>
 			<div class="input-field col s3">
-				<label for="data_inicio">Data inicial:</label> <input type="date"
+				<label for="data_inicio">Data inicial:</label> <input type="date" th:disabled="${torneio.getAtletaVencedor()}"
 					th:value="${torneio.data_inicio}" name="data_inicio" />
 			</div>
 			<div class="input-field col s3">
-				<button class="waves-effect waves-light btn" type="submit">Atualizar</button>
+				<button class="waves-effect waves-light btn" type="submit" th:disabled="${torneio.getAtletaVencedor()}">Atualizar</button>
 			</div>
+			<span th:each="atletaVencedor : ${torneio.getAtletaVencedor()}"  th:text="'Atleta vencedor: '+${atletaVencedor.nome}+' - Clube: '+${atletaVencedor.clube.nomeClube}"></span>
 		</div>
 		<th:block th:include="mensagemValidacao"></th:block>
 	</form>
@@ -66,7 +67,7 @@
 						<td><p>
 								<span th:text="${atleta.clube.nomeClube}"></span></td>
 						<td><a
-							th:href="${(#mvc.url('TC#deleteAtletaTorneio').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
+							th:disabled="${torneio.getAtletaVencedor()}" th:href="${(#mvc.url('TC#deleteAtletaTorneio').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
 							class="waves-effect waves-light btn-small ball"><i
 								class="material-icons">delete</i></a></td>
 					</tr>
@@ -86,7 +87,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="atleta : ${atletas2}">
-						<td><a th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
+						<td><a th:disabled="${torneio.getAtletaVencedor()}" th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
 						class="waves-effect waves-light btn-small ball"><i 
 							class="material-icons">add</i></a></td>
 						<td><span

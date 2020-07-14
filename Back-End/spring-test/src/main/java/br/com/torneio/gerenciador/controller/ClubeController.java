@@ -1,7 +1,11 @@
 package br.com.torneio.gerenciador.controller;
 //OKstella_front
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.torneio.gerenciador.form.OrganizadorForm2;
+import br.com.torneio.gerenciador.model.Atleta;
 import br.com.torneio.gerenciador.model.Clube;
 import br.com.torneio.gerenciador.model.Organizador;
 import br.com.torneio.gerenciador.model.Torneio;
@@ -74,20 +79,32 @@ public class ClubeController {
 		or.save(organizador);
 	}
 	
-	
 	@RequestMapping("/{id_organizador}/editar")
-	public ModelAndView formClube(@PathVariable("id_organizador") long id_organizador){
+	public ModelAndView formClube(@PathVariable("id_organizador") long id_organizador) throws ParseException{
 		ModelAndView mv = new ModelAndView("Clube");
 		Organizador organizador = or.findById(id_organizador);
 		mv.addObject("organizador",organizador);
 		Clube clube = organizador.getClube();
 		mv.addObject("clube",clube);
+		Iterable<Torneio> torneios = clube.getTorneios();
+		mv.addObject("torneios", Convert.ordenarTorneioDataBS(torneios));
 		
-		List<Torneio> torneios = clube.getTorneios();
-		mv.addObject("torneios", torneios);
+		
+		//Iterable<Torneio> torneiosV =  torneios;
+		List<Torneio> torneiosVencidos = new ArrayList<Torneio>();
+		
+		for(Torneio torneio : torneios){
+			Optional<Atleta> av = Optional.ofNullable(torneio.getAtletaVencedor());
+		
+			//se torneio tem um vencedor
+			if(av.isPresent() && av.get().getClube()==clube) {
+				torneiosVencidos.add(torneio);
+			}			
+		}
+		mv.addObject("torneiosVencidos", torneiosVencidos);
 		return mv;	
 	}
-	//QUE QUE É ISSO??
+	//redirecionamento para ficha do torneio
 	@RequestMapping("/{id_organizador}/editar/{id_torneio}")
 	public String formClubeR(@PathVariable("id_organizador") long id_organizador, @PathVariable long id_torneio) {
 		return"redirect:/{id_organizador}/torneio/editar/"+id_torneio;		

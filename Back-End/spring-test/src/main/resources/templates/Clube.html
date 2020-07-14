@@ -34,9 +34,14 @@
 		<h4>Clube</h4>
 			<ul>
 				<li><p>Torneios sediados:</p></li>
-				<li th:each="torneios: ${clube.torneios}">
+				<li th:each="torneios: ${torneios}">
 				<a th:href="${(#mvc.url('CC#formClubeR').arg(0,organizador.getId()).arg(1,torneios.id)).build()}">
 					<span th:text="'Data: '+${torneios.data_inicio}+'  -  Nome: '+${torneios.nome}"></span>					
+				</a></li>
+				<li><p>Torneios vencidos:</p></li>
+				<li th:each="torneiosVencidos: ${torneiosVencidos}">
+				<a>
+					<span th:text="'Data: '+${torneiosVencidos.data_inicio}+'  -  Nome: '+${torneiosVencidos.nome}"></span>					
 				</a></li>
 			</ul>	
 		

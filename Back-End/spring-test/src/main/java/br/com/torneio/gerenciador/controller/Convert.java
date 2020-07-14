@@ -3,8 +3,13 @@ package br.com.torneio.gerenciador.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import br.com.torneio.gerenciador.model.Torneio;
+
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -45,7 +50,36 @@ public class Convert {
 		return ""+idade;
 	}
 	
+	public static List<Torneio> ordenarTorneioDataBS(Iterable<Torneio> torneios) throws ParseException {
 
+
+		List<Torneio> torneioSort = new ArrayList<Torneio>() ;
+        for(Torneio torneio : torneios) {        	
+        	Calendar cal = Convert.convertStringToCalendar("yyyy-MM-dd", torneio.getData_inicio());
+    		torneio.setData_inicio(Convert.convertCalendarToString("yyyyMMdd", cal));
+        	torneioSort.add(torneio); 
+        }
+       //BUBBLE SORT        
+        for(int i = 0; i<torneioSort.size(); i++){
+            for(int j = 0; j<torneioSort.size()-1; j++){
+            	int temp = Integer.parseInt(torneioSort.get(j).getData_inicio());
+            	int temp2 = Integer.parseInt(torneioSort.get(j+1).getData_inicio()); 
+                if(temp > temp2){
+                    Torneio aux = torneioSort.get(j);
+                    torneioSort.set(j, torneioSort.get(j+1));
+                    torneioSort.set(j+1, aux);
+                }
+            }
+        }
+        for(Torneio torneio : torneioSort) {     	
+            Calendar cal = Convert.convertStringToCalendar("yyyyMMdd", torneio.getData_inicio());
+    		torneio.setData_inicio(Convert.convertCalendarToString("dd/MM/yyyy", cal));
+        } 
+		
+		return torneioSort;
+		
+		
+	}
 	
 	
 	
