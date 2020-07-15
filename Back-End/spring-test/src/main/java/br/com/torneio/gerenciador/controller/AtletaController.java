@@ -1,5 +1,4 @@
 package br.com.torneio.gerenciador.controller;
-//OKstella_front
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -53,23 +52,12 @@ public class AtletaController {
 		return mv;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	@PostMapping("/cadastrar")
 	public String saveAtleta(@PathVariable("id_organizador") long id_organizador, @Valid Atleta atleta, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Verifique os campos");
             return "redirect:/{id_organizador}/atleta/cadastrar";
         }
-		
 		
 		//BUSCAR CPF NO BANCO, SE REPETIDO
 		List<Atleta> atletas = ar.findAll();

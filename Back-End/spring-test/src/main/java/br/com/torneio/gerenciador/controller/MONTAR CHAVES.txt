@@ -1,0 +1,103 @@
+MONTAR CHAVES
+    1. pegar todos os atletas cadastrados no torneio
+        1.1. retorno de Query(?!)
+    2. criar um objeto com pares de atletas e informações necessárias
+        2.1. Criar pares de atletas a partir de random da lista de atletas do torneio
+        2.2. Remover da lista de atletas os atleta sorteado
+        2.3. Montagem de chaves iniciai sempre de 0-7 (pos)
+        [
+            {
+                pos: 0,
+                id_partida: x
+                partida: {
+                    id_jogador_a: ,
+                    id_jogador_b:
+                }
+            },{
+                pos: 1,
+                id_partida: x
+                partida: {
+                    id_jogador_a: ,
+                    id_jogador_b:
+                }
+            },{
+            .
+            .
+            .
+            },{
+                pos: 7,
+                id_partida: x
+                partida: {
+                    id_jogador_a: ,
+                    id_jogador_b:
+                }
+            }
+        ]
+
+VENCEDOR
+    1. Ter campos editáveis no html
+        Set (1 à 5)
+        pontos (para cada set e jogador)
+        Set         1   2   3   4   5
+        JogadorA    5   3   6   1
+        JogadorB    7   6   2   6
+
+        Liberar coluna seguinte para edição apenas se a anterior for completamente preenchida (js)
+
+    2. Comparar pontos e setar set vencido para o maior pontuador
+    3. Quando Set vencido for igual a 3, jogador é setado como vencedor (flag = true /false)
+    4. Montar objeto contendo dados dos vencedores
+        {
+            {
+                pos: 0,
+                id_partida: x,
+                vencedor: JogadorB
+            },
+            {
+                pos: 1,
+                id_partida: y,
+                vencedor: JogadorA
+            },
+            .
+            .
+            .
+        }
+
+MONTAR PRÓXIMAS CHAVES
+    1. pegar objeto contendo vencedores
+    2. criar outro objeto com pares de atletas e informações necessárias
+        2.1. Criar pares de atletas a partir das posições 
+            0-1, 2-3, 4-5, 6-7
+        2.2. Montagem deve se basear na quantidade de ojetos contidos no retorno dos vencedores dividido por 2
+
+    {
+        {
+            pos: 0,
+            id_partida: x
+            partida: {
+                id_jogador_a: ,
+                id_jogador_b:
+            }
+        },{
+            pos: 1,
+            id_partida: x
+            partida: {
+                id_jogador_a: ,
+                id_jogador_b:
+            }
+        },{
+            pos: 2,
+            id_partida: x
+            partida: {
+                id_jogador_a: ,
+                id_jogador_b:
+            }
+        },{
+            pos: 3,
+            id_partida: x
+            partida: {
+                id_jogador_a: ,
+                id_jogador_b:
+            }
+        }
+    }

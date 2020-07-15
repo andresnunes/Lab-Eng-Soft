@@ -77,12 +77,7 @@ public class Convert {
         } 
 		
 		return torneioSort;
-		
-		
+			
 	}
-	
-	
-	
-	
 	
 }

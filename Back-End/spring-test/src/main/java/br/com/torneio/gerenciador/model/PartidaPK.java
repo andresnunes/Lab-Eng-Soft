@@ -11,20 +11,25 @@ public class PartidaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne @JoinColumn
-	private Partidas partida;
+	private Partidas id;
 	
 	@ManyToOne @JoinColumn
 	private Atleta atleta_a;
 	
 	@ManyToOne @JoinColumn
 	private Atleta atleta_b;
+
+	public PartidaPK(Atleta atleta_a, Atleta atleta_b) {
+		this.atleta_a = atleta_a;
+		this.atleta_b = atleta_b;
+	}
 	
-	public Partidas getPartidaId() {
-		return partida;
+	public Long getPartidaId() {
+		return serialVersionUID;
 	}
 
 	public void setPartidaId(Partidas partida) {
-		this.partida = partida;
+		this.id = partida;
 	}
 	
 	public Atleta getAtletaAId() {
