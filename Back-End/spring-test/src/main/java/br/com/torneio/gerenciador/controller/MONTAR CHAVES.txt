@@ -47,7 +47,7 @@ VENCEDOR
     2. Comparar pontos e setar set vencido para o maior pontuador
     3. Quando Set vencido for igual a 3, jogador é setado como vencedor (flag = true /false)
     4. Montar objeto contendo dados dos vencedores
-        {
+        [
             {
                 pos: 0,
                 id_partida: x,
@@ -61,7 +61,7 @@ VENCEDOR
             .
             .
             .
-        }
+        ]
 
 MONTAR PRÓXIMAS CHAVES
     1. pegar objeto contendo vencedores
