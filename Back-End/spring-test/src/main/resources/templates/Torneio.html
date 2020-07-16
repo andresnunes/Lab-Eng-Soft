@@ -43,7 +43,7 @@
 			<div class="input-field col s3">
 				<button class="waves-effect waves-light btn" type="submit" th:disabled="${torneio.getAtletaVencedor()}">Atualizar</button>
 			</div>
-			<span th:each="atletaVencedor : ${torneio.getAtletaVencedor()}"  th:text="'Atleta vencedor: '+${atletaVencedor.nome}+' - Clube: '+${atletaVencedor.clube.nomeClube}"></span>
+			<span style="color: red" th:each="atletaVencedor : ${torneio.getAtletaVencedor()}"  th:text="'Atleta vencedor: '+${atletaVencedor.nome}+' - Clube: '+${atletaVencedor.clube.nomeClube}"></span>
 		</div>
 		<th:block th:include="mensagemValidacao"></th:block>
 	</form>
@@ -53,7 +53,10 @@
 			<h5>Atletas cadastrados no torneio</h5>
 			<table>
 				<thead>
-				<tr><th colspan="3" style="text-align:center;"><span th:text="${'Atletas inscritos: '+atletas1.size()}"></span></th></tr>
+				<tr><th colspan="3" style="text-align:center;">
+				<span th:text="'Atletas inscritos: '"></span>
+				<span id="count" th:text="${atletas1.size()}"></span>
+				</th>
 					<tr>
 						<th>Nome</th>
 						<th>Clube</th>
@@ -87,7 +90,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="atleta : ${atletas2}">
-						<td><a th:disabled="${torneio.getAtletaVencedor()}" th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
+						<td><a  th:disabled="${torneio.getAtletaVencedor()}" onclick="atletaCheck(count);" th:href="${(#mvc.url('TC#saveAtletaTorneio').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
 						class="waves-effect waves-light btn-small ball"><i 
 							class="material-icons">add</i></a></td>
 						<td><span
@@ -101,8 +104,7 @@
 			</table>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/script/script.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
 </body>
 </html>

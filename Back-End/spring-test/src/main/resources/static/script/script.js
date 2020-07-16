@@ -1,3 +1,12 @@
+atletaCheck = function(id) {
+	//el = document.getElementById(id).innerHTML;
+	el = document.getElementById('count').innerHTML;
+	//alert('VAGAS EXCEDIDAS'+el);
+		if(el>=16){
+			alert('VAGAS EXCEDIDAS'); 
+		} 
+	}
+
 function validarCNPJ(cnpj) {
 
 	try {

@@ -40,7 +40,7 @@
 				Data: <span th:text="${torneio.data_inicio}"></span>
 			</li>
 			<li th:each="atletaVencedor : ${torneio.getAtletaVencedor()}">
-				<span th:text="'Atleta vencedor: '+${atletaVencedor.nome}+' - Clube: '+${atletaVencedor.clube.nomeClube}"></span>
+				<span style="color: red;" th:text="'Atleta vencedor: '+${atletaVencedor.nome}+' - Clube: '+${atletaVencedor.clube.nomeClube}"></span>
 			</li>
 		</ul>			
 		</div>
@@ -60,7 +60,7 @@
 								<span th:text="${atleta.nome}"></span></td>
 						<td><p>
 								<span th:text="${atleta.clube.nomeClube}"></span></td>
-						<td><a
+						<td><a 
 							th:href="${(#mvc.url('PC#saveAtletaVencedor').arg(0,organizador.getId()).arg(1, torneio.id).arg(2, atleta.id)).build()}"
 							class="waves-effect waves-light btn-small ball"><i
 								class="material-icons">add</i></a></td>

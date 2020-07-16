@@ -18,7 +18,7 @@
                     <ul  id="nav-mobile" class="right hide-on-med-and-down">
                     	<li><a th:href="${(#mvc.url('CC#formClube').arg(0,organizador.getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Ficha do Clube</a></li>
                         <li><a th:href="${(#mvc.url('TC#formCadastroTorneio').arg(0,organizador.getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Novo torneio!</a></li>
-						<li><a th:href="${(#mvc.url('AC#formCadastroAtleta').arg(0,organizador.getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar atleta ao Clube</a></li>
+						<li><a th:href="${(#mvc.url('AC#formCadastroAtleta').arg(0,organizador.getId())).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Atletas do clube</a></li>
                         <li><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_forward</i>Logout</a></li>
                     </ul>
                 </div>
